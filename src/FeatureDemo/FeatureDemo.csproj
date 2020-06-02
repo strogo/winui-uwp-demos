@@ -1412,7 +1412,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DevExpress.WinUI.Uwp">
-      <Version>0.0.1-preview</Version>
+      <Version>20.2.1-ctp1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
