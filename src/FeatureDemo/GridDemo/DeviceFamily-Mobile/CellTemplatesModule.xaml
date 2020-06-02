@@ -1,0 +1,69 @@
+﻿<local:GridDemoUserControl 
+    x:Class="GridDemo.CellTemplatesModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GridDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:Grid="using:DevExpress.UI.Xaml.Grid"
+    xmlns:Core="using:DevExpress.Core"
+    xmlns:dxmvvm="using:DevExpress.Mvvm.UI"
+    d:DesignHeight="610"
+    d:DesignWidth="450">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///GridDemo/Themes/CustomControlStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <local:SalesDataViewModel  x:Key="salesDataViewModel"/>
+            <dxmvvm:FormatStringConverter x:Key="FormatStringConverter" FormatString="$#0,0"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid x:Name="gridRoot" DataContext="{StaticResource salesDataViewModel}">
+        <Grid:GridControl x:Name="gridControl" ItemsSource="{Binding Items}" AutoWidth="True" AutoGenerateColumns="False" Background="Transparent" ItemContainerStyle="{StaticResource ItemContainerStyle}" AllowColumnFiltering="False">
+            <Grid:GridControl.Columns>
+                <Grid:GridTextColumn MinWidth="260" FieldName="Country" />
+                <Grid:GridTemplateColumn Header="Actual sales / target" Width="280" FixedWidth="True">
+                    <Grid:GridTemplateColumn.CellTemplate>
+                        <DataTemplate >
+                            <local:DemoSparkBarControl ActualValue="{Binding ActualSales}" TargetValue="{Binding TargetSales}" Scale="100000" />
+                        </DataTemplate>
+                    </Grid:GridTemplateColumn.CellTemplate>
+                </Grid:GridTemplateColumn>
+                <Grid:GridTemplateColumn MinWidth="130" FieldName="ActualSales">
+                    <Grid:GridTemplateColumn.CellTemplate>
+                        <DataTemplate >
+                            <TextBlock Text="{Binding ActualSales, Converter={StaticResource FormatStringConverter}}"/>
+                        </DataTemplate>
+                    </Grid:GridTemplateColumn.CellTemplate>
+                </Grid:GridTemplateColumn>
+                <Grid:GridTemplateColumn MinWidth="130" FieldName="TargetSales">
+                    <Grid:GridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding TargetSales, Converter={StaticResource FormatStringConverter}}"/>
+                        </DataTemplate>
+                    </Grid:GridTemplateColumn.CellTemplate>
+                </Grid:GridTemplateColumn>
+                <Grid:GridTemplateColumn Header="ActualSalesByMonth" Width="230" FixedWidth="True">
+                    <Grid:GridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <local:DemoSparkColumnChart Scale="50000" Points="{Binding ActualSalesByMonthlies}"/>
+                        </DataTemplate>
+                    </Grid:GridTemplateColumn.CellTemplate>
+                </Grid:GridTemplateColumn>
+                <Grid:GridTemplateColumn Header="Quantity sold / Target sell" Width="230" FixedWidth="True">
+                    <Grid:GridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <local:DemoSparkColumnChart Scale="50000" Points="{Binding QuantitySoldByMonthlies}" Stroke="#FFFF9700"/>
+                                <local:DemoSparkLineChart Scale="50000" Points="{Binding QuantityTargetSellByMonthlies}" StrokeThickness="2"/>
+                            </Grid>
+                        </DataTemplate>
+                    </Grid:GridTemplateColumn.CellTemplate>
+                </Grid:GridTemplateColumn>
+            </Grid:GridControl.Columns>
+        </Grid:GridControl>
+    </Grid>
+</local:GridDemoUserControl>
+    

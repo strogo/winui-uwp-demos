@@ -1,0 +1,417 @@
+﻿<Common:DemoModuleView
+    x:Class="RibbonDemo.RibbonToolbarModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dxmvvm="using:DevExpress.Mvvm.UI"
+    xmlns:Xaml="using:DevExpress.UI.Xaml"
+    xmlns:Core="using:DevExpress.Core"
+    xmlns:Interactivity="using:DevExpress.Mvvm.UI.Interactivity"
+    xmlns:Ribbon="using:DevExpress.UI.Xaml.Ribbon"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    xmlns:local="using:RibbonDemo"
+    xmlns:Common="using:FeatureDemo.Common"
+    mc:Ignorable="d">
+
+    <Common:DemoModuleView.DataContext>
+        <local:RibbonViewModel />
+    </Common:DemoModuleView.DataContext>
+
+    <Common:DemoModuleView.Resources>
+        <dxmvvm:ObjectToObjectConverter x:Key="RibbonViewModeToVisibilityConverter">
+            <dxmvvm:MapItem Source="Normal" Target="Visible"/>
+            <dxmvvm:MapItem Source="AutoHide" Target="Collapsed"/>
+        </dxmvvm:ObjectToObjectConverter>
+        <dxmvvm:ObjectToObjectConverter x:Key="RibbonViewModeToVisibilityInvertConverter">
+            <dxmvvm:MapItem Source="Normal" Target="Collapsed"/>
+            <dxmvvm:MapItem Source="AutoHide" Target="Visible"/>
+        </dxmvvm:ObjectToObjectConverter>
+        <Core:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <local:AlignmentEnumToBooleanConverter x:Key="AlignmentToBooleanConverter"/>
+        <Common:IntToDoubleConverter x:Name="IntToDoubleConverter"/>
+        <Common:BooleanToNullableBooleanConverter x:Name="BoolToNullableConverter"/>
+        <Common:IdentityConverter x:Name="IdentityConverter"/>
+        <Common:ObjectToFloatConverter x:Name="ObjectToFloatConverter"/>
+    </Common:DemoModuleView.Resources>
+    
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="DeviceFamilyStates">
+                <VisualState x:Name="Mobile">
+                    <VisualState.StateTriggers>
+                        <Xaml:DeviceFamilyTrigger DeviceFamily="Mobile"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="scrollArea.ZoomFactor" Value="0.4"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Ribbon:RibbonToolbarControl Width="Auto" 
+                                      HorizontalAlignment="Stretch" 
+                                      x:Name="ribbon" 
+                                      Margin="0" 
+                                      Grid.Row="0"
+                                     HotItemsColumnsCount="4">
+            <Ribbon:RibbonToolbarControl.HotItems>
+                <Ribbon:RibbonToolbarToggleButton IconSource="ms-appx:///RibbonDemo/Images/Bold.svg"
+                                               IconStretch="Uniform"
+                                               ToolTipService.ToolTip="Bold"
+                                               ItemStyle="Glyph"
+                                               IsThreeStateMode="False"
+                                               CollapsePriority="Low"
+                                               IsChecked="{x:Bind rtfEditor.CurrentSelectionBoldDecoration, Mode=TwoWay, Converter={StaticResource BoolToNullableConverter}}"/>
+                <Ribbon:RibbonToolbarToggleButton IconSource="ms-appx:///RibbonDemo/Images/Italic.svg"
+                                               IconStretch="Uniform"
+                                               ToolTipService.ToolTip="Italic"
+                                               ItemStyle="Glyph"
+                                               CollapsePriority="Low"
+                                               IsThreeStateMode="False"
+                                               IsChecked="{x:Bind rtfEditor.CurrentSelectionItalicDecoration, Mode=TwoWay, Converter={StaticResource BoolToNullableConverter}}"
+                                               FlyoutSameRow="True"/>
+                <Ribbon:RibbonToolbarToggleButton IconSource="ms-appx:///RibbonDemo/Images/Underline.svg"
+                                               IconStretch="Uniform"
+                                               ToolTipService.ToolTip="Underline"
+                                               ItemStyle="Glyph"
+                                               CollapsePriority="Low"
+                                               IsThreeStateMode="False"
+                                               IsChecked="{x:Bind rtfEditor.CurrentSelectionUnderlineDecoration, Mode=TwoWay, Converter={StaticResource BoolToNullableConverter}}"
+                                               FlyoutFlowBreakWithSeparator="True"/>
+                <Ribbon:RibbonToolbarRadioButton IconSource="ms-appx:///RibbonDemo/Images/AlignLeft.svg"
+                                                      IconStretch="Uniform"
+                                                      ToolTipService.ToolTip="Align Left"
+                                                      ItemStyle="Glyph"
+                                                      GroupName="Alignment"
+                                                      IsChecked="{Binding CurrentSelectionAlignment, ElementName=rtfEditor, Converter={StaticResource AlignmentToBooleanConverter}, ConverterParameter=Left, Mode=TwoWay}"/>
+                <Ribbon:RibbonToolbarRadioButton IconSource="ms-appx:///RibbonDemo/Images/AlignCenter.svg"
+                                                      IconStretch="Uniform"
+                                                      ToolTipService.ToolTip="Center"
+                                                      ItemStyle="Glyph"
+                                                      IsChecked="{Binding CurrentSelectionAlignment, ElementName=rtfEditor, Converter={StaticResource AlignmentToBooleanConverter}, ConverterParameter=Center, Mode=TwoWay}"
+                                                      GroupName="Alignment"/>
+                <Ribbon:RibbonToolbarRadioButton IconSource="ms-appx:///RibbonDemo/Images/AlignRight.svg"
+                                                      IconStretch="Uniform"
+                                                      ToolTipService.ToolTip="Align Right"
+                                                      ItemStyle="Glyph"
+                                                      IsChecked="{Binding CurrentSelectionAlignment, ElementName=rtfEditor, Converter={StaticResource AlignmentToBooleanConverter}, ConverterParameter=Right, Mode=TwoWay}"
+                                                      GroupName="Alignment"/>
+                <Ribbon:RibbonToolbarRadioButton IconSource="ms-appx:///RibbonDemo/Images/AlignJustify.svg"
+                                                      IconStretch="Uniform"
+                                                      ToolTipService.ToolTip="Justify"                                              
+                                                      ItemStyle="Glyph"
+                                                      GroupName="Alignment"
+                                                      IsChecked="{Binding CurrentSelectionAlignment, ElementName=rtfEditor, Converter={StaticResource AlignmentToBooleanConverter}, ConverterParameter=Justify, Mode=TwoWay}"
+                                                      FlyoutFlowBreakWithSeparator="True"/>
+            </Ribbon:RibbonToolbarControl.HotItems>
+            <Ribbon:RibbonToolbarControl.HelpPane>
+                <Ribbon:ToolbarHelpPane>
+                    <Ribbon:ToolbarHelpPaneButton IconSource="ms-appx:///RibbonDemo/Images/Undo.svg"
+                                                   IconStretch="Uniform"
+                                                   ToolTipService.ToolTip="Undo"
+                                                   Content="Undo"
+                                                   Command="{x:Bind ViewModel.UndoCommand}"/>
+                    <Ribbon:ToolbarHelpPaneButton IconSource="ms-appx:///RibbonDemo/Images/Redo.svg"
+                                                   IconStretch="Uniform"
+                                                   ToolTipService.ToolTip="Redo"
+                                                   Content="Redo"
+                                                   Command="{x:Bind ViewModel.RedoCommand}"
+                                                   /> 
+                </Ribbon:ToolbarHelpPane>
+            </Ribbon:RibbonToolbarControl.HelpPane>
+            <Ribbon:RibbonToolbarTab Caption="Main" >
+                <Ribbon:RibbonToolbarGroup Caption="Font"
+                                    IconSource="ms-appx:///RibbonDemo/Images/FontColor.svg"
+                                    Width="Auto">
+                    <Ribbon:RibbonToolbarFontEdit SelectedFontFamilyName="{Binding CurrentSelectionFontFamily, ElementName=rtfEditor, Mode=TwoWay}"
+                                                  SelectedFontSize="{Binding CurrentSelectionFontSize, ElementName=rtfEditor, Mode=TwoWay}"/>
+                    <Ribbon:RibbonToolbarToggleButton IconSource="ms-appx:///RibbonDemo/Images/Bold.svg"
+                                               IconStretch="Uniform"
+                                               ToolTipService.ToolTip="Bold"
+                                               ItemStyle="Glyph"
+                                               IsThreeStateMode="False"
+                                               CollapsePriority="Low"
+                                               IsChecked="{x:Bind rtfEditor.CurrentSelectionBoldDecoration, Mode=TwoWay, Converter={StaticResource BoolToNullableConverter}}"/>
+                    <Ribbon:RibbonToolbarToggleButton IconSource="ms-appx:///RibbonDemo/Images/Italic.svg"
+                                               IconStretch="Uniform"
+                                               ToolTipService.ToolTip="Italic"
+                                               ItemStyle="Glyph"
+                                               CollapsePriority="Low"
+                                               IsThreeStateMode="False"
+                                               IsChecked="{x:Bind rtfEditor.CurrentSelectionItalicDecoration, Mode=TwoWay, Converter={StaticResource BoolToNullableConverter}}"
+                                               FlyoutSameRow="True"/>
+                    <Ribbon:RibbonToolbarToggleButton IconSource="ms-appx:///RibbonDemo/Images/Underline.svg"
+                                               IconStretch="Uniform"
+                                               ToolTipService.ToolTip="Underline"
+                                               ItemStyle="Glyph"
+                                               CollapsePriority="Low"
+                                               IsThreeStateMode="False"
+                                               IsChecked="{x:Bind rtfEditor.CurrentSelectionUnderlineDecoration, Mode=TwoWay, Converter={StaticResource BoolToNullableConverter}}"
+                                               FlyoutFlowBreak="True"/>
+                    <Ribbon:RibbonToolbarButton IconSource="ms-appx:///RibbonDemo/Images/DecreaseFontSize.svg"
+                                                IconFill="{ThemeResource IconAccentColorBrush}"
+                                         ToolTipService.ToolTip="Font size down"
+                                         ItemStyle="Glyph"
+                                         Command="{x:Bind ViewModel.FontViewModel.DecreaseFontSizeCommand}"/>
+                    <Ribbon:RibbonToolbarButton IconSource="ms-appx:///RibbonDemo/Images/IncreaseFontSize.svg"
+                                                IconFill="{ThemeResource IconAccentColorBrush}"
+                                         ToolTipService.ToolTip="Font size up"
+                                         ItemStyle="Glyph"
+                                         Command="{x:Bind ViewModel.FontViewModel.IncreaseFontSizeCommand}" 
+                                         FlyoutSameRow="True"/>
+                    <Ribbon:RibbonToolbarToggleButton IconSource="ms-appx:///RibbonDemo/Images/Subscript.svg"
+                                                      IconFill="{ThemeResource IconAccentColorBrush}"
+                                                      ToolTipService.ToolTip="Subscript"
+                                                      ItemStyle="Glyph"
+                                                      IconWidth="24"
+                                                      IconHeight="24"
+                                                      FlyoutSameRow="True"
+                                                      IsChecked="{x:Bind rtfEditor.CurrentSelectionSubscript, Mode=TwoWay, Converter={StaticResource BoolToNullableConverter}}"/>
+                    <Ribbon:RibbonToolbarToggleButton IconSource="ms-appx:///RibbonDemo/Images/Superscript.svg"
+                                                      IconFill="{ThemeResource IconAccentColorBrush}"
+                                                      ToolTipService.ToolTip="Superscript"
+                                                      ItemStyle="Glyph"  
+                                                      IconWidth="24"
+                                                      IconHeight="24"
+                                                      FlyoutFlowBreakWithSeparator="True"
+                                                      IsChecked="{x:Bind rtfEditor.CurrentSelectionSuperscript, Mode=TwoWay, Converter={StaticResource BoolToNullableConverter}}"/>
+                    <Ribbon:RibbonToolbarColorEdit x:Name="PickerForeground"
+                                                   FlyoutCaption="Font Color"
+                                                   Content="Font color" 
+                                                   IconSource="ms-appx:///RibbonDemo/Images/FontColor.svg"
+                                                   IconFill="{x:Bind ViewModel.FontViewModel.Foreground, Mode=TwoWay, Converter={StaticResource IdentityConverter}}"
+                                                   SelectedBrush="{x:Bind ViewModel.FontViewModel.Foreground, Mode=TwoWay, Converter={StaticResource IdentityConverter}}"
+                                                   ShowIndicator="False"
+                                                   IconStretch="Uniform"
+                                                   ItemStyle="Glyph"
+                                                   Command="{x:Bind ViewModel.FontViewModel.SetForegroundColorCommand}"/>
+                    <Ribbon:RibbonToolbarColorEdit x:Name="PickerBackground"
+                                                   DefaultColor="White"
+                                                   FlyoutCaption="Highlight color"
+                                                   Content="Highlight color" 
+                                                   IconSource="ms-appx:///RibbonDemo/Images/Highlight.svg"
+                                                   IconFill="{x:Bind ViewModel.FontViewModel.Background, Mode=TwoWay, Converter={StaticResource IdentityConverter}}"
+                                                   SelectedBrush="{x:Bind ViewModel.FontViewModel.Background, Mode=TwoWay, Converter={StaticResource IdentityConverter}}"
+                                                   ShowIndicator="False"
+                                                   IconStretch="Uniform"
+                                                   ItemStyle="Glyph"
+                                                   Command="{x:Bind ViewModel.FontViewModel.SetBackgroundColorCommand}"/>
+                </Ribbon:RibbonToolbarGroup>
+                <Ribbon:RibbonToolbarGroup Caption="Paragraph Format"                               
+                                            IconSource="ms-appx:///RibbonDemo/Images/AlignJustify.svg"
+                                            Width="Auto">
+                    <Ribbon:RibbonToolbarRadioButton IconSource="ms-appx:///RibbonDemo/Images/AlignLeft.svg"
+                                                      IconStretch="Uniform"
+                                                      ToolTipService.ToolTip="Align Left"
+                                                      ItemStyle="Glyph"
+                                                      GroupName="Alignment"
+                                                      IsChecked="{Binding CurrentSelectionAlignment, ElementName=rtfEditor, Converter={StaticResource AlignmentToBooleanConverter}, ConverterParameter=Left, Mode=TwoWay}"/>
+                    <Ribbon:RibbonToolbarRadioButton IconSource="ms-appx:///RibbonDemo/Images/AlignCenter.svg"
+                                                      IconStretch="Uniform"
+                                                      ToolTipService.ToolTip="Center"
+                                                      ItemStyle="Glyph"
+                                                      IsChecked="{Binding CurrentSelectionAlignment, ElementName=rtfEditor, Converter={StaticResource AlignmentToBooleanConverter}, ConverterParameter=Center, Mode=TwoWay}"
+                                                      GroupName="Alignment"/>
+                    <Ribbon:RibbonToolbarRadioButton IconSource="ms-appx:///RibbonDemo/Images/AlignRight.svg"
+                                                      IconStretch="Uniform"
+                                                      ToolTipService.ToolTip="Align Right"
+                                                      ItemStyle="Glyph"
+                                                      IsChecked="{Binding CurrentSelectionAlignment, ElementName=rtfEditor, Converter={StaticResource AlignmentToBooleanConverter}, ConverterParameter=Right, Mode=TwoWay}"
+                                                      GroupName="Alignment"/>
+                    <Ribbon:RibbonToolbarRadioButton  IconSource="ms-appx:///RibbonDemo/Images/AlignJustify.svg"
+                                                      IconStretch="Uniform"
+                                                      ToolTipService.ToolTip="Justify"                                              
+                                                      ItemStyle="Glyph"
+                                                      GroupName="Alignment"
+                                                      IsChecked="{Binding CurrentSelectionAlignment, ElementName=rtfEditor, Converter={StaticResource AlignmentToBooleanConverter}, ConverterParameter=Justify, Mode=TwoWay}"
+                                                      FlyoutFlowBreakWithSeparator="True"/>
+                    <Ribbon:RibbonToolbarButton IconSource="ms-appx:///RibbonDemo/Images/IncreaseIndent.svg"
+                                                IconFill="{ThemeResource IconAccentColorBrush}"
+                                                 ToolTipService.ToolTip="Increase Indent"
+                                                 ItemStyle="Glyph"
+                                                 Command="{x:Bind ViewModel.ParagraphViewModel.IncreaseParagraphIndentCommand}"/>
+                    <Ribbon:RibbonToolbarButton IconSource="ms-appx:///RibbonDemo/Images/DecreaseIndent.svg"
+                                                IconFill="{ThemeResource IconAccentColorBrush}"
+                                         ToolTipService.ToolTip="Decrease Indent"
+                                         ItemStyle="Glyph"
+                                         IconWidth="24"
+                                         IconHeight="24"
+                                         Command="{x:Bind ViewModel.ParagraphViewModel.DecreaseParagraphIndentCommand}" />
+                    <Ribbon:RibbonToolbarMenuButton IconSource="ms-appx:///RibbonDemo/Images/BulletedList.svg"
+                                                IconFill="{ThemeResource IconAccentColorBrush}"
+                                             IconWidth="24"
+                                             IconHeight="24"
+                                             Content="List style" 
+                                             ItemStyle="Glyph">
+                        <Ribbon:RibbonToolbarButton Content="None"
+                                             IconSource="ms-appx:///RibbonDemo/Images/AlignJustify.svg"
+                                             IconStretch="Uniform"
+                                             Command="{x:Bind ViewModel.ParagraphViewModel.SetListStyleCommand}"
+                                             CommandParameter="none"
+                                             Grid.Row="0"/>
+                        <Ribbon:RibbonToolbarButton Content="Bullets"
+                                             IconSource="ms-appx:///RibbonDemo/Images/BulletedList.svg"
+                                             IconFill="{ThemeResource IconAccentColorBrush}"
+                                             IconWidth="24"
+                                             IconHeight="24"
+                                             Command="{x:Bind ViewModel.ParagraphViewModel.SetListStyleCommand}"
+                                             CommandParameter="bullet"
+                                             Grid.Row="0"/>
+                        <Ribbon:RibbonToolbarButton Content="Arabic" 
+                                             IconSource="ms-appx:///RibbonDemo/Images/NumberedList.svg"
+                                             IconFill="{ThemeResource IconAccentColorBrush}"
+                                             IconWidth="24"
+                                             IconHeight="24"
+                                             Command="{x:Bind ViewModel.ParagraphViewModel.SetListStyleCommand}"
+                                             CommandParameter="arabic"
+                                             Grid.Row="1"/>
+                    </Ribbon:RibbonToolbarMenuButton>
+                </Ribbon:RibbonToolbarGroup>
+                <Ribbon:RibbonToolbarGroup Caption="Edit"  Width="Auto">
+                    <Ribbon:RibbonToolbarButton IconSource="ms-appx:///RibbonDemo/Images/Copy.svg"
+                                         ToolTipService.ToolTip="Copy"
+                                         ItemStyle="Glyph"
+                                         Command="{x:Bind ViewModel.CopyCommand}"/>
+                    <Ribbon:RibbonToolbarButton IconSource="ms-appx:///RibbonDemo/Images/Paste.svg"
+                                         ToolTipService.ToolTip="Paste"
+                                         ItemStyle="Glyph"
+                                         FlyoutSameRow="True"
+                                         Command="{x:Bind ViewModel.PasteCommand}"/>
+                    <Ribbon:RibbonToolbarButton IconSource="ms-appx:///RibbonDemo/Images/Cut.svg"
+                                         IconStretch="Uniform"
+                                         ToolTipService.ToolTip="Cut"
+                                         ItemStyle="Glyph"
+                                         FlyoutSameRow="True"
+                                         Command="{x:Bind ViewModel.CutCommand}"/>
+                </Ribbon:RibbonToolbarGroup>
+            </Ribbon:RibbonToolbarTab>
+            <Ribbon:RibbonToolbarTab Caption="Insert" Name="insertRibbonTab">
+                <Ribbon:RibbonToolbarGroup Caption="Insert">
+                    <Ribbon:RibbonToolbarButton Content="Image" 
+                                         IconSource="ms-appx:///RibbonDemo/Images/Picture.svg"
+                                         IconFill="{ThemeResource IconAccentColorBrush}"
+                                         Command="{x:Bind ViewModel.InsertViewModel.InsertImageCommand}"/>
+                </Ribbon:RibbonToolbarGroup>
+            </Ribbon:RibbonToolbarTab>
+
+            <Ribbon:RibbonToolbarControl.Content>
+                <Grid>
+                    <local:DemoRichEditBoxExtended x:Name="rtfEditor" 
+                                                   Background="White"
+                                                   Padding="32,0"
+                                                   BorderThickness="0"
+                                                   BorderBrush="Transparent"
+                                                   ScrollViewer.BringIntoViewOnFocusChange="False"
+                                                   ScrollViewer.VerticalScrollMode="Auto"
+                                                   ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                                   DocumentColors="{x:Bind ViewModel.DocumentColors, Mode=OneWay}"
+                                                   RTFText="{x:Bind ViewModel.CurrentDocumentText, Mode=TwoWay}">
+                        <Interactivity:Interaction.Behaviors>
+                            <local:DemoRichEditorBehavior/>
+                        </Interactivity:Interaction.Behaviors>
+                    </local:DemoRichEditBoxExtended>
+                    <Ribbon:ContextToolbarControl Target="{Binding ElementName=rtfEditor}" Orientation="Vertical">
+                        <Ribbon:ContextToolbarGroup>
+                            <Ribbon:ContextToolbarRadioButton IconSource="ms-appx:///RibbonDemo/Images/AlignLeft.svg"
+                                                                  FlyoutSameRow="True"
+                                                                  IconStretch="Uniform"
+                                                                  ToolTipService.ToolTip="Align Left"
+                                                                  ItemStyle="Glyph"
+                                                                  GroupName="Alignment"
+                                                                  IsChecked="{Binding CurrentSelectionAlignment, ElementName=rtfEditor, Converter={StaticResource AlignmentToBooleanConverter}, ConverterParameter=Left, Mode=TwoWay}"/>
+                            <Ribbon:ContextToolbarRadioButton IconSource="ms-appx:///RibbonDemo/Images/AlignCenter.svg"
+                                                                  FlyoutSameRow="True"
+                                                                  IconStretch="Uniform"
+                                                                  ToolTipService.ToolTip="Center"
+                                                                  ItemStyle="Glyph"
+                                                                  IsChecked="{Binding CurrentSelectionAlignment, ElementName=rtfEditor, Converter={StaticResource AlignmentToBooleanConverter}, ConverterParameter=Center, Mode=TwoWay}"
+                                                                  GroupName="Alignment"/>
+                            <Ribbon:ContextToolbarRadioButton IconSource="ms-appx:///RibbonDemo/Images/AlignRight.svg"
+                                                                  FlyoutSameRow="True"
+                                                                  IconStretch="Uniform"
+                                                                  ToolTipService.ToolTip="Align Right"
+                                                                  ItemStyle="Glyph"
+                                                                  IsChecked="{Binding CurrentSelectionAlignment, ElementName=rtfEditor, Converter={StaticResource AlignmentToBooleanConverter}, ConverterParameter=Right, Mode=TwoWay}"
+                                                                  GroupName="Alignment"/>
+                            <Ribbon:ContextToolbarRadioButton IconSource="ms-appx:///RibbonDemo/Images/AlignJustify.svg"
+                                                                  FlyoutSameRow="True"
+                                                                  IconStretch="Uniform"
+                                                                  ToolTipService.ToolTip="Justify"                                              
+                                                                  ItemStyle="Glyph"
+                                                                  GroupName="Alignment"
+                                                                  IsChecked="{Binding CurrentSelectionAlignment, ElementName=rtfEditor, Converter={StaticResource AlignmentToBooleanConverter}, ConverterParameter=Justify, Mode=TwoWay}"
+                                                                  FlyoutFlowBreakWithSeparator="True"/>
+                            <Ribbon:ContextToolbarMenuButton Content="Font Style" Orientation="Vertical">
+                                <Ribbon:ContextToolbarFontEdit SelectedFontFamilyName="{Binding CurrentSelectionFontFamily, ElementName=rtfEditor, Mode=TwoWay}"
+                                                                   SelectedFontSize="{Binding CurrentSelectionFontSize, ElementName=rtfEditor, Mode=TwoWay}"/>
+                                <Ribbon:ContextToolbarToggleButton IconSource="ms-appx:///RibbonDemo/Images/Bold.svg"
+                                                                       IconStretch="Uniform"
+                                                                       ToolTipService.ToolTip="Bold"
+                                                                       ItemStyle="Glyph"
+                                                                       IconWidth="24" 
+                                                                       IconHeight="24"
+                                                                       IsThreeStateMode="False"
+                                                                       CollapsePriority="Low"
+                                                                       IsChecked="{x:Bind rtfEditor.CurrentSelectionBoldDecoration, Mode=TwoWay, Converter={StaticResource BoolToNullableConverter}}"/>
+                                <Ribbon:ContextToolbarToggleButton IconSource="ms-appx:///RibbonDemo/Images/Italic.svg"
+                                                                       IconStretch="Uniform"
+                                                                       ToolTipService.ToolTip="Italic"
+                                                                       ItemStyle="Glyph"
+                                                                       CollapsePriority="Low"
+                                                                       IsThreeStateMode="False"
+                                                                       IsChecked="{x:Bind rtfEditor.CurrentSelectionItalicDecoration, Mode=TwoWay, Converter={StaticResource BoolToNullableConverter}}"
+                                                                       FlyoutSameRow="True"/>
+                                <Ribbon:ContextToolbarToggleButton IconSource="ms-appx:///RibbonDemo/Images/Underline.svg"
+                                                                   FlyoutFlowBreakWithSeparator="True"
+                                                                       IconStretch="Uniform"
+                                                                       ToolTipService.ToolTip="Underline"
+                                                                       ItemStyle="Glyph"
+                                                                       CollapsePriority="Low"
+                                                                       IsThreeStateMode="False"
+                                                                       IsChecked="{x:Bind rtfEditor.CurrentSelectionUnderlineDecoration, Mode=TwoWay, Converter={StaticResource BoolToNullableConverter}}"/>
+                                <Ribbon:ContextToolbarColorEdit FlyoutCaption="Font Color"
+                                                                        ClosePopupOnClick="False"
+                                                                        Content="Font color" 
+                                                                        IconSource="ms-appx:///RibbonDemo/Images/FontColor.svg"
+                                                                        IconFill="{x:Bind ViewModel.FontViewModel.Foreground, Mode=TwoWay, Converter={StaticResource IdentityConverter}}"
+                                                                        SelectedBrush="{x:Bind ViewModel.FontViewModel.Foreground, Mode=TwoWay, Converter={StaticResource IdentityConverter}}"
+                                                                        ShowIndicator="False"
+                                                                        IconStretch="Uniform"
+                                                                        ItemStyle="Glyph"
+                                                                        Command="{x:Bind ViewModel.FontViewModel.SetForegroundColorCommand}"/>
+
+                                <Ribbon:ContextToolbarColorEdit FlyoutCaption="Highlight color"
+                                                                        ClosePopupOnClick="False"
+                                                                        Content="Highlight color" 
+                                                                        DefaultColor="White"
+                                                                        IconSource="ms-appx:///RibbonDemo/Images/Highlight.svg"
+                                                                        IconFill="{x:Bind ViewModel.FontViewModel.Background, Mode=TwoWay, Converter={StaticResource IdentityConverter}}"
+                                                                        SelectedBrush="{x:Bind ViewModel.FontViewModel.Background, Mode=TwoWay, Converter={StaticResource IdentityConverter}}"
+                                                                        ShowIndicator="False"
+                                                                        IconStretch="Uniform"
+                                                                        ItemStyle="Glyph"
+                                                                        Command="{x:Bind ViewModel.FontViewModel.SetBackgroundColorCommand}"/>
+                            </Ribbon:ContextToolbarMenuButton>
+                            <Ribbon:ContextToolbarButton IconSource="ms-appx:///RibbonDemo/Images/Copy.svg"
+                                                             ToolTipService.ToolTip="Copy"
+                                                             Content="Copy"
+                                                             Command="{x:Bind ViewModel.CopyCommand}"/>
+                            <Ribbon:ContextToolbarButton IconSource="ms-appx:///RibbonDemo/Images/Paste.svg"
+                                                             ToolTipService.ToolTip="Paste"
+                                                             Content="Paste"
+                                                             FlyoutSameRow="False"
+                                                             FlyoutFlowBreak="True"
+                                                             Command="{x:Bind ViewModel.PasteCommand}"/>
+                            <Ribbon:ContextToolbarButton IconSource="ms-appx:///RibbonDemo/Images/Cut.svg"
+                                                             IconStretch="Uniform"
+                                                             ToolTipService.ToolTip="Cut"
+                                                             Content="Cut"
+                                                             FlyoutSameRow="True"
+                                                             Command="{x:Bind ViewModel.CutCommand}"/>
+                        </Ribbon:ContextToolbarGroup>
+                    </Ribbon:ContextToolbarControl>
+                </Grid>
+            </Ribbon:RibbonToolbarControl.Content>
+        </Ribbon:RibbonToolbarControl>
+    </Grid>
+</Common:DemoModuleView>

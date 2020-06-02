@@ -1,0 +1,41 @@
+﻿<Common:DemoModuleView
+    x:Class="RibbonDemo.ToolbarModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:RibbonDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Ribbon="using:DevExpress.UI.Xaml.Ribbon"
+    mc:Ignorable="d">
+
+    <Ribbon:ToolbarControl HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="1" BorderBrush="{ThemeResource DemoModuleSeparatorBrush}">
+        <Ribbon:ToolbarGroup>
+            <Ribbon:ToolbarButton IconSource="ms-appx:///RibbonDemo/Images/Reply.svg" Content="Reply"/>
+            <Ribbon:ToolbarButton IconSource="ms-appx:///RibbonDemo/Images/ReplyAll.svg" Content="Reply All"/>
+            <Ribbon:ToolbarButton IconSource="ms-appx:///RibbonDemo/Images/Forward.svg" Content="Forward"/>
+            <Ribbon:ToolbarButton IconSource="ms-appx:///RibbonDemo/Images/DeleteMail.svg" Content="Delete"/>
+            <Ribbon:ToolbarToggleButton IconSource="ms-appx:///RibbonDemo/Images/SetFlag.svg"
+                                        Content="Set flag" 
+                                        CheckedContent="Clear flag" 
+                                        IsThreeStateMode="False"/>
+            <Ribbon:ToolbarToggleButton IconSource="ms-appx:///RibbonDemo/Images/MarkAsRead.svg"
+                                        CheckedIconSource="ms-appx:///RibbonDemo/Images/MarkAsUnread.svg"
+                                        Content="Mark as read" 
+                                        CheckedContent="Mark as unread"/>
+            <Ribbon:ToolbarButton IconSource="ms-appx:///RibbonDemo/Images/ArchiveMail.svg" Content="Archive" ShowInFlyoutOnly="True"/>
+            <Ribbon:ToolbarButton IconSource="ms-appx:///RibbonDemo/Images/NewerMail.svg" Content="Newer" IsEnabled="False" ShowInFlyoutOnly="True"/>
+            <Ribbon:ToolbarButton IconSource="ms-appx:///RibbonDemo/Images/OlderMail.svg" Content="Older" ShowInFlyoutOnly="True"/>
+            <Ribbon:ToolbarButton IconSource="ms-appx:///RibbonDemo/Images/Find.svg" Content="Find" ShowInFlyoutOnly="True"/>
+            <Ribbon:ToolbarButton IconSource="ms-appx:///RibbonDemo/Images/Print.svg" Content="Print" ShowInFlyoutOnly="True"/>
+            <Ribbon:ToolbarMenuButton IconSource="ms-appx:///RibbonDemo/Images/Zoom.svg" Content="Zoom" ShowInFlyoutOnly="True">
+                <Ribbon:ToolbarButton Content="400%"/>
+                <Ribbon:ToolbarButton Content="200%"/>
+                <Ribbon:ToolbarButton Content="150%"/>
+                <Ribbon:ToolbarButton Content="100%"/>
+                <Ribbon:ToolbarButton Content="75%"/>
+                <Ribbon:ToolbarButton Content="50%"/>
+            </Ribbon:ToolbarMenuButton>
+        </Ribbon:ToolbarGroup>
+    </Ribbon:ToolbarControl>
+</Common:DemoModuleView>

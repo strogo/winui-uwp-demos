@@ -1,0 +1,128 @@
+﻿<Common:DemoModuleView
+    x:Class="ControlsDemo.ContextMenuModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    MinMargin="0"
+    MaxMargin="0"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    xmlns:Ribbon="using:DevExpress.UI.Xaml.Ribbon"
+    xmlns:Xaml="using:DevExpress.UI.Xaml"
+    xmlns:Core="using:DevExpress.Core"
+    xmlns:mvvmui="using:DevExpress.Mvvm.UI"
+    xmlns:Interactivity="using:DevExpress.Mvvm.UI.Interactivity"
+    xmlns:local="using:ControlsDemo"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.DataContext>
+        <local:ContextMenuViewModel x:Name="dataContext"/>
+    </UserControl.DataContext>
+
+    <Interactivity:Interaction.Behaviors>
+        <local:ContextMenuService Menu="{x:Bind contextMenu}"/>
+    </Interactivity:Interaction.Behaviors>
+    
+    <UserControl.Resources>
+        <DataTemplate x:Key="ToolbarMenuTemplate" x:DataType="Xaml:ContextMenuInfo">
+            <Ribbon:ToolbarControl Orientation="Vertical" Padding="0">
+                <Ribbon:ToolbarGroup>
+                    <Ribbon:ToolbarMenuButton Content="{Binding TargetDataContext.EditGroup.Caption}" >
+                        <Ribbon:ToolbarButton Content="{Binding TargetDataContext.CutItem.Caption}" />
+                        <Ribbon:ToolbarButton Content="{Binding TargetDataContext.CopyItem.Caption}" />
+                        <Ribbon:ToolbarButton Content="{Binding TargetDataContext.PasteItem.Caption}"/>
+                    </Ribbon:ToolbarMenuButton>
+                    <Ribbon:ToolbarMenuButton Content="{Binding TargetDataContext.TextFormattingGroup.Caption}" >
+                        <Ribbon:ToolbarToggleButton ClosePopupOnClick="False" Content="{Binding TargetDataContext.BoldItem.Caption}" IsChecked="{Binding TargetDataContext.BoldItem.IsChecked, Mode=TwoWay}"/>
+                        <Ribbon:ToolbarToggleButton ClosePopupOnClick="False" Content="{Binding TargetDataContext.ItalicItem.Caption}" IsChecked="{Binding TargetDataContext.ItalicItem.IsChecked, Mode=TwoWay}"/>
+                        <Ribbon:ToolbarToggleButton ClosePopupOnClick="False" Content="{Binding TargetDataContext.UnderlineItem.Caption}" IsChecked="{Binding TargetDataContext.UnderlineItem.IsChecked, Mode=TwoWay}"/>
+                    </Ribbon:ToolbarMenuButton>
+                    <Ribbon:ToolbarMenuButton Content="{Binding TargetDataContext.AlignmentGroup.Caption}" IconSource="{Binding TargetDataContext.AlignmentGroup.Icon}">
+                        <Ribbon:ToolbarRadioButton ClosePopupOnClick="False" GroupName="ContextMenuToolbarAlignment" Content="{Binding TargetDataContext.AlignJustifyItem.Caption}" IconSource="{Binding TargetDataContext.AlignJustifyItem.Icon}" IsChecked="{Binding TargetDataContext.AlignJustifyItem.IsChecked, Mode=TwoWay}"/>
+                        <Ribbon:ToolbarRadioButton ClosePopupOnClick="False" GroupName="ContextMenuToolbarAlignment" Content="{Binding TargetDataContext.AlignLeftItem.Caption}" IconSource="{Binding TargetDataContext.AlignLeftItem.Icon}" IsChecked="{Binding TargetDataContext.AlignLeftItem.IsChecked, Mode=TwoWay}"/>
+                        <Ribbon:ToolbarRadioButton ClosePopupOnClick="False" GroupName="ContextMenuToolbarAlignment" Content="{Binding TargetDataContext.AlignCenterItem.Caption}" IconSource="{Binding TargetDataContext.AlignCenterItem.Icon}" IsChecked="{Binding TargetDataContext.AlignCenterItem.IsChecked, Mode=TwoWay}"/>
+                        <Ribbon:ToolbarRadioButton ClosePopupOnClick="False" GroupName="ContextMenuToolbarAlignment" Content="{Binding TargetDataContext.AlignRightItem.Caption}" IconSource="{Binding TargetDataContext.AlignRightItem.Icon}" IsChecked="{Binding TargetDataContext.AlignRightItem.IsChecked, Mode=TwoWay}"/>
+                    </Ribbon:ToolbarMenuButton>
+                </Ribbon:ToolbarGroup>
+            </Ribbon:ToolbarControl>
+        </DataTemplate>
+        <DataTemplate x:Key="ContextToolbarContextMenuTemplate" x:DataType="Xaml:ContextMenuInfo">
+            <Ribbon:ContextToolbarControl Orientation="Vertical">
+                <Ribbon:ContextToolbarGroup>
+                    <Ribbon:ContextToolbarMenuButton Content="{Binding TargetDataContext.EditGroup.Caption}" IconSource="{Binding TargetDataContext.EditGroup.Icon}" Orientation="Vertical">
+                        <Ribbon:ContextToolbarButton Content="{Binding TargetDataContext.CutItem.Caption}" IconSource="{Binding TargetDataContext.CutItem.Icon}"/>
+                        <Ribbon:ContextToolbarButton Content="{Binding TargetDataContext.CopyItem.Caption}" IconSource="{Binding TargetDataContext.CopyItem.Icon}"/>
+                        <Ribbon:ContextToolbarButton Content="{Binding TargetDataContext.PasteItem.Caption}" IconSource="{Binding TargetDataContext.PasteItem.Icon}"/>
+                    </Ribbon:ContextToolbarMenuButton>
+                    <Ribbon:ContextToolbarMenuButton Content="{Binding TargetDataContext.TextFormattingGroup.Caption}" IconSource="{Binding TargetDataContext.TextFormattingGroup.Icon}" Orientation="Vertical">
+                        <Ribbon:ContextToolbarToggleButton ClosePopupOnClick="False" Content="{Binding TargetDataContext.BoldItem.Caption}" IconSource="{Binding TargetDataContext.BoldItem.Icon}" IsChecked="{Binding TargetDataContext.BoldItem.IsChecked, Mode=TwoWay}"/>
+                        <Ribbon:ContextToolbarToggleButton ClosePopupOnClick="False" Content="{Binding TargetDataContext.ItalicItem.Caption}" IconSource="{Binding TargetDataContext.ItalicItem.Icon}" IsChecked="{Binding TargetDataContext.ItalicItem.IsChecked, Mode=TwoWay}"/>
+                        <Ribbon:ContextToolbarToggleButton ClosePopupOnClick="False" Content="{Binding TargetDataContext.UnderlineItem.Caption}" IconSource="{Binding TargetDataContext.UnderlineItem.Icon}" IsChecked="{Binding TargetDataContext.UnderlineItem.IsChecked, Mode=TwoWay}"/>
+                    </Ribbon:ContextToolbarMenuButton>
+                    <Ribbon:ContextToolbarMenuButton Content="{Binding TargetDataContext.AlignmentGroup.Caption}" IconSource="{Binding TargetDataContext.AlignmentGroup.Icon}">
+                        <Ribbon:ContextToolbarRadioButton ClosePopupOnClick="False" GroupName="ContextMenuToolbarAlignment" Content="{Binding TargetDataContext.AlignJustifyItem.Caption}" IconSource="{Binding TargetDataContext.AlignJustifyItem.Icon}" IsChecked="{Binding TargetDataContext.AlignJustifyItem.IsChecked, Mode=TwoWay}"/>
+                        <Ribbon:ContextToolbarRadioButton ClosePopupOnClick="False" GroupName="ContextMenuToolbarAlignment" Content="{Binding TargetDataContext.AlignLeftItem.Caption}" IconSource="{Binding TargetDataContext.AlignLeftItem.Icon}" IsChecked="{Binding TargetDataContext.AlignLeftItem.IsChecked, Mode=TwoWay}"/>
+                        <Ribbon:ContextToolbarRadioButton ClosePopupOnClick="False" GroupName="ContextMenuToolbarAlignment" Content="{Binding TargetDataContext.AlignCenterItem.Caption}" IconSource="{Binding TargetDataContext.AlignCenterItem.Icon}" IsChecked="{Binding TargetDataContext.AlignCenterItem.IsChecked, Mode=TwoWay}"/>
+                        <Ribbon:ContextToolbarRadioButton ClosePopupOnClick="False" GroupName="ContextMenuToolbarAlignment" Content="{Binding TargetDataContext.AlignRightItem.Caption}" IconSource="{Binding TargetDataContext.AlignRightItem.Icon}" IsChecked="{Binding TargetDataContext.AlignRightItem.IsChecked, Mode=TwoWay}"/>
+                    </Ribbon:ContextToolbarMenuButton>
+                </Ribbon:ContextToolbarGroup>
+            </Ribbon:ContextToolbarControl>
+        </DataTemplate>
+        <DataTemplate x:Key="SystemFlyout" x:DataType="Xaml:ContextMenuInfo">
+            <MenuFlyout Placement="Bottom">
+                <MenuFlyoutSubItem Text="{Binding TargetDataContext.EditGroup.Caption}">
+                    <MenuFlyoutItem Text="{Binding TargetDataContext.CutItem.Caption}"/>
+                    <MenuFlyoutItem Text="{Binding TargetDataContext.CopyItem.Caption}"/>
+                    <MenuFlyoutItem Text="{Binding TargetDataContext.PasteItem.Caption}"/>
+                </MenuFlyoutSubItem>
+                <MenuFlyoutSubItem Text="{Binding TargetDataContext.TextFormattingGroup.Caption}">
+                    <ToggleMenuFlyoutItem Text="{Binding TargetDataContext.BoldItem.Caption}" IsChecked="{Binding TargetDataContext.BoldItem.IsChecked, Mode=TwoWay}"/>
+                    <ToggleMenuFlyoutItem Text="{Binding TargetDataContext.ItalicItem.Caption}" IsChecked="{Binding TargetDataContext.ItalicItem.IsChecked, Mode=TwoWay}"/>
+                    <ToggleMenuFlyoutItem Text="{Binding TargetDataContext.UnderlineItem.Caption}" IsChecked="{Binding TargetDataContext.UnderlineItem.IsChecked, Mode=TwoWay}"/>
+                </MenuFlyoutSubItem>
+            </MenuFlyout>
+        </DataTemplate>
+        <DataTemplate x:Key="CustomContent" x:DataType="Xaml:ContextMenuInfo">
+            <ListView SelectionMode="None">
+                <ListViewItem Content="{Binding TargetDataContext.PasteItem.Caption}"/>
+                <ListViewItem Content="{Binding TargetDataContext.CutItem.Caption}"/>
+                <ListViewItem Content="{Binding TargetDataContext.CopyItem.Caption}"/>
+            </ListView>
+        </DataTemplate>
+
+        <Core:EnumToObjectConverter x:Name="menuTypeConverter">
+            <Core:EnumToObjectConverter.Values>
+                <Core:EnumObjectProvider x:Key="Toolbar" Value="{StaticResource ToolbarMenuTemplate}"/>
+                <Core:EnumObjectProvider x:Key="ContextToolbar" Value="{StaticResource ContextToolbarContextMenuTemplate}"/>
+                <Core:EnumObjectProvider x:Key="MenuFlyout" Value="{StaticResource SystemFlyout}"/>
+                <Core:EnumObjectProvider x:Key="Custom" Value="{StaticResource CustomContent}" />
+            </Core:EnumToObjectConverter.Values>
+        </Core:EnumToObjectConverter>
+    </UserControl.Resources>
+
+    <Border Background="Transparent">
+        <Xaml:ContextMenu.Menu>
+            <Xaml:ContextMenu x:Name="contextMenu" Header="{x:Bind dataContext.Header, Mode=OneWay}"
+                Content="{x:Bind dataContext.MenuType, Mode=OneWay, Converter={StaticResource menuTypeConverter}}">
+                <Interactivity:Interaction.Behaviors>
+                    <mvvmui:EventToCommand EventName="Opening" Command="{Binding MenuOpeningCommand}" PassEventArgsToCommand="True"/>
+                </Interactivity:Interaction.Behaviors>
+            </Xaml:ContextMenu>
+        </Xaml:ContextMenu.Menu>
+        <TextBlock Text="Right-click or press and hold to invoke the menu." VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </Border>
+
+    <Common:DemoModuleView.Options>
+        <Common:OptionsPanel>
+            <Common:OptionGroupHeader Text="Context Menu Type" />
+            <RadioButton GroupName="contextMenuType" Content="ContextToolbar" IsChecked="{Binding IsContextToolbarChecked, Mode=TwoWay}"/>
+            <RadioButton GroupName="contextMenuType" Content="Toolbar" IsChecked="{Binding IsToolbarChecked, Mode=TwoWay}" />
+            <RadioButton GroupName="contextMenuType" Content="MenuFlyout" IsChecked="{Binding IsMenuFlyoutChecked, Mode=TwoWay}"/>
+            <RadioButton GroupName="contextMenuType" Content="Custom" IsChecked="{Binding IsCustomChecked, Mode=TwoWay}" />
+        </Common:OptionsPanel>
+    </Common:DemoModuleView.Options>
+</Common:DemoModuleView>
+

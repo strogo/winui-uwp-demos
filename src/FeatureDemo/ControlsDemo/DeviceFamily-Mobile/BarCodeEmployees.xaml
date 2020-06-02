@@ -1,0 +1,74 @@
+﻿<UserControl
+    x:Class="FeatureDemo.ControlsDemo.BarCodeEmployees"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FeatureDemo.ControlsDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Controls="using:DevExpress.UI.Xaml.Controls"
+    xmlns:common="using:FeatureDemo.Common"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Core="using:DevExpress.Core"
+    xmlns:dxmvvmui="using:DevExpress.Mvvm.UI"
+    xmlns:dxmvvmi="using:DevExpress.Mvvm.UI.Interactivity"
+    mc:Ignorable="d"
+    d:DesignHeight="750"
+    d:DesignWidth="1200">
+    <UserControl.DataContext>
+        <local:BarCodeEmployeesViewModel/>
+    </UserControl.DataContext>
+    <Layout:LayoutGroup VerticalItemSpacing="50" Orientation="Vertical">
+        <Layout:LayoutItem Layout:LayoutGroup.StretchRatio="1"/>
+        <FlipView ItemsSource="{Binding Accounts}" SelectedValue="{Binding SelectedEmploye, Mode=TwoWay}" Name="flipView" HorizontalAlignment="Center" Layout:LayoutGroup.StretchRatio="4" Margin="50,0">
+            <FlipView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Gray" BorderThickness="1" VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="14,14,14,14" Name="border">
+                        <dxmvvmi:Interaction.BehaviorsTemplate>
+                            <DataTemplate>
+                                <ContentControl>
+                                    <common:PrintFrameworkElementBehavior DocumentSource="{Binding PrintDocumentSource, Mode=TwoWay}"/>
+                                </ContentControl>
+                            </DataTemplate>
+                        </dxmvvmi:Interaction.BehaviorsTemplate>
+                        <Layout:LayoutGroup Margin="20" Orientation="Horizontal" HorizontalItemSpacing="30" HorizontalAlignment="Center">
+                            <Image Source="{Binding Photo}" Stretch="UniformToFill" Height="255" Width="200"/>
+                            <Layout:LayoutGroup Orientation="Vertical" VerticalAlignment="Stretch" Margin="0,10,0,0" VerticalItemSpacing="55">
+                                <Layout:LayoutGroup Orientation="Vertical" VerticalItemSpacing="-8" VerticalAlignment="Top" HorizontalContentAlignment="Left">
+                                    <TextBlock Text="{Binding FirstName}" FontSize="28" FontWeight="Bold"/>
+                                    <TextBlock Text="{Binding LastName}" FontSize="28" FontWeight="Bold" />
+                                    <TextBlock Text="{Binding Title}" FontSize="22" Foreground="#FFF89C3A"/>
+                                </Layout:LayoutGroup>
+                                <Layout:LayoutGroup Orientation="Vertical" VerticalItemSpacing="2" VerticalAlignment="Bottom" HorizontalContentAlignment="Left">
+                                    <Layout:LayoutGroup.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="FontSize" Value="20"/>
+                                        </Style>
+                                    </Layout:LayoutGroup.Resources>
+                                    <TextBlock Text="{Binding Address}"/>
+                                    <Layout:LayoutGroup Orientation="Horizontal">
+                                        <TextBlock Text="Phone: "/>
+                                        <TextBlock Text="{Binding Phone}"/>
+                                    </Layout:LayoutGroup>
+                                    <TextBlock Text="{Binding Email}"/>
+                                </Layout:LayoutGroup>
+                            </Layout:LayoutGroup>
+                            <Controls:BarCodeControl AutoModule="True" Text="{Binding Data}" ShowText="False" Margin="10" Foreground="Black" Width="220" Height="220">
+                                <Controls:BarCodeControl.Symbology>
+                                    <Controls:QRCodeSymbology CompactionMode="Byte"/>
+                                </Controls:BarCodeControl.Symbology>
+                            </Controls:BarCodeControl>
+                        </Layout:LayoutGroup>
+                    </Border>
+                </DataTemplate>
+            </FlipView.ItemTemplate>
+            <FlipView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel AreScrollSnapPointsRegular="True" Orientation="Horizontal" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </FlipView.ItemsPanel>
+        </FlipView>
+        <Button VerticalAlignment="Bottom" FontSize="24" Content="Print Card" Command="{Binding PrintCommand}" HorizontalAlignment="Center" Layout:LayoutGroup.StretchRatio="1"
+                Foreground="White" Background="#FFF7941E" Margin="35" Padding="54,16"/>
+        <Layout:LayoutItem Layout:LayoutGroup.StretchRatio="2"/>
+    </Layout:LayoutGroup>
+</UserControl>

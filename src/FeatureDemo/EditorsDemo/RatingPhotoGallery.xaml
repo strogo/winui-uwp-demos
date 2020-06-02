@@ -1,0 +1,80 @@
+﻿<Common:DemoModuleView 
+    x:Class="EditorsDemo.RatingPhotoGallery"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EditorsDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"    
+    xmlns:Ribbon="using:DevExpress.UI.Xaml.Ribbon"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    xmlns:Controls="using:DevExpress.UI.Xaml.Controls"                       
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Core="using:DevExpress.Core"
+    mc:Ignorable="d"
+    d:DesignHeight="600"
+    d:DesignWidth="400">
+    <Common:DemoModuleView.DataContext>
+        <local:RatingPhotoGalleryViewModel/>
+    </Common:DemoModuleView.DataContext>
+    <Common:DemoModuleView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <Core:SystemStyleOverrides/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="ImageInfoContainerStyle" TargetType="ContentControl">
+                <Setter Property="Core:StyleHelper.BindableSetters">
+                    <Setter.Value>
+                        <Core:BindableSetterCollection>
+                            <Core:BindableSetter Property="Visibility" Binding="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay}"/>
+                        </Core:BindableSetterCollection>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="FontFamily" Value="Segoe UI" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ContentControl">
+                            <Grid Padding="20" Background="{ThemeResource TileBackground}" BorderThickness="1" BorderBrush="{ThemeResource ToolbarSeparatorBorderBrush}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Common:AdaptiveImage Grid.Row="0" SourceUri="{Binding ImageSource}" Margin="0,0,0,20" />
+                                <TextBlock Text="{Binding FileName}" Foreground="{ThemeResource RatingDemoImageNameForeground}" FontWeight="Bold" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                <Editors:RatingEdit Grid.Row="1" Precision="Full" Value="{Binding Rating, Mode=TwoWay}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Common:DemoModuleView.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="FilterPanel" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
+            <TextBlock VerticalAlignment="Center" FontFamily="Segoe UI" Text="Filter by:" Foreground="{ThemeResource DemoModuleCaptionForegroundBrush}"/>
+            <Editors:RatingEdit VerticalAlignment="Center" Margin="10,0,10,0" Value="{Binding FilterRating, Mode=TwoWay}" />
+            <TextBlock VerticalAlignment="Center" FontFamily="Segoe UI" Text="and higher" Foreground="{ThemeResource DemoModuleCaptionForegroundBrush}"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" Margin="0,15,0,0"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled"
+                      HorizontalScrollMode="Disabled"
+                      VerticalSnapPointsAlignment="Near"
+                      VerticalSnapPointsType="Mandatory">
+            <Common:ContentControlUniformPanel ItemsSource="{Binding ImageInfos, Mode=OneTime}" 
+                                               ItemContainerStyle="{StaticResource ImageInfoContainerStyle}"
+                                               MaxItemWidth="500" 
+                                               Margin="20,0,20,0" 
+                                               Space="40"/>
+        </ScrollViewer>
+    </Grid>
+</Common:DemoModuleView>

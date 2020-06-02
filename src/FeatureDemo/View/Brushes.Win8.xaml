@@ -1,0 +1,69 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Name="Default">
+            <SolidColorBrush x:Key="MainBrush" Color="#FFF88E1D" />
+            <SolidColorBrush x:Key="PageBackground" Color="White" />
+            <SolidColorBrush x:Key="DemoModuleCaptionForegroundBrush" Color="#FF0078D7" />
+            <SolidColorBrush x:Key="ToolbarItemHoverBackground" Color="#300078D7" />
+            <SolidColorBrush x:Key="ToolbarItemPressedBackground" Color="#400078D7" />
+            <SolidColorBrush x:Key="ToolbarSeparatorBorderBrush" Color="#FFD9D9D9" />
+
+            <SolidColorBrush x:Key="DemoModuleTileGroupHeaderBrush" Color="#FF5C5C5C" />
+            <SolidColorBrush x:Key="TileBackground" Color="#FF3D3D3D" />
+            <SolidColorBrush x:Key="TilePointerOverBackgroundBrush" Color="#FFF7941E" />
+            <SolidColorBrush x:Key="TilePressedBackgroundBrush" Color="#FFF7941E" />
+            <SolidColorBrush x:Key="DemoModuleForegroundBrush" Color="#FF404040" />
+
+            <SolidColorBrush x:Key="ComboBoxItemNormalBackground" Color="#FFFFFFFF"/>
+            <SolidColorBrush x:Key="ComboBoxItemNormalForeground" Color="#FF000000"/>
+            <SolidColorBrush x:Key="ComboBoxItemNormalHoverForeground" Color="#FF000000" />
+            <SolidColorBrush x:Key="ComboBoxItemNormalHoverBackground" Color="#FFDEDEDE"/>
+            <SolidColorBrush x:Key="ComboBoxItemNormalPressedBackground" Color="#FFD3D3D3"/>
+            <SolidColorBrush x:Key="ComboBoxItemNormalPressedForeground" Color="#FF000000"/>
+
+            <SolidColorBrush x:Key="ComboBoxItemSelectedForeground" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="ComboBoxItemSelectedBackground" Color="#FF4617B4"/>
+            <SolidColorBrush x:Key="ComboBoxItemSelectedHoverForeground" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="ComboBoxItemSelectedHoverBackground" Color="#FF5F37BE"/>
+            <SolidColorBrush x:Key="ComboBoxItemSelectedPressedForeground" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="ComboBoxItemSelectedPressedBackground" Color="#FF4617B4"/>
+
+            <SolidColorBrush x:Key="ComboBoxItemDisabledForeground" Color="#FF2B2B2B" />
+            <SolidColorBrush x:Key="ComboBoxItemDisabledBackground" Color="#FF2B2B2B" />
+        </ResourceDictionary>
+        <ResourceDictionary x:Name="Light">
+            <SolidColorBrush x:Key="MainBrush" Color="#FFF88E1D" />
+            <SolidColorBrush x:Key="PageBackground" Color="White" />
+            <SolidColorBrush x:Key="DemoModuleCaptionForegroundBrush" Color="#FF0078D7" />
+            <SolidColorBrush x:Key="ToolbarItemHoverBackground" Color="#300078D7" />
+            <SolidColorBrush x:Key="ToolbarItemPressedBackground" Color="#400078D7" />
+            <SolidColorBrush x:Key="ToolbarSeparatorBorderBrush" Color="#FFD9D9D9" />
+
+            <SolidColorBrush x:Key="DemoModuleTileGroupHeaderBrush" Color="#FF5C5C5C" />
+            <SolidColorBrush x:Key="TileBackground" Color="#FF3D3D3D" />
+            <SolidColorBrush x:Key="TilePointerOverBackgroundBrush" Color="#FFF7941E" />
+            <SolidColorBrush x:Key="TilePressedBackgroundBrush" Color="#FFF7941E" />
+            <SolidColorBrush x:Key="DemoModuleForegroundBrush" Color="#FF404040" />
+
+            <SolidColorBrush x:Key="ComboBoxItemNormalBackground" Color="#FFFFFFFF"/>
+            <SolidColorBrush x:Key="ComboBoxItemNormalForeground" Color="#FF000000"/>
+            <SolidColorBrush x:Key="ComboBoxItemNormalHoverForeground" Color="#FF000000" />
+            <SolidColorBrush x:Key="ComboBoxItemNormalHoverBackground" Color="#FFDEDEDE"/>
+            <SolidColorBrush x:Key="ComboBoxItemNormalPressedBackground" Color="#FFD3D3D3"/>
+            <SolidColorBrush x:Key="ComboBoxItemNormalPressedForeground" Color="#FF000000"/>
+
+            <SolidColorBrush x:Key="ComboBoxItemSelectedForeground" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="ComboBoxItemSelectedBackground" Color="#FF4617B4"/>
+            <SolidColorBrush x:Key="ComboBoxItemSelectedHoverForeground" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="ComboBoxItemSelectedHoverBackground" Color="#FF5F37BE"/>
+            <SolidColorBrush x:Key="ComboBoxItemSelectedPressedForeground" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="ComboBoxItemSelectedPressedBackground" Color="#FF4617B4"/>
+
+            <SolidColorBrush x:Key="ComboBoxItemDisabledForeground" Color="#FF2B2B2B" />
+            <SolidColorBrush x:Key="ComboBoxItemDisabledBackground" Color="#FF2B2B2B" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

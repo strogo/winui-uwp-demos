@@ -1,0 +1,137 @@
+﻿<UserControl
+    x:Class="GaugesDemo.CircularGaugeModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GaugesDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Gauges="using:DevExpress.UI.Xaml.Gauges"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:demobase="using:FeatureDemo.Base"
+    BorderBrush="Transparent"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <Style x:Key="HourNeedleOptionsStyle" TargetType="Gauges:ArcScaleNeedleOptions">
+            <Setter Property="EndOffset" Value="90"/>
+            <Setter Property="StartOffset" Value="0"/>
+        </Style>
+        <Style x:Key="HourNeedleStyle" TargetType="Gauges:ArcScaleNeedle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle RenderTransformOrigin="0, 0.5" Height="7" Margin="-17,0,0,0" Fill="{Binding Path=Fill, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MinuteNeedleOptionsStyle" TargetType="Gauges:ArcScaleNeedleOptions">
+            <Setter Property="StartOffset" Value="0"/>
+        </Style>
+        <Style x:Key="MinuteNeedleStyle" TargetType="Gauges:ArcScaleNeedle">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle RenderTransformOrigin="0, 0.5" Height="5" Margin="-17,0,0,0" Fill="{Binding Path=Fill, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="SecondNeedleOptionsStyle" TargetType="Gauges:ArcScaleNeedleOptions">
+            <Setter Property="EndOffset" Value="62"/>
+            <Setter Property="StartOffset" Value="0"/>
+        </Style>
+        <Style x:Key="CustomTextStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI Light"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#FF908982"/>
+        </Style>
+    </UserControl.Resources>
+    <Common:DemoModuleViewControl Style="{StaticResource ChartsDemoModuleViewControlStyle}">
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled" Margin="0">
+            <StackPanel Margin="0,20,0,0">
+                <Gauges:CircularGauge Margin="0" FlowDirection="LeftToRight" Padding="0" FontSize="18" FontFamily="Segoe UI" FontWeight="Light">
+                    <Gauges:CircularGauge.Scales>
+                        <Gauges:ArcScale StartAngle="-90" EndAngle="270"  
+                                   StartValue="0" EndValue="12" 
+                                   MajorIntervalCount="4" MinorIntervalCount="3"
+                                   ShowMajorTickmarks="True"
+                                   ShowMinorTickmarks="True"
+                                   ShowLabels="True"
+                                   ShowSpindleCap="True">
+                            <Gauges:ArcScale.Layers>
+                                <Gauges:ArcScaleLayer/>
+                            </Gauges:ArcScale.Layers>
+                            <Gauges:ArcScale.MajorTickmarkOptions>
+                                <Gauges:MajorTickmarkOptions Fill="Transparent"/>
+                            </Gauges:ArcScale.MajorTickmarkOptions>
+                            <Gauges:ArcScale.LabelOptions>
+                                <Gauges:ArcScaleLabelOptions Orientation="LeftToRight" ShowFirst="False" Offset="-24" ZIndex="1" Foreground="White"/>
+                            </Gauges:ArcScale.LabelOptions>
+                            <Gauges:ArcScale.Needles>
+                                <Gauges:ArcScaleNeedle Value="{Binding NewYorkHours}" Style="{StaticResource ResourceKey=HourNeedleStyle}">
+                                    <Gauges:ArcScaleNeedle.Options>
+                                        <Gauges:ArcScaleNeedleOptions Style="{StaticResource ResourceKey=HourNeedleOptionsStyle}"/>
+                                    </Gauges:ArcScaleNeedle.Options>
+                                </Gauges:ArcScaleNeedle>
+                                <Gauges:ArcScaleNeedle Value="{Binding Minutes}" Style="{StaticResource ResourceKey=MinuteNeedleStyle}">
+                                    <Gauges:ArcScaleNeedle.Options>
+                                        <Gauges:ArcScaleNeedleOptions Style="{StaticResource ResourceKey=MinuteNeedleOptionsStyle}"/>
+                                    </Gauges:ArcScaleNeedle.Options>
+                                </Gauges:ArcScaleNeedle>
+                                <Gauges:ArcScaleNeedle Value="{Binding Seconds}">
+                                    <Gauges:ArcScaleNeedle.Options>
+                                        <Gauges:ArcScaleNeedleOptions Style="{StaticResource ResourceKey=SecondNeedleOptionsStyle}"/>
+                                    </Gauges:ArcScaleNeedle.Options>
+                                </Gauges:ArcScaleNeedle>
+                            </Gauges:ArcScale.Needles>
+                        </Gauges:ArcScale>
+                    </Gauges:CircularGauge.Scales>
+                </Gauges:CircularGauge>
+                <TextBlock Text="New York" Style="{StaticResource CustomTextStyle}" Margin="0,20,0,0"/>
+                <Gauges:CircularGauge Margin="0,20,0,20" Padding="0" FlowDirection="LeftToRight" FontSize="18" FontFamily="Segoe UI" FontWeight="Light">
+                    <Gauges:CircularGauge.Scales>
+                        <Gauges:ArcScale StartAngle="-90" EndAngle="270" 
+                                   StartValue="0" EndValue="12" 
+                                   MajorIntervalCount="4" MinorIntervalCount="3"
+                                   ShowMajorTickmarks="True"
+                                   ShowMinorTickmarks="True"
+                                   ShowLabels="True"
+                                   ShowSpindleCap="True">
+                            <Gauges:ArcScale.Layers>
+                                <Gauges:ArcScaleLayer/>
+                            </Gauges:ArcScale.Layers>
+                            <Gauges:ArcScale.MajorTickmarkOptions>
+                                <Gauges:MajorTickmarkOptions Fill="Transparent"/>
+                            </Gauges:ArcScale.MajorTickmarkOptions>
+                            <Gauges:ArcScale.LabelOptions>
+                                <Gauges:ArcScaleLabelOptions Orientation="LeftToRight" ShowFirst="False" Offset="-24" ZIndex="1" Foreground="White"/>
+                            </Gauges:ArcScale.LabelOptions>
+                            <Gauges:ArcScale.Needles>
+                                <Gauges:ArcScaleNeedle Value="{Binding LondonHours}" Style="{StaticResource ResourceKey=HourNeedleStyle}">
+                                    <Gauges:ArcScaleNeedle.Options>
+                                        <Gauges:ArcScaleNeedleOptions Style="{StaticResource ResourceKey=HourNeedleOptionsStyle}"/>
+                                    </Gauges:ArcScaleNeedle.Options>
+                                </Gauges:ArcScaleNeedle>
+                                <Gauges:ArcScaleNeedle Value="{Binding Minutes}" Style="{StaticResource ResourceKey=MinuteNeedleStyle}">
+                                    <Gauges:ArcScaleNeedle.Options>
+                                        <Gauges:ArcScaleNeedleOptions Style="{StaticResource ResourceKey=MinuteNeedleOptionsStyle}"/>
+                                    </Gauges:ArcScaleNeedle.Options>
+                                </Gauges:ArcScaleNeedle>
+                                <Gauges:ArcScaleNeedle Value="{Binding Seconds}">
+                                    <Gauges:ArcScaleNeedle.Options>
+                                        <Gauges:ArcScaleNeedleOptions Style="{StaticResource ResourceKey=SecondNeedleOptionsStyle}"/>
+                                    </Gauges:ArcScaleNeedle.Options>
+                                </Gauges:ArcScaleNeedle>
+                            </Gauges:ArcScale.Needles>
+                        </Gauges:ArcScale>
+                    </Gauges:CircularGauge.Scales>
+                </Gauges:CircularGauge>
+                <TextBlock Text="London" Style="{StaticResource CustomTextStyle}" Margin="0,0,0,20"/>
+            </StackPanel>
+        </ScrollViewer>
+    </Common:DemoModuleViewControl>
+</UserControl>

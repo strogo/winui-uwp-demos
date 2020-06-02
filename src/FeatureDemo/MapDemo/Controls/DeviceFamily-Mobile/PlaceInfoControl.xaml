@@ -1,0 +1,140 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MapDemo"
+    xmlns:Map="using:DevExpress.UI.Xaml.Map">
+    <local:PhotoGalleryResources x:Key="ImageResources"/>
+    <Style x:Key="NavButtonStyle" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid Background="#00000000">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.15" To="MouseOver">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.15" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contentPresenter"/>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition From="MouseOver" GeneratedDuration="0" To="Normal">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.3" To="0.75" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contentPresenter"/>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="MouseOver">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contentPresenter">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contentPresenter">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0.35"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contentPresenter">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0.15"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Opacity="0.75"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="local:PlaceInfoControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:PlaceInfoControl">
+                    <Grid x:Name="Panels" HorizontalAlignment="Right" Margin="8" Width="297" Visibility="Visible">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="VisibleStates">
+                                <VisualState x:Name="Visible">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Panels" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Panels" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Invisible">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Panels" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value="0"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Panels" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00.5">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid x:Name="TopPanel">
+                            <Border Background="Black" Opacity="0.75"/>
+                            <StackPanel Margin="10">
+                                <TextBlock TextWrapping="Wrap" Text="{Binding PlaceInfo.CityName, RelativeSource={RelativeSource TemplatedParent}}" FontSize="23" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+                                <Image Source="{Binding PlaceInfo.ImageSource, RelativeSource={RelativeSource TemplatedParent}}" Stretch="None"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button x:Name="PrevButton" Style="{StaticResource NavButtonStyle}" VerticalAlignment="Bottom"
+                                            Command="{Binding Path=ChangePlaceCommand, RelativeSource={RelativeSource TemplatedParent}}">
+                                        <Button.CommandParameter>
+                                            <local:NavDirection>Previous</local:NavDirection>
+                                        </Button.CommandParameter>
+                                        <Image Source="{Binding PlaceInfoControlPrevImageSource, Source={StaticResource ResourceKey=ImageResources}}" Stretch="None"/>
+                                    </Button>
+                                    <TextBlock Grid.Column="1" TextWrapping="Wrap" Text="{Binding PlaceInfo.Name, RelativeSource={RelativeSource TemplatedParent}}" FontSize="16" Foreground="White" HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                                    <Button Grid.Column="2" x:Name="NextButton" Style="{StaticResource NavButtonStyle}" VerticalAlignment="Bottom"
+                                            Command="{Binding Path=ChangePlaceCommand, RelativeSource={RelativeSource TemplatedParent}}">
+                                        <Button.CommandParameter>
+                                            <local:NavDirection>Next</local:NavDirection>
+                                        </Button.CommandParameter>
+                                        <Image Source="{Binding PlaceInfoControlNextImageSource, Source={StaticResource ResourceKey=ImageResources}}" Stretch="None"/>
+                                    </Button>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                        <Grid x:Name="BottomPanel" Grid.Row="1" Margin="0,10,0,10">
+                            <Border Background="Black" Opacity="0.75"/>
+                            <Grid Margin="20,20,10,20">
+                                <ScrollViewer  x:Name="TestScrollViewer" ZoomMode="Disabled">
+                                    <TextBlock Text="{Binding PlaceInfo.Description, RelativeSource={RelativeSource TemplatedParent}}" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap"/>
+                                </ScrollViewer>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

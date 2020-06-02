@@ -1,0 +1,55 @@
+﻿<Common:DemoModuleView
+    x:Class="NavigationDemo.MessageDialogModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:NavigationDemo"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    xmlns:Core="using:DevExpress.Core"
+    xmlns:dxmvvm="using:DevExpress.Mvvm"
+    xmlns:dxmvvmui="using:DevExpress.Mvvm.UI"
+    xmlns:dxmvvmi="using:DevExpress.Mvvm.UI.Interactivity"
+    mc:Ignorable="d"
+    d:DesignWidth="800"
+    >
+    <Common:DemoModuleView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <Core:SystemStyleOverrides/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Button" BasedOn="{StaticResource SystemButtonStyle}">
+                <Setter Property="MinWidth" Value="150"/>
+                <Setter Property="MinHeight" Value="50"/>
+                <Setter Property="Margin" Value="12,12,0,0"/>
+            </Style>
+        </ResourceDictionary>
+    </Common:DemoModuleView.Resources>
+    <Common:DemoModuleView.DataContext>
+        <local:MessageDialogModuleViewModel/>
+    </Common:DemoModuleView.DataContext>
+    <dxmvvmi:Interaction.Behaviors>
+        <dxmvvmui:MessageBoxService/>
+    </dxmvvmi:Interaction.Behaviors>
+
+    <Layout:HyperlinkNavigationButton Command="{Binding Path=ShowMessageBoxCommand}" Content="Click to show MessageBox" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Common:DemoModuleView.Options>
+        <Common:OptionsPanel>
+            <Common:OptionGroupHeader Text="Parameters" />
+            <Common:OptionItem Header="Title" HeaderOrientation="Vertical">
+                <Editors:TextEdit Text="{Binding Path=Title, Mode=TwoWay}"/>
+            </Common:OptionItem>
+            <Common:OptionItem Header="Message" HeaderOrientation="Vertical">
+                <Editors:TextEdit Text="{Binding Path=Message, Mode=TwoWay}"/>
+            </Common:OptionItem>
+            <Common:OptionItem Header="MessageDialogButtons" HeaderOrientation="Vertical">
+                <ComboBox ItemsSource="{Binding Path=MessageDialogButtons}" SelectedItem="{Binding Path=SelectedMessageDialogButtons, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            </Common:OptionItem>
+            <Common:OptionItem Header="Result:" >
+                <TextBlock Text="{Binding Path=Output}" />
+            </Common:OptionItem>
+        </Common:OptionsPanel>
+    </Common:DemoModuleView.Options>
+</Common:DemoModuleView>

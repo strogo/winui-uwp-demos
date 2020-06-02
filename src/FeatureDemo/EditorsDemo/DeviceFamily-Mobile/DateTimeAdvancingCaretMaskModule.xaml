@@ -1,0 +1,78 @@
+﻿<UserControl
+    x:Class="EditorsDemo.DateTimeAdvancingCaretMaskModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EditorsDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout" 
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors" mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,7,0,3"></Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
+        <StackPanel Margin="20,0">
+            <TextBlock Text="Full (f):"/>
+                <Editors:TextEdit Text="07.09.2016 3:14:48">
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings Mask="f" MaskType="DateTimeAdvancingCaret"/>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+
+            <TextBlock Text="Full date and time (f):"/>
+                <Editors:TextEdit Text="07.09.2016 3:14:48">
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings Mask="MM/dd/yyyy h:m:s t" MaskType="DateTimeAdvancingCaret"/>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+
+            <TextBlock Text="RFC1123 (f):"/>
+                <Editors:TextEdit Text="07.09.2016 3:14:48">
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings Mask="R" MaskType="DateTimeAdvancingCaret"/>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+
+            <TextBlock Text="Universal sortable (f):"/>
+                <Editors:TextEdit Text="07.09.2016 3:14:48">
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings Mask="u" MaskType="DateTimeAdvancingCaret"/>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+
+            <TextBlock Text="MonthDay (M):"/>
+                <Editors:TextEdit Text="07.09.2016 3:14:48">
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings Mask="M" MaskType="DateTimeAdvancingCaret"/>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+
+            <TextBlock Text="Year (Year: yyyy):"/>
+                <Editors:TextEdit Text="07.09.2016 3:14:48">
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings Mask="Year: yyyy" MaskType="DateTimeAdvancingCaret"/>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+
+            <TextBlock Text="Short time (t):"/>
+                <Editors:TextEdit Text="07.09.2016 3:14:48">
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings Mask="t" MaskType="DateTimeAdvancingCaret"/>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+
+            <TextBlock Text="Day (d, dddd):"/>
+                <Editors:TextEdit Text="07.09.2016 3:14:48">
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings Mask="d, dddd" MaskType="DateTimeAdvancingCaret"/>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+            
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

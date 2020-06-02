@@ -1,0 +1,48 @@
+﻿<Layout:DXPage
+    x:Class="FeatureDemo.View.DemoModuleGroupPage"
+    IsTabStop="false"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:common="using:FeatureDemo.Common"
+    xmlns:view="using:FeatureDemo.View"
+    xmlns:ViewModel="using:FeatureDemo.ViewModel"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dxmvvmui="using:DevExpress.Mvvm.UI"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:dxmvvmi="using:DevExpress.Mvvm.UI.Interactivity"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <dxmvvmui:BooleanToVisibilityConverter  x:Key="booleanToVisibilityConverter"/>
+        <dxmvvmui:BooleanToVisibilityConverter  x:Key="invertedBooleanToVisibilityConverter" Inverse="True"/>
+        <common:ItemsSourceConverter x:Key="itemSourceConverter" />
+    </Page.Resources>
+    <Grid Background="{StaticResource PageBackground}">
+        <Pivot ItemsSource="{x:Bind ViewModel.DemoModuleGroups, Mode=OneTime}" SelectedItem="{x:Bind ViewModel.SelectedGroup, Mode=TwoWay, Converter={StaticResource itemSourceConverter}}" Style="{StaticResource GroupPivotStyle}" Padding="0" Margin="0">
+            <Pivot.HeaderTemplate>
+                <DataTemplate x:DataType="ViewModel:DemoModuleGroupViewModel">
+                    <TextBlock Text="{x:Bind Group.Title, Mode=OneTime}" FontFamily="Segoe UI" FontSize="20" FontWeight="Light" Margin="0,20,10000,0" Foreground="#FFF88E1D" />
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+            <Pivot.ItemTemplate>
+                <DataTemplate x:DataType="ViewModel:DemoModuleGroupViewModel">
+                    <Common:CustomListView ItemsSource="{x:Bind DemoModules, Mode=OneTime}" Style="{StaticResource GroupListView}" SelectionMode="None"
+                                           ItemClickCommand="{Binding MainViewModel.NavigateToDemoCommand, Mode=OneTime}">
+                        <!--<dxmvvmi:Interaction.BehaviorsTemplate>
+                            <DataTemplate>
+                                <ContentControl>
+                                    <dxmvvmui:EventToCommand EventName="Tapped" Command="{Binding MainViewModel.NavigateToDemoCommand, Mode=OneTime}" PassEventArgsToCommand="True">
+                                        <dxmvvmui:EventToCommand.EventArgsConverter>
+                                            <dxmvvmui:ItemsControlMouseEventArgsConverter/>
+                                        </dxmvvmui:EventToCommand.EventArgsConverter>
+                                    </dxmvvmui:EventToCommand>
+                                </ContentControl>
+                            </DataTemplate>
+                        </dxmvvmi:Interaction.BehaviorsTemplate>-->
+                    </Common:CustomListView>
+                </DataTemplate>
+            </Pivot.ItemTemplate>
+        </Pivot>
+    </Grid>
+</Layout:DXPage>

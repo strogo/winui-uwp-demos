@@ -1,0 +1,22 @@
+﻿<UserControl
+    x:Class="LayoutDemo.DataLayoutControlModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LayoutDemo"
+    xmlns:Controls="using:DevExpress.UI.Xaml.Controls"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    >
+    <UserControl.Resources>
+        <local:DataLayoutControlViewModel x:Key="dataLayoutControlViewModel" />
+    </UserControl.Resources>
+    <Layout:LayoutControl DataContext="{StaticResource dataLayoutControlViewModel}" PortraitOrientation="Vertical">
+        <Controls:CodeViewControl ItemsSource="{Binding Path=Items}" SelectedItem="{Binding Path=SelectedDataItem, Mode=TwoWay}">
+            <Controls:CodeViewControl.ItemTemplate>
+                <DataTemplate>
+                    <Controls:CodeViewItem CodeText="{Binding Path=GetCodeTextFunc}" FileName="{Binding Path=DisplayName}" CodeLanguage="{Binding Path=CodeLanguage}" />
+                </DataTemplate>
+            </Controls:CodeViewControl.ItemTemplate>
+        </Controls:CodeViewControl>
+        <Layout:DataLayoutControl Header="{Binding Path=SelectedDataItem.DisplayName}" CurrentItem="{Binding Path=SelectedDataItem.Data}"/>
+    </Layout:LayoutControl>
+</UserControl>

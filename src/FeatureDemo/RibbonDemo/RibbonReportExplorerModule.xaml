@@ -1,0 +1,139 @@
+﻿<UserControl
+    x:Class="RibbonDemo.RibbonReportExplorerModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxcip="using:DevExpress.UI.Xaml.Controls.Internal.Pdf"
+    xmlns:local="using:RibbonDemo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    xmlns:Controls="using:DevExpress.UI.Xaml.Controls"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Ribbon="using:DevExpress.UI.Xaml.Ribbon"
+    xmlns:Core="using:DevExpress.Core"
+    BorderBrush="Transparent"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <Core:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+        <dxcip:PdfViewModeToBooleanConverter x:Key="PdfViewModeToBoolConverter"/>
+        <local:RibbonReportParametersSelector x:Key="reportParametersSelector" 
+                                          MultiColumnTemplate="{StaticResource multicolumnParametersTemplate}"
+                                          EmptyTemplate="{StaticResource emptyParametersTemplate}"
+                                          TableTemplate="{StaticResource tableParametersTemplate}"
+                                          SubreportTemplate="{StaticResource subreportParametersTemplate}" />
+        <DataTemplate x:Key="multicolumnParametersTemplate">
+            <Ribbon:RibbonSplitButton Content="{Binding DisplayName}" Icon="{StaticResource MultiColumnReportPath}" Command="{Binding LoadDocumentCommand}" CommandParameter="{Binding}" >
+                <Ribbon:RibbonCheckBox Content="First across, then down" IsChecked="{Binding Parameters.IsHorizontal, Mode=TwoWay}"/>
+            </Ribbon:RibbonSplitButton>
+        </DataTemplate>
+        <DataTemplate x:Key="emptyParametersTemplate">
+            <Ribbon:RibbonButton Content="{Binding DisplayName}" Icon="{StaticResource ReportMasterPath}"  Command="{Binding LoadDocumentCommand}" CommandParameter="{Binding}" />
+        </DataTemplate>
+        <DataTemplate x:Key="tableParametersTemplate">
+            <Ribbon:RibbonSplitButton Content="{Binding DisplayName}" Command="{Binding LoadDocumentCommand}" CommandParameter="{Binding}">
+                <Layout:LayoutControl Orientation="Vertical">
+                    <Layout:LayoutItem Header="Order Id:" HeaderPosition="Top">
+                        <Editors:SpinEdit EditValue="{Binding Parameters.OrderId, Mode=TwoWay}" Width="250">
+                            <Editors:SpinEdit.TextInputSettings>
+                                <Editors:TextInputMaskSettings Mask="d" MaskType="Numeric"/>
+                            </Editors:SpinEdit.TextInputSettings>
+                        </Editors:SpinEdit>
+                    </Layout:LayoutItem>
+                    <Layout:LayoutItem Header="Max Rows per Page:" HeaderPosition="Top">
+                        <Editors:SpinEdit EditValue="{Binding Parameters.MaxRowsPerPage, Mode=TwoWay}">
+                            <Editors:SpinEdit.TextInputSettings>
+                                <Editors:TextInputMaskSettings Mask="d" MaskType="Numeric"/>
+                            </Editors:SpinEdit.TextInputSettings>
+                        </Editors:SpinEdit>
+                    </Layout:LayoutItem>
+                </Layout:LayoutControl>
+            </Ribbon:RibbonSplitButton>
+        </DataTemplate>
+        <DataTemplate x:Key="subreportParametersTemplate">
+            <Ribbon:RibbonSplitButton Content="{Binding DisplayName}" Command="{Binding LoadDocumentCommand}" CommandParameter="{Binding}">
+                <Layout:LayoutControl Orientation="Vertical">
+                    <Layout:LayoutItem Header="From Date:" HeaderPosition="Top">
+                        <Editors:DateEdit EditValue="{Binding Parameters.From, Mode=TwoWay}" Width="250">
+                            <Editors:DateEdit.TextInputSettings>
+                                <Editors:TextInputMaskSettings Mask="MM/dd/yyyy" MaskType="DateTime"/>
+                            </Editors:DateEdit.TextInputSettings>
+                        </Editors:DateEdit>
+                    </Layout:LayoutItem>
+                    <Layout:LayoutItem Header="To Date:" HeaderPosition="Top">
+                        <Editors:DateEdit EditValue="{Binding Parameters.To, Mode=TwoWay}" Width="250">
+                            <Editors:DateEdit.TextInputSettings>
+                                <Editors:TextInputMaskSettings Mask="MM/dd/yyyy" MaskType="DateTime"/>
+                            </Editors:DateEdit.TextInputSettings>
+                        </Editors:DateEdit>
+                    </Layout:LayoutItem>
+                </Layout:LayoutControl>
+            </Ribbon:RibbonSplitButton>
+        </DataTemplate>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <local:RibbonReportExplorerViewModel />
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Controls:PdfViewerControl x:Name="pdfViewer"
+                                   DocumentSource="{Binding Document}"
+                                   Grid.Row="1"
+                                   IsDataLoading="{Binding IsLoading, Mode=TwoWay}"
+                                   Loaded="PdfViewer_Loaded">
+            <Controls:PdfViewerControl.OverlaySettings>
+                <Controls:SimpleSettingsBarOverlaySettings IsSettingsBarVisible="False"/>
+            </Controls:PdfViewerControl.OverlaySettings>
+        </Controls:PdfViewerControl>
+        <Ribbon:RibbonControl Grid.ColumnSpan="2" 
+                              Title="Report Explorer" 
+                              Width="Auto" 
+                              HorizontalAlignment="Stretch" 
+                              x:Name="ribbon"  
+                              Grid.Row="0">
+            <Ribbon:RibbonTab Caption="View">
+                <Ribbon:RibbonGroup Caption="View Mode">
+                    <Ribbon:RibbonRadioButton Icon="{StaticResource SinglePagePath}" 
+                                              IconWidth="24"
+                                              IconHeight="24"
+                                              IsChecked="{Binding PdfViewMode, ElementName=pdfViewer, Converter={StaticResource PdfViewModeToBoolConverter}, ConverterParameter=SinglePage, Mode=TwoWay}">
+                    </Ribbon:RibbonRadioButton>
+                    <Ribbon:RibbonRadioButton Icon="{StaticResource ContinuousePath}" 
+                                              IconWidth="24"
+                                              IconHeight="24"
+                                              IsChecked="{Binding PdfViewMode, ElementName=pdfViewer, Converter={StaticResource PdfViewModeToBoolConverter}, ConverterParameter=Continuous, Mode=TwoWay}"/>
+                    <local:RibbonTextSearchBox Owner="{Binding ElementName=pdfViewer}"/>
+                </Ribbon:RibbonGroup>
+                <Ribbon:RibbonGroup Caption="Search" Visibility="{Binding IsTextSearchEnabled, ElementName=pdfViewer, Converter={StaticResource booleanToVisibilityConverter}}">
+                </Ribbon:RibbonGroup>
+                <Ribbon:RibbonGroup Caption="View Settings">
+                    <Ribbon:RibbonButton IconTemplate="{StaticResource FitIntoPageLevelIconTemplate}"
+                                         Command="{Binding FitSizeCommand, ElementName=pdfViewer}" 
+                                         CommandParameter="FitPageLevel"/>
+                    <Ribbon:RibbonButton IconTemplate="{StaticResource FitWidthIconTemplate}"
+                                         Command="{Binding FitSizeCommand, ElementName=pdfViewer}" 
+                                         CommandParameter="FitWidth"/>
+                    <Ribbon:RibbonButton IconTemplate="{StaticResource FitHeightIconTemplate}"
+                                         Command="{Binding FitSizeCommand, ElementName=pdfViewer}" 
+                                         CommandParameter="FitHeight"/>
+                </Ribbon:RibbonGroup>
+                <Ribbon:RibbonGroup Caption="Bookmarks">
+                    <Ribbon:RibbonToggleButton Icon="{StaticResource BookmarkPath}"
+                                               IconWidth="24"
+                                               IconHeight="24"
+                                               Command="{Binding CurrentView.BookmarkPageCommand, ElementName=pdfViewer}"
+                                               IsChecked="{Binding CurrentView.IsCurrentPageHasBookmark, ElementName=pdfViewer, Mode=TwoWay}"/>
+                </Ribbon:RibbonGroup>
+            </Ribbon:RibbonTab>
+            <Ribbon:RibbonTab Caption="Report Settings">
+                <Ribbon:RibbonGroup ItemsSource="{Binding AvailableReports}" ItemTemplateSelector="{StaticResource reportParametersSelector}">
+                </Ribbon:RibbonGroup>
+            </Ribbon:RibbonTab>
+        </Ribbon:RibbonControl>
+    </Grid>
+</UserControl>
+

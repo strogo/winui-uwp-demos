@@ -1,0 +1,305 @@
+﻿<Common:DemoModuleView
+    x:Class="RangeControlDemo.RangeControlModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:local="using:RangeControlDemo" 
+    xmlns:xaml="using:DevExpress.UI.Xaml"
+    xmlns:Controls="using:DevExpress.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="400"
+    d:DesignWidth="800">
+
+    <Common:DemoModuleView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <SolidColorBrush x:Key="RangeForegroundBrush" Color="#FFFFFFFF"/>
+                    <SolidColorBrush x:Key="RangeBackgroundColor" Color="#42000000"/>
+                    <SolidColorBrush x:Key="RangeBorderColor" Color="#FFFFFFFF"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="RangeForegroundBrush" Color="#AA000000"/>
+                    <SolidColorBrush x:Key="RangeBackgroundColor" Color="#FFFFFFFF"/>
+                    <SolidColorBrush x:Key="RangeBorderColor" Color="#26000000"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+            <local:FromDateConverter x:Key="FromDateConverter"/>
+        </ResourceDictionary>
+    </Common:DemoModuleView.Resources>
+
+    <Grid>
+        <Layout:TabbedContainer Grid.Row="1" HorizontalAlignment="Stretch" Margin="0,40,0,0" VerticalAlignment="Stretch">
+            <Layout:TabbedContainerItem Header="Calendar">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.25*" />
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="0.25*" />
+                    </Grid.RowDefinitions>
+                    <Controls:RangeControl Grid.Row="1"
+                                           x:Name="CalendarRangeControl"
+                                           OutOfRangeAreaBrush="Transparent">
+                        <Controls:CalendarClient>
+                            <Controls:CalendarClient.IntervalFactories>
+                                <Controls:YearIntervalFactory/>
+                                <Controls:MonthIntervalFactory/>
+                                <Controls:DayIntervalFactory/>
+                            </Controls:CalendarClient.IntervalFactories>
+                        </Controls:CalendarClient>
+                    </Controls:RangeControl>
+                    <Grid Grid.Row="2" 
+                          Margin="0,20,0,0" 
+                          Padding="8"
+                          Background="{ThemeResource RangeBackgroundColor}" 
+                          BorderThickness="1"
+                          BorderBrush="{ThemeResource RangeBorderColor}"
+                          HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Selected range:" HorizontalAlignment="Right" Margin="10,0" Foreground="{ThemeResource RangeForegroundBrush}" Grid.Column="0"/>
+                        <TextBlock Text="{Binding ElementName=CalendarRangeControl, Path=SelectionRangeStart, Converter={StaticResource FromDateConverter}}" Grid.Column="1" Foreground="{ThemeResource RangeForegroundBrush}" Margin="10,0"/>
+                        <TextBlock Text="-" Grid.Column="2" Foreground="{ThemeResource RangeForegroundBrush}"/>
+                        <TextBlock Text="{Binding ElementName=CalendarRangeControl, Path=SelectionRangeEnd, Converter={StaticResource FromDateConverter}}" Grid.Column="3" Foreground="{ThemeResource RangeForegroundBrush}" Margin="10,0"/>
+                    </Grid>
+                </Grid>
+            </Layout:TabbedContainerItem>
+            <Layout:TabbedContainerItem x:Name="tabbedContainerItem1st" Header="Spark Point">
+                <Layout:TabbedContainerItem.DataContext>
+                    <local:DateTimeViewModel Count="1000" Step="06:00:00"/>
+                </Layout:TabbedContainerItem.DataContext>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.25*" />
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="0.25*" />
+                    </Grid.RowDefinitions>
+                    <Controls:RangeControl 
+                        x:Name="SparkPointRangeControl"
+                        ShowRangeThumbs="True"
+                        ShowSelectionRectangle="False"
+                        Grid.Row="1"
+                        VisibleRangeStart="{Binding Path=VisibleStart}"
+                        VisibleRangeEnd="{Binding Path=VisibleEnd}"
+                        SelectionRangeStart="{Binding Path=SelectionStart}"
+                        SelectionRangeEnd="{Binding Path=SelectionEnd}"
+                        ShowRangeBar="True">
+                        <Controls:SparkPointClient 
+                            ShowAxisLabels="True" 
+                            ShowAxisXGridLines="True" 
+                            ShowAxisXMinorGridLines="True"
+                            DisplayMember="DisplayValue"
+                            ValueMember="Value"
+                            DisplayScaleType="Numeric"
+                            ValueScaleType="DateTime"
+                            ItemsSource="{Binding Path=ItemsSource}">
+                            <Controls:SparkPointClient.IntervalFactories>
+                                <Controls:MonthIntervalFactory/>
+                                <Controls:DayIntervalFactory/>
+                            </Controls:SparkPointClient.IntervalFactories>
+                        </Controls:SparkPointClient>
+                    </Controls:RangeControl>
+                    <Grid Grid.Row="2" 
+                          Margin="0,20,0,0" 
+                          Padding="8"
+                          Background="{ThemeResource RangeBackgroundColor}" 
+                          BorderThickness="1"
+                          BorderBrush="{ThemeResource RangeBorderColor}"
+                          HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Selected range:" HorizontalAlignment="Right" Margin="10,0" Foreground="{ThemeResource RangeForegroundBrush}"/>
+                        <TextBlock Text="{Binding ElementName=SparkPointRangeControl, Path=SelectionRangeStart, Converter={StaticResource FromDateConverter}}" Grid.Column="1" Foreground="{ThemeResource RangeForegroundBrush}" Margin="10,0"/>
+                        <TextBlock Text="-" Grid.Column="2" Foreground="{ThemeResource RangeForegroundBrush}"/>
+                        <TextBlock Text="{Binding ElementName=SparkPointRangeControl, Path=SelectionRangeEnd, Converter={StaticResource FromDateConverter}}" Grid.Column="3" Foreground="{ThemeResource RangeForegroundBrush}" Margin="10,0"/>
+                    </Grid>
+                </Grid>
+            </Layout:TabbedContainerItem>
+            <Layout:TabbedContainerItem x:Name="tabbedContainerItem2nd" Header="Spark Line">
+                <Layout:TabbedContainerItem.DataContext>
+                    <local:DateTimeViewModel Count="5000" Step="02:00:00"/>
+                </Layout:TabbedContainerItem.DataContext>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.25*" />
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="0.25*" />
+                    </Grid.RowDefinitions>
+                    <Controls:RangeControl 
+                        x:Name="SparkLineRangeControl"
+                        ShowRangeThumbs="True"
+                        ShowSelectionRectangle="False"
+                        Grid.Row="1"
+                        VisibleRangeStart="{Binding Path=VisibleStart}"
+                        VisibleRangeEnd="{Binding Path=VisibleEnd}"
+                        SelectionRangeStart="{Binding Path=SelectionStart}"
+                        SelectionRangeEnd="{Binding Path=SelectionEnd}"
+                        ShowRangeBar="True">
+                        <Controls:SparkLineClient 
+                            ShowMarkers="False"
+                            ShowAxisLabels="True" 
+                            ShowAxisXGridLines="True" 
+                            ShowAxisXMinorGridLines="True"
+                            DisplayMember="DisplayValue"
+                            ValueMember="Value"
+                            DisplayScaleType="Numeric"
+                            ValueScaleType="DateTime"
+                            ItemsSource="{Binding Path=ItemsSource}">
+                            <Controls:SparkLineClient.IntervalFactories>
+                                <Controls:MonthIntervalFactory/>
+                                <Controls:DayIntervalFactory/>
+                            </Controls:SparkLineClient.IntervalFactories>
+                        </Controls:SparkLineClient>
+                    </Controls:RangeControl>
+                    <Grid Grid.Row="2" 
+                          Margin="0,20,0,0" 
+                          Padding="8"
+                          Background="{ThemeResource RangeBackgroundColor}" 
+                          BorderThickness="1"
+                          BorderBrush="{ThemeResource RangeBorderColor}"
+                          HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Selected range:" HorizontalAlignment="Right" Margin="10,0" Foreground="{ThemeResource RangeForegroundBrush}"/>
+                        <TextBlock Text="{Binding ElementName=SparkLineRangeControl, Path=SelectionRangeStart, Converter={StaticResource FromDateConverter}}" Grid.Column="1" Foreground="{ThemeResource RangeForegroundBrush}" Margin="10,0"/>
+                        <TextBlock Text="-" Grid.Column="2" Foreground="{ThemeResource RangeForegroundBrush}"/>
+                        <TextBlock Text="{Binding ElementName=SparkLineRangeControl, Path=SelectionRangeEnd, Converter={StaticResource FromDateConverter}}" Grid.Column="3" Foreground="{ThemeResource RangeForegroundBrush}" Margin="10,0"/>
+                    </Grid>
+                </Grid>
+            </Layout:TabbedContainerItem>
+            <Layout:TabbedContainerItem x:Name="tabbedContainerItem3rd" Header="Spark Area">
+                <Layout:TabbedContainerItem.DataContext>
+                    <local:DateTimeViewModel Count="5000" Step="02:00:00" Start="10000"/>
+                </Layout:TabbedContainerItem.DataContext>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.25*" />
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="0.25*" />
+                    </Grid.RowDefinitions>
+                    <Controls:RangeControl Grid.Row="1"
+                                           x:Name="SparkAreaRangeControl"
+                                           ShowRangeThumbs="True"
+                                           ShowSelectionRectangle="False"
+                                           VisibleRangeStart="{Binding Path=VisibleStart}"
+                                           VisibleRangeEnd="{Binding Path=VisibleEnd}"
+                                           SelectionRangeStart="{Binding Path=SelectionStart}"
+                                           SelectionRangeEnd="{Binding Path=SelectionEnd}"
+                                           ShowRangeBar="True">
+                        <Controls:SparkAreaClient ShowMarkers="False"
+                                                  ShowAxisLabels="True" 
+                                                  ShowAxisXGridLines="True" 
+                                                  ShowAxisXMinorGridLines="True"
+                                                  DisplayMember="DisplayValue"
+                                                  ValueMember="Value"
+                                                  DisplayScaleType="Numeric"
+                                                  ValueScaleType="DateTime"
+                                                  ItemsSource="{Binding Path=ItemsSource}">
+                            <Controls:SparkAreaClient.StrokeStyle>
+                                <xaml:StrokeStyle Thickness="4"/>
+                            </Controls:SparkAreaClient.StrokeStyle>
+                            <Controls:SparkAreaClient.IntervalFactories>
+                                <Controls:MonthIntervalFactory/>
+                                <Controls:DayIntervalFactory/>
+                            </Controls:SparkAreaClient.IntervalFactories>
+                        </Controls:SparkAreaClient>
+                    </Controls:RangeControl>
+                    <Grid Grid.Row="2" 
+                          Margin="0,20,0,0" 
+                          Padding="8"
+                          Background="{ThemeResource RangeBackgroundColor}" 
+                          BorderThickness="1"
+                          BorderBrush="{ThemeResource RangeBorderColor}"
+                          HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Selected range:" HorizontalAlignment="Right" Margin="10,0" Foreground="{ThemeResource RangeForegroundBrush}"/>
+                        <TextBlock Text="{Binding ElementName=SparkAreaRangeControl, Path=SelectionRangeStart, Converter={StaticResource FromDateConverter}}" Grid.Column="1" Foreground="{ThemeResource RangeForegroundBrush}" Margin="10,0"/>
+                        <TextBlock Text="-" Grid.Column="2" Foreground="{ThemeResource RangeForegroundBrush}"/>
+                        <TextBlock Text="{Binding ElementName=SparkAreaRangeControl, Path=SelectionRangeEnd, Converter={StaticResource FromDateConverter}}" Grid.Column="3" Foreground="{ThemeResource RangeForegroundBrush}" Margin="10,0"/>
+                    </Grid>
+                </Grid>
+            </Layout:TabbedContainerItem>
+            <Layout:TabbedContainerItem x:Name="tabbedContainerItem4th" Header="Spark Bar">
+                <Layout:TabbedContainerItem.DataContext>
+                    <local:DateTimeViewModel Count="1000" Step="06:00:00" Start="10000"/>
+                </Layout:TabbedContainerItem.DataContext>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.25*" />
+                        <RowDefinition Height="0.5*" />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="0.25*" />
+                    </Grid.RowDefinitions>
+                    <Controls:RangeControl Grid.Row="1"
+                                           x:Name="SparkBarRangeControl"
+                        ShowRangeThumbs="True"
+                        ShowSelectionRectangle="False"
+                        VisibleRangeStart="{Binding Path=VisibleStart}"
+                        VisibleRangeEnd="{Binding Path=VisibleEnd}"
+                        SelectionRangeStart="{Binding Path=SelectionStart}"
+                        SelectionRangeEnd="{Binding Path=SelectionEnd}"
+                        ShowRangeBar="True">
+                        <Controls:SparkBarClient 
+                            BarWidth="0.01"
+                            ShowAxisLabels="True" 
+                            ShowAxisXGridLines="True" 
+                            ShowAxisXMinorGridLines="True"
+                            DisplayMember="DisplayValue"
+                            ValueMember="Value"
+                            DisplayScaleType="Numeric"
+                            ValueScaleType="DateTime"
+                            ItemsSource="{Binding Path=ItemsSource}">
+                            <Controls:SparkBarClient.IntervalFactories>
+                                <Controls:YearIntervalFactory/>
+                                <Controls:MonthIntervalFactory/>
+                                <Controls:DayIntervalFactory/>
+                            </Controls:SparkBarClient.IntervalFactories>
+                        </Controls:SparkBarClient>
+                    </Controls:RangeControl>
+                    <Grid Grid.Row="2" 
+                          Margin="0,20,0,0" 
+                          Padding="8"
+                          Background="{ThemeResource RangeBackgroundColor}" 
+                          BorderThickness="1"
+                          BorderBrush="{ThemeResource RangeBorderColor}"
+                          HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Selected range:" HorizontalAlignment="Right" Margin="10,0" Foreground="{ThemeResource RangeForegroundBrush}"/>
+                        <TextBlock Text="{Binding ElementName=SparkBarRangeControl, Path=SelectionRangeStart, Converter={StaticResource FromDateConverter}}" Grid.Column="1" Foreground="{ThemeResource RangeForegroundBrush}" Margin="10,0"/>
+                        <TextBlock Text="-" Grid.Column="2" Foreground="{ThemeResource RangeForegroundBrush}"/>
+                        <TextBlock Text="{Binding ElementName=SparkBarRangeControl, Path=SelectionRangeEnd, Converter={StaticResource FromDateConverter}}" Grid.Column="3" Foreground="{ThemeResource RangeForegroundBrush}" Margin="10,0"/>
+                    </Grid>
+                </Grid>
+            </Layout:TabbedContainerItem>
+        </Layout:TabbedContainer>
+    </Grid>
+</Common:DemoModuleView>

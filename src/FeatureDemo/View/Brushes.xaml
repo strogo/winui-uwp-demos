@@ -1,0 +1,108 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Core="using:DevExpress.Core">
+
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Name="Default">
+            <SolidColorBrush x:Key="TitleLabelGroupBackground" Color="#FF4A4A4A" />
+            <SolidColorBrush x:Key="TitleLabelNewBackground" Color="#FFD93E5B" />
+            <SolidColorBrush x:Key="TitleLabelUpdatedBackground" Color="#FF1D9E5D" />
+            <SolidColorBrush x:Key="TitleLabelForeground" Color="#FFFFFFFF" />
+
+            <SolidColorBrush x:Key="HamburgerMenuDemoSettingsPaneBackground" Color="#FF333333" />
+            <SolidColorBrush x:Key="HamburgerMenuDemoSettingsSeparatorBackground" Color="#FF333333" />
+            <SolidColorBrush x:Key="HamburgerMenuDemoIconForeground" Core:ColorKey.Link="HamburgerMenuHyperlinkButtonColors.Foreground.Default"/>
+            <SolidColorBrush x:Key="OptionsBorderBrush" Color="#FFC2C2C2"/>
+
+            <SolidColorBrush x:Key="MainBrush" Color="#FF0078D7" />
+            <SolidColorBrush x:Key="PageBackground" Color="#FF515151" />
+            <SolidColorBrush x:Key="MainPageBackground" Color="#FFF2F2F2" />
+            <SolidColorBrush x:Key="DemoModuleCaptionForegroundBrush" Color="#FFFFFFFF"  Core:ColorKey.Link="ToolbarMenuButtonColors.Foreground.Default"/>
+            <SolidColorBrush x:Key="ToolbarItemHoverBackground" Color="#30000000" />
+            <SolidColorBrush x:Key="ToolbarItemPressedBackground" Color="#60000000" />
+            <SolidColorBrush x:Key="ToolbarSeparatorBorderBrush" Color="#7FFFFFFF" />
+
+            <SolidColorBrush x:Key="LoadingIndicatorTextForeground" Color="#FFFFFFFF" Core:ColorKey.Link="ProgressRingSplashScreenViewColors.StateForeground.Default"/>
+            <SolidColorBrush x:Key="LoadingIndicatorForeground" Core:ColorKey.Link="ProgressRingSplashScreenViewColors.Foreground.Default"/>
+
+            <SolidColorBrush x:Key="DemoModuleTileGroupHeaderBrush" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="TileImageBorderBrush" Color="#FFBFBFBF" />
+            <SolidColorBrush x:Key="TileDescriptionForeground" Color="#FF5E5E5E" />
+            <SolidColorBrush x:Key="TileTitleForeground" Color="#FF454545" />
+            <SolidColorBrush x:Key="TileBackground" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="TileHoverBrush" Color="#FFBFBFBF" />
+            <SolidColorBrush x:Key="TileBrushPressed" Color="#FFBFBFBF" />
+
+            <SolidColorBrush x:Key="ModuleHeaderBrush" Color="#FFFFFCDB" />
+            <SolidColorBrush x:Key="DemoModuleForegroundBrush" Color="#FFD4D4D4" />
+            <SolidColorBrush x:Key="DemoModuleSeparatorBrush" Color="#FF404040" />
+            <SolidColorBrush x:Key="DemoModuleDescriptionForeground" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="DemoModuleDescriptionBackground" Color="#FF404040" />
+
+            <SolidColorBrush x:Key="TextBoxBackgroundThemeBrush" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="TextBoxBorderThemeBrush" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="TextBoxDisabledBackgroundThemeBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="TextBoxDisabledForegroundThemeBrush" Color="#FF666666" />
+            <SolidColorBrush x:Key="TextBoxForegroundThemeBrush" Color="#FF000000" />
+            <SolidColorBrush x:Key="TextBoxForegroundHeaderThemeBrush" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="TextBoxPlaceholderTextThemeBrush" Color="#AB000000" />
+            <SolidColorBrush x:Key="TextSelectionHighlightColorThemeBrush" Color="#FF106EBE"/>
+            <SolidColorBrush x:Key="GaugeHeaderBrush" Color="#FFDCDCDC"/>
+            <SolidColorBrush x:Key="MapShapeStrokeBrush" Color="#00FFFFFF"/>
+            <SolidColorBrush x:Key="SplashScreenDemoTextForeground" Core:ColorKey.Link="ProgressRingSplashScreenViewColors.StateForeground.Default"/>
+
+            <SolidColorBrush x:Key="RatingDemoImageNameForeground" Color="#FF5C5C5C"/>
+        </ResourceDictionary>
+        <ResourceDictionary x:Name="Light">
+            <SolidColorBrush x:Key="TitleLabelGroupBackground" Color="#FF4A4A4A" />
+            <SolidColorBrush x:Key="TitleLabelNewBackground" Color="#FFD93E5B" />
+            <SolidColorBrush x:Key="TitleLabelUpdatedBackground" Color="#FF1D9E5D" />
+            <SolidColorBrush x:Key="TitleLabelForeground" Color="#FFFFFFFF" />
+
+            <SolidColorBrush x:Key="HamburgerMenuDemoSettingsPaneBackground" Color="#FFF3F3F3" />
+            <SolidColorBrush x:Key="HamburgerMenuDemoSettingsSeparatorBackground" Color="Black" />
+            <SolidColorBrush x:Key="HamburgerMenuDemoIconForeground" Core:ColorKey.Link="DateNavigatorColors.DecorationTodayBackground.Light" />
+            <SolidColorBrush x:Key="OptionsBorderBrush" Color="#FF6A6A6A"/>
+
+            <SolidColorBrush x:Key="MainBrush" Color="#FF0078D7" />
+            <SolidColorBrush x:Key="PageBackground" Color="White" />
+            <SolidColorBrush x:Key="MainPageBackground" Color="#FFF2F2F2" />
+            <SolidColorBrush x:Key="DemoModuleCaptionForegroundBrush" Core:ColorKey.Link="ToolbarMenuButtonColors.Foreground.Light" />
+            <SolidColorBrush x:Key="ToolbarItemHoverBackground" Color="#300078D7" />
+            <SolidColorBrush x:Key="ToolbarItemPressedBackground" Color="#400078D7" />
+            <SolidColorBrush x:Key="ToolbarSeparatorBorderBrush" Color="#FFD9D9D9" />
+
+            <SolidColorBrush x:Key="LoadingIndicatorTextForeground" Color="#FF5C5C5C" Core:ColorKey.Link="ProgressRingSplashScreenViewColors.StateForeground.Light"/>
+            <SolidColorBrush x:Key="LoadingIndicatorForeground" Core:ColorKey.Link="ProgressRingSplashScreenViewColors.Foreground.Light"/>
+
+            <SolidColorBrush x:Key="DemoModuleTileGroupHeaderBrush" Color="#FF5C5C5C" />
+            <SolidColorBrush x:Key="TileImageBorderBrush" Color="#FFBFBFBF" />
+            <SolidColorBrush x:Key="TileDescriptionForeground" Color="#FF5E5E5E" />
+            <SolidColorBrush x:Key="TileTitleForeground" Color="#FF454545" />
+            <SolidColorBrush x:Key="TileBackground" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="TileHoverBrush" Color="#FFBFBFBF" />
+            <SolidColorBrush x:Key="TileBrushPressed" Color="#FFBFBFBF" />
+
+            <SolidColorBrush x:Key="ModuleHeaderBrush" Color="#FFFFFCDB" />
+            <SolidColorBrush x:Key="DemoModuleForegroundBrush" Color="#FF505050" />
+            <SolidColorBrush x:Key="DemoModuleSeparatorBrush" Color="#FFDEDEDE" />
+            <SolidColorBrush x:Key="DemoModuleDescriptionForeground" Color="#FF505050" />
+            <SolidColorBrush x:Key="DemoModuleDescriptionBackground" Color="#FFEEEEEE" />
+
+            <SolidColorBrush x:Key="TextBoxBackgroundThemeBrush" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="TextBoxBorderThemeBrush" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="TextBoxDisabledBackgroundThemeBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="TextBoxDisabledForegroundThemeBrush" Color="#FF666666" />
+            <SolidColorBrush x:Key="TextBoxForegroundThemeBrush" Color="#FF000000" />
+            <SolidColorBrush x:Key="TextBoxForegroundHeaderThemeBrush" Color="#FFFFFFFF" />
+            <SolidColorBrush x:Key="TextBoxPlaceholderTextThemeBrush" Color="#AB000000" />
+            <SolidColorBrush x:Key="TextSelectionHighlightColorThemeBrush" Color="#FF106EBE"/>
+            <SolidColorBrush x:Key="GaugeHeaderBrush" Color="#FF484E5A"/>
+            <SolidColorBrush x:Key="MapShapeStrokeBrush" Color="#00000000"/>
+            <SolidColorBrush x:Key="SplashScreenDemoTextForeground" Color="#FF106EBE" Core:ColorKey.Link="ProgressRingSplashScreenViewColors.StateForeground.Light"/>
+
+            <SolidColorBrush x:Key="RatingDemoImageNameForeground" Color="#FF5C5C5C"/>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

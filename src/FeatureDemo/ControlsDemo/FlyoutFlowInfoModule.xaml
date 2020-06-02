@@ -1,0 +1,440 @@
+﻿<Common:DemoModuleView
+    x:Class="ControlsDemo.FlyoutFlowInfoModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EditorsDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Xaml="using:DevExpress.UI.Xaml"
+    xmlns:Core="using:DevExpress.Core"
+    mc:Ignorable="d"
+    d:DesignHeight="768"
+    d:DesignWidth="1024">
+    <Common:DemoModuleView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <Core:SystemStyleOverrides/>
+            </ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <SolidColorBrush x:Key="ModuleBackgroundBrush" Color="Transparent"/>
+                    <SolidColorBrush x:Key="ButtonBorderBrush" Core:ColorKey.Link="HyperlinkNavigationButtonColors.Foreground.Default"/>
+                    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="Transparent"/>
+                    <SolidColorBrush x:Key="ButtonBackgroundHoverBrush" Core:ColorKey.Link="ToolbarMenuButtonColors.BackgroundHovered.Default"/>
+                    <SolidColorBrush x:Key="ButtonBackgroundPressedBrush" Core:ColorKey.Link="ToolbarMenuButtonColors.BackgroundPressed.Default"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="ModuleBackgroundBrush" Color="Transparent"/>
+                    <SolidColorBrush x:Key="ButtonBorderBrush"  Color="White"/>
+                    <SolidColorBrush x:Key="ButtonBackgroundBrush" Core:ColorKey.Link="DateNavigatorColors.DecorationTodayBackground.Light"/>
+                    <SolidColorBrush x:Key="ButtonBackgroundHoverBrush" Color="#30FFFFFF"/>
+                    <SolidColorBrush x:Key="ButtonBackgroundPressedBrush" Color="#60FFFFFF"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+
+            <Style TargetType="Button" BasedOn="{StaticResource SystemButtonStyle}">
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Width" Value="84"/>
+                <Setter Property="Height" Value="36"/>
+                <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderBrush}"/>
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Background" Value="{ThemeResource ButtonBackgroundBrush}"/>
+                <Setter Property="Margin" Value="27,12" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal"/>
+                                        <VisualState x:Name="PointerOver">
+                                            <VisualState.Setters>
+                                                <Setter Target="Border.Fill" Value="{ThemeResource ButtonBackgroundHoverBrush}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Pressed">
+                                            <VisualState.Setters>
+                                                <Setter Target="Border.Fill" Value="{ThemeResource ButtonBackgroundPressedBrush}" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Rectangle x:Name="Border" Fill="Transparent" />
+                                <ContentPresenter
+                                    x:Name="ContentPresenter"
+                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                    ContentTransitions="{TemplateBinding ContentTransitions}"
+                                    Content="{TemplateBinding Content}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    Margin="{TemplateBinding Padding}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="TopCenter" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyoutSettings Placement="Top" ShowIndicator="True" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="TopCenter"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="TopLeft" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyoutSettings Placement="Top" ShowIndicator="True" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="TopLeft"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="TopRight" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyoutSettings Placement="Top" ShowIndicator="True" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="TopRight"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="LeftTop" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyoutSettings Placement="Left" ShowIndicator="True" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="LeftTop"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+            </Style>
+            <Style x:Key="LeftCenter" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyoutSettings Placement="Left" ShowIndicator="True" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="LeftCenter"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="LeftBottom" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyoutSettings Placement="Left" ShowIndicator="True" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="LeftBottom"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+            </Style>
+            <Style x:Key="RightTop" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyoutSettings Placement="Right" ShowIndicator="True" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock TextWrapping="Wrap" Text="RightTop" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Top"/>
+            </Style>
+            <Style x:Key="RightCenter" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyoutSettings Placement="Right" ShowIndicator="True" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="RightCenter"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="RightBottom" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyoutSettings Placement="Right" ShowIndicator="True" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="RightBottom"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+            </Style>
+            <Style x:Key="BottomLeft" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyoutSettings Placement="Bottom" ShowIndicator="True" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="BottomLeft"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="BottomCenter" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyoutSettings Placement="Bottom" ShowIndicator="True" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="BottomCenter"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="BottomRight" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyoutSettings Placement="Bottom" ShowIndicator="True" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="BottomRight"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="Top" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyinSettings/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="Top"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="VerticalAlignment" Value="Top" />
+            </Style>
+            <Style x:Key="Left" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyinSettings/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="Left"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Left" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+            </Style>
+            <Style x:Key="Center" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyinSettings/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="Center"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="Right" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyinSettings/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="Right"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="VerticalAlignment" Value="Stretch" />
+            </Style>
+            <Style x:Key="Bottom" TargetType="Xaml:FlyoutControl">
+                <Setter Property="Settings">
+                    <Setter.Value>
+                        <Xaml:FlyinSettings/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextBlock Text="Bottom"/>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalAlignment" Value="Stretch" />
+                <Setter Property="VerticalAlignment" Value="Bottom" />
+            </Style>
+        </ResourceDictionary>
+    </Common:DemoModuleView.Resources>
+    <Grid Background="{ThemeResource ModuleBackgroundBrush}">
+        <Xaml:FlyoutControl
+            x:Name="flyoutControl"
+            Foreground="#FF666666"
+            FontSize="16"
+            Padding="36"
+            FontFamily="Segoe UI Light"
+            BorderBrush="#FF9F9F9F"
+            BorderThickness="1"
+            Background="White"/>
+        <Grid x:Name="all" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Click="OpenFlyout" x:Name="TopLeft" Margin="27,12,27,24" Grid.Column="1">
+                <Path Stretch="Fill" Stroke="{ThemeResource ButtonBorderBrush}" StrokeThickness="1" Fill="{ThemeResource ButtonBorderBrush}" Data="F1 M 311,637L 314,637L 317,640L 320,637L 341,637L 341,621L 311,621L 311,637 Z" HorizontalAlignment="Center" Height="19" Margin="0" VerticalAlignment="Center" Width="30"/>
+            </Button>
+            <Button Click="OpenFlyout" x:Name="TopCenter" Margin="27,12,27,24" Grid.Column="2">
+                <Path Stretch="Fill" Stroke="{ThemeResource ButtonBorderBrush}" StrokeThickness="1" Fill="{ThemeResource ButtonBorderBrush}" Data="F1 M 345,637L 357,637L 360,640L 363,637L 375,637L 375,621L 345,621L 345,637 Z" HorizontalAlignment="Center" Height="19" Margin="0" VerticalAlignment="Center" Width="30"/>
+            </Button>
+            <Button Click="OpenFlyout" x:Name="TopRight" Margin="27,12,27,24" Grid.Column="3">
+                <Path Stretch="Fill" Stroke="{ThemeResource ButtonBorderBrush}" StrokeThickness="1" Fill="{ThemeResource ButtonBorderBrush}" Data="F1 M 409,637L 406,637L 403,640L 400,637L 379,637L 379,621L 409,621L 409,637 Z " HorizontalAlignment="Center" Height="19" Margin="0" VerticalAlignment="Center" Width="30"/>
+            </Button>
+            <Button Click="OpenFlyout" x:Name="BottomLeft" Margin="27,24,27,12" Grid.Column="1" Grid.Row="4">
+                <Path Stretch="Fill" Stroke="{ThemeResource ButtonBorderBrush}" StrokeThickness="1" Fill="{ThemeResource ButtonBorderBrush}" Data="F1 M 316,700L 319,700L 322,697L 325,700L 346,700L 346,716L 316,716L 316,700 Z " HorizontalAlignment="Center" Height="19" Margin="0" VerticalAlignment="Center" Width="30"/>
+            </Button>
+            <Button Click="OpenFlyout" x:Name="BottomCenter" Margin="27,24,27,12" Grid.Column="2" Grid.Row="4">
+                <Path Stretch="Fill" Stroke="{ThemeResource ButtonBorderBrush}" StrokeThickness="1" Fill="{ThemeResource ButtonBorderBrush}" Data="F1 M 350,700L 362,700L 365,697L 368,700L 380,700L 380,716L 350,716L 350,700 Z " HorizontalAlignment="Center" Height="19" Margin="0" VerticalAlignment="Center" Width="30"/>
+            </Button>
+            <Button Click="OpenFlyout" x:Name="BottomRight" Margin="27,24,27,12" Grid.Column="3" Grid.Row="4">
+                <Path Stretch="Fill" Stroke="{ThemeResource ButtonBorderBrush}" StrokeThickness="1" Fill="{ThemeResource ButtonBorderBrush}" Data="F1 M 414,700L 411,700L 408,697L 405,700L 384,700L 384,716L 414,716L 414,700 Z " HorizontalAlignment="Center" Height="19" Margin="0" VerticalAlignment="Center" Width="30"/>
+            </Button>
+            <Button Click="OpenFlyout" x:Name="RightTop" Grid.Column="4" Grid.Row="1">
+                <Path Stretch="Fill" Stroke="{ThemeResource ButtonBorderBrush}" StrokeThickness="1" Fill="{ThemeResource ButtonBorderBrush}" Data="F1 M 453,617L 483,617L 483,637L 453,637L 453,626L 450,623L 453,620L 453,617 Z " HorizontalAlignment="Center" Height="20" Margin="0" VerticalAlignment="Center" Width="33" UseLayoutRounding="False"/>
+            </Button>
+            <Button Click="OpenFlyout" x:Name="RightCenter" Grid.Row="2" Grid.Column="4">
+                <Path Stretch="Fill" Stroke="{ThemeResource ButtonBorderBrush}" StrokeThickness="1" Fill="{ThemeResource ButtonBorderBrush}" Data="F1 M 453,639L 483,639L 483,659L 453,659L 453,652L 450,649L 453,646L 453,639 Z " HorizontalAlignment="Center" Height="20" Margin="0" VerticalAlignment="Center" Width="33"/>
+            </Button>
+            <Button Click="OpenFlyout" x:Name="RightBottom" Grid.Column="4" Grid.Row="3">
+                <Path Stretch="Fill" Stroke="{ThemeResource ButtonBorderBrush}" StrokeThickness="1" Fill="{ThemeResource ButtonBorderBrush}" Data="F1 M 453,660L 483,660L 483,680L 453,680L 453,677L 450,674L 453,671L 453,660 Z " HorizontalAlignment="Center" Height="20" Margin="0" VerticalAlignment="Center" Width="33"/>
+            </Button>
+            <Button Click="OpenFlyout" x:Name="LeftTop" Grid.Row="1">
+                <Path Stretch="Fill" Stroke="{ThemeResource ButtonBorderBrush}" StrokeThickness="1" Fill="{ThemeResource ButtonBorderBrush}" Data="F1 M 437,569L 407,569L 407,589L 437,589L 437,578L 440,575L 437,572L 437,569 Z " HorizontalAlignment="Center" Height="20" Margin="0" VerticalAlignment="Center" Width="33"/>
+            </Button>
+            <Button Click="OpenFlyout" x:Name="LeftCenter" Grid.Row="2">
+                <Path Stretch="Fill" Stroke="{ThemeResource ButtonBorderBrush}" StrokeThickness="1" Fill="{ThemeResource ButtonBorderBrush}" Data="F1 M 437,591L 407,591L 407,611L 437,611L 437,604L 440,601L 437,598L 437,591 Z " HorizontalAlignment="Center" Height="20" Margin="0" VerticalAlignment="Center" Width="33"/>
+            </Button>
+            <Button Click="OpenFlyout" x:Name="LeftBottom" Grid.Row="3">
+                <Path Stretch="Fill" Stroke="{ThemeResource ButtonBorderBrush}" StrokeThickness="1" Fill="{ThemeResource ButtonBorderBrush}" Data="F1 M 437,612L 407,612L 407,632L 437,632L 437,629L 440,626L 437,623L 437,612 Z " HorizontalAlignment="Center" Height="20" Margin="0" VerticalAlignment="Center" Width="33"/>
+            </Button>
+            <Button Click="OpenInnerFlyout" x:Name="Left" Grid.Row="2" Grid.Column="1">
+                <Border BorderBrush="{ThemeResource ButtonBorderBrush}" BorderThickness="1" Height="20" Width="35" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Border BorderBrush="{ThemeResource ButtonBorderBrush}" Background="{ThemeResource ButtonBorderBrush}" Width="10" BorderThickness="0,0,1,0" HorizontalAlignment="Left" VerticalAlignment="Stretch"/>
+                </Border>
+            </Button>
+            <Button Click="OpenInnerFlyout" x:Name="Right" Grid.Row="2" Grid.Column="3">
+                <Border BorderBrush="{ThemeResource ButtonBorderBrush}" BorderThickness="1" Height="20" Width="35" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Border BorderBrush="{ThemeResource ButtonBorderBrush}" Background="{ThemeResource ButtonBorderBrush}" Width="10" BorderThickness="1,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
+                </Border>
+            </Button>
+            <Button Click="OpenInnerFlyout" x:Name="Top" Grid.Column="2" Grid.Row="1">
+                <Border BorderBrush="{ThemeResource ButtonBorderBrush}" BorderThickness="1" Height="20" Width="35" >
+                    <Border BorderBrush="{ThemeResource ButtonBorderBrush}" Background="{ThemeResource ButtonBorderBrush}" BorderThickness="0,0,0,1" Height="10" VerticalAlignment="Top"/>
+                </Border>
+            </Button>
+            <Button Click="OpenInnerFlyout" x:Name="Bottom" Grid.Column="2" Grid.Row="3">
+                <Border BorderBrush="{ThemeResource ButtonBorderBrush}" BorderThickness="1" Height="20" Width="35" >
+                    <Border BorderBrush="{ThemeResource ButtonBorderBrush}" Background="{ThemeResource ButtonBorderBrush}" BorderThickness="0,1,0,0" Height="10" VerticalAlignment="Bottom"/>
+                </Border>
+            </Button>
+            <Button Click="OpenInnerFlyout" x:Name="Center" Grid.Row="2" Grid.Column="2">
+                <Rectangle Fill="{ThemeResource ButtonBorderBrush}" Stroke="{ThemeResource ButtonBorderBrush}" StrokeThickness="1" Width="35" Height="20" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Button>
+        </Grid>
+    </Grid>
+</Common:DemoModuleView>

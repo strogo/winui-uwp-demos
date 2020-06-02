@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Appointments>
+  <Appointment Date="2016-07-12T11:05:00" Description="Rent this car " Location="city" Priority="Medium" Subject="Mr.Brown" />
+  <Appointment Date="2016-07-14T08:15:00" Description="Scheduled repair of this car" Location="Service Center" Priority="High" Subject="Repair" />
+  <Appointment Date="2016-07-19T10:00:00" Description="Rent this car" Location="city" Priority="High" Subject="Mr.White" />
+  <Appointment Date="2016-07-05T16:40:00" Description="Wash this car in the garage" Location="Garage" Priority="Medium" Subject="Wash" />
+  <Appointment Date="2016-07-13T18:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Medium" Subject="Wash" />
+  <Appointment Date="2016-07-21T16:20:00" Description="Wash this car in the garage" Location="Garage" Priority="Medium" Subject="Wash" />
+  <Appointment Date="2016-07-20T15:00:00" Description="Wash this car in the garage" Location="Garage" Priority="Medium" Subject="Wash" />
+  <Appointment Date="2016-07-22T16:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Medium" Subject="Wash" />
+  <Appointment Date="2016-07-11T16:25:00" Description="Wash this car in the garage" Location="Garage" Priority="Medium" Subject="Wash" />
+  <Appointment Date="2016-07-15T19:45:00" Description="Check up after maintenance" Location="Service Center" Priority="High" Subject="Check up" />
+  <Appointment Date="2016-07-18T00:00:00" Description="Rent this car for the all day" Location="city" Priority="Low" Subject="Mr.Green"/>
+  
+  <Appointment Date="2016-07-12T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-07-14T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-07-16T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-07-19T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-07-21T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-07-23T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-07-26T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-07-28T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-07-30T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-08-02T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-08-04T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-08-06T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-08-09T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-08-11T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-08-13T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-08-16T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-08-18T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-08-20T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+  <Appointment Date="2016-08-23T07:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash"/>
+
+  <Appointment Date="2016-07-20T01:30:00" Description="Wash this car in the garage" Location="Garage" Priority="Low" Subject="Wash" />
+  <Appointment Date="2016-07-11T10:00:00" Description="Rent this car" Location="out-of-town" Priority="High" Subject="Mrs.Black" />
+  <Appointment Date="2016-07-18T13:00:00" Description="Rent this car" Location="out-of-town" Priority="High" Subject="Mrs.Black" />
+  <Appointment Date="2016-07-13T15:30:00" Description="Rent this car" Location="out-of-town" Priority="Low" Subject="Mrs.Black" />
+</Appointments>

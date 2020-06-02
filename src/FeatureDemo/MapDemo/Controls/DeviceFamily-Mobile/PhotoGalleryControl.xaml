@@ -1,0 +1,67 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MapDemo">
+    <Style TargetType="local:PhotoGalleryControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:PhotoGalleryControl">
+                    <Grid x:Name="LayoutRoot" Opacity="0" Visibility="Collapsed">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="VisibleStates">
+                                <VisualState x:Name="Visible">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot"
+												   Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <EasingDoubleKeyFrame KeyTime="00:00:01" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot"
+												   Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Invisible">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot"
+												   Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <LinearDoubleKeyFrame KeyTime="00:00:01" Value="0" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LayoutRoot"
+												   Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:01">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Border x:Name="Mask" Grid.RowSpan="3" Background="#BF000000"/>
+                        <TextBlock TextWrapping="Wrap" Text="{TemplateBinding Title}" FontSize="34.667" Foreground="White" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                        <ItemsControl HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Margin="0,0,0,50" x:Name="PART_Elements" DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}" 
+                                        ItemsSource="{TemplateBinding ActualItems}" ItemTemplate="{TemplateBinding ItemTemplate}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <local:PhotoGalleryPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                        <TextBlock TextWrapping="Wrap" Text="Click a sight to see it in detail" FontSize="21.333" Foreground="White" HorizontalAlignment="Center" Grid.Row="2" Margin="0,0,0,20"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

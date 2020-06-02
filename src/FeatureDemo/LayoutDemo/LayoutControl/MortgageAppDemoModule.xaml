@@ -1,0 +1,256 @@
+﻿<Common:DemoModuleView
+    x:Class="LayoutDemo.LayoutControl.MortgageAppDemoModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:local="using:LayoutDemo.LayoutControl"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    >
+    <Common:DemoModuleView.Resources>
+        <local:MortgageAppViewModel x:Key="mortgageAppViewModel" 
+                                    PurchasePrice="450000"
+                                    PrepaidItems="3959.25"
+                                    ClosingCosts="5334.5"
+                                    Fees="7087.5"
+                                    Discount="3605.76"
+                                    ClosingCostsPaidBySeller="10000"
+                                    LoanAmountWithoutFees="405000"
+                                    FeesFinanced="7087"
+                                    />
+        <Style x:Key="AppTitle" TargetType="Layout:LayoutControlHeader">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style TargetType="Layout:LayoutGroupHeader">
+            <Setter Property="Margin" Value="-12,0,12,0"/>
+        </Style>
+        <Style TargetType="Layout:LayoutGroup">
+            <Setter Property="VerticalItemSpacing" Value="12"/>
+            <Setter Property="HorizontalItemSpacing" Value="12"/>
+        </Style>
+        <Style TargetType="Layout:LayoutItem">
+            <Setter Property="HeaderPosition" Value="Top"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+    </Common:DemoModuleView.Resources>
+    <Layout:LayoutControl Orientation="Vertical" DataContext="{StaticResource mortgageAppViewModel}"
+                            Header="Residental Loan Application" 
+                            HorizontalHeaderAlignment="Center"
+                            HeaderStyle="{StaticResource AppTitle}" 
+                            HorizontalContentAlignment="Stretch"
+                            MaxWidth="785"
+                            >
+
+        <Layout:LayoutGroup Header="Type of mortgage and terms of loan" Orientation="Vertical" ItemHeadersAlignment="Local" AllowExpand="True">
+            <Layout:LayoutGroup Header="Type of Mortgage:" IsAdaptive="True" ItemSizeMode="AutoSize" HorizontalItemSpacing="15">
+                    <RadioButton Content="Conventional" GroupName="mType"/>
+                    <RadioButton Content="FHA" IsChecked="True" GroupName="mType"/>
+                    <RadioButton Content="VA"  GroupName="mType"/>
+                    <RadioButton Content="FmHA"  GroupName="mType"/>
+                    <RadioButton Content="Other"  GroupName="mType"/>
+            </Layout:LayoutGroup>
+            <Layout:LayoutGroup IsAdaptive="True">
+                <Layout:LayoutItem Header="Amount:" Required="True" >
+                    <Editors:TextEdit IsReadOnly="True" EditValue="{Binding Path=LoanAmount}">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="c" MaskType="Numeric"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Interest Rate:" Required="True">
+                    <Editors:TextEdit EditValue="0.05">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="p3" MaskType="Numeric"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="No. of Months:" Required="True">
+                    <Editors:TextEdit EditValue="360">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="0##" MaskType="Simple"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+            </Layout:LayoutGroup>
+            <Layout:LayoutGroup Header="Amortization Type:" IsAdaptive="True" ItemSizeMode="AutoSize" HorizontalItemSpacing="15">
+                    <RadioButton Content="Fixed Rate" IsChecked="True" GroupName="aType"/>
+                    <RadioButton Content="ARM" GroupName="aType"/>
+                    <RadioButton Content="GPM" GroupName="aType"/>
+                    <RadioButton Content="Other" GroupName="aType"/>
+            </Layout:LayoutGroup>
+        </Layout:LayoutGroup>
+        <Layout:LayoutGroup Header="Property information and purpose of loan" Orientation="Vertical" ItemHeadersAlignment="Local"  AllowExpand="True">
+            <Layout:LayoutGroup IsAdaptive="True" >
+                <Layout:LayoutItem Header="Subject Property Address (street, city, state &amp; zip code)" >
+                    <Editors:TextEdit EditValue="238 S Arroyo Pkwy, Pasadena, CA 91105"/>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Year Built"  Width="90" HorizontalAlignment="Left">
+                    <Editors:TextEdit EditValue="2010">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="0000" MaskType="Simple"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+            </Layout:LayoutGroup>
+            <Layout:LayoutGroup Header="Purpose of Loan" IsAdaptive="True" ItemSizeMode="AutoSize" HorizontalItemSpacing="5">
+                <RadioButton Content="Purchase" IsChecked="True" GroupName="pOfLoan"/>
+                <RadioButton Content="Refinance"  GroupName="pOfLoan"/>
+                <RadioButton Content="Construction"  GroupName="pOfLoan"/>
+                <RadioButton Content="Other"  GroupName="pOfLoan"/>
+                <RadioButton Content="Construction-Permanent"  GroupName="pOfLoan"/>
+            </Layout:LayoutGroup>
+            <Layout:LayoutGroup Header="Property will be" IsAdaptive="True" ItemSizeMode="AutoSize">
+                <RadioButton Content="Primary Residence" IsChecked="True" GroupName="pWillBe"/>
+                <RadioButton Content="Secondary Residence" GroupName="pWillBe"/>
+                <RadioButton Content="Investment" GroupName="pWillBe"/>
+            </Layout:LayoutGroup>
+            <Layout:LayoutItem Header="Title will be held in what Name(s)" >
+                <Editors:TextEdit EditValue="Bruce Gates"/>
+            </Layout:LayoutItem>
+        </Layout:LayoutGroup>
+        <Layout:LayoutGroup Header="Borrower Information" Orientation="Vertical"  AllowExpand="True" Expanded="False">
+            <Layout:LayoutItem Header="Borrower's Name (include Jr. or Sr. if applicable)" >
+                <Editors:TextEdit EditValue="Bruce Gates"/>
+            </Layout:LayoutItem>
+            <Layout:LayoutGroup IsAdaptive="True">
+                <Layout:LayoutItem Header="Social Security Number" Width="175" HorizontalAlignment="Left">
+                    <Editors:TextEdit EditValue="123456789">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings MaskType="Simple" Mask="000-00-0000" UseAsDisplayFormat="True"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Home Phone (include area code)" Width="235" HorizontalAlignment="Left">
+                    <Editors:TextEdit EditValue="8181234567">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings MaskType="Simple" Mask="(000) 000-0000" UseAsDisplayFormat="True"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Age" Width="95" HorizontalAlignment="Left">
+                    <Editors:TextEdit EditValue="33">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings MaskType="Simple" Mask="0#"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Years School" Width="105" HorizontalAlignment="Left">
+                    <Editors:TextEdit EditValue="16">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings MaskType="Simple" Mask="0#"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+            </Layout:LayoutGroup>
+            <Layout:LayoutGroup IsAdaptive="True" ItemSizeMode="AutoSize" HorizontalItemSpacing="15">
+                <RadioButton Content="Married" IsChecked="True" GroupName="stat"/>
+                <RadioButton Content="Separated" GroupName="stat"/>
+                <RadioButton Content="Unmarried (include single, divorced, widowed)"  GroupName="stat"/>
+            </Layout:LayoutGroup>
+            <Layout:LayoutItem Header="Present Address (street, city, state, zip code)"  >
+                <Editors:TextEdit EditValue="2761 Paradise Rd, Las Vegas, NV 89052"/>
+            </Layout:LayoutItem>
+            <Layout:LayoutGroup IsAdaptive="True" ItemSizeMode="AutoSize" HorizontalItemSpacing="15">
+                <RadioButton Content="Own" IsChecked="True" GroupName="rent"/>
+                <RadioButton Content="Rent"  GroupName="rent"/>
+                <Layout:LayoutItem Header="Years:" HeaderAlignment="None" HeaderPosition="Left" Width="140" HorizontalAlignment="Right">
+                    <Editors:TextEdit  EditValue="3">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings MaskType="Numeric" Mask="f2"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+            </Layout:LayoutGroup>
+        </Layout:LayoutGroup>
+        <Layout:LayoutGroup Header="Details of transaction" IsAdaptive="True" >
+            <Layout:LayoutGroup Orientation="Vertical" Layout:LayoutGroup.DesiredWidth="220">
+                <Layout:LayoutItem Header="Purchase price:" Required="True">
+                    <Editors:TextEdit EditValue="{Binding Path=PurchasePrice, Mode=TwoWay}">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="c" MaskType="Numeric"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Estimated prepaid items:">
+                    <Editors:TextEdit EditValue="{Binding Path=PrepaidItems, Mode=TwoWay}">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="c" MaskType="Numeric"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Estimated closing costs:">
+                    <Editors:TextEdit EditValue="{Binding Path=ClosingCosts, Mode=TwoWay}">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="c" MaskType="Numeric"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="PMI, MIP, Funding Fee">
+                    <Editors:TextEdit EditValue="{Binding Path=Fees, Mode=TwoWay}">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="c" MaskType="Numeric"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Discount (if Borrower will pay):">
+                    <Editors:TextEdit EditValue="{Binding Path=Discount, Mode=TwoWay}">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="c" MaskType="Numeric"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Total costs:">
+                    <Editors:TextEdit IsReadOnly="True" EditValue="{Binding Path=TotalCosts}">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="c" MaskType="Numeric"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+            </Layout:LayoutGroup>
+            <Layout:LayoutGroup Orientation="Vertical" Layout:LayoutGroup.DesiredWidth="220">
+                <Layout:LayoutItem Header="Borrower's closing costs paid by Seller:">
+                    <Editors:TextEdit EditValue="{Binding Path=ClosingCostsPaidBySeller, Mode=TwoWay}">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="c" MaskType="Numeric"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem VerticalContentAlignment="Center">
+                    <Layout:LayoutItem.Header>
+                        <TextBlock>
+                                    Loan amount
+                                    <!--<LineBreak />-->
+                                    (exclude PMI, MIP, Funding Fee financed):
+                        </TextBlock>
+                    </Layout:LayoutItem.Header>
+                    <Editors:TextEdit EditValue="{Binding LoanAmountWithoutFees, Mode=TwoWay}">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="c" MaskType="Numeric"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="PMI, MIP, Funding Fee financed:">
+                    <Editors:TextEdit EditValue="{Binding Path=FeesFinanced, Mode=TwoWay}">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="c" MaskType="Numeric"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Loan amount:" VerticalAlignment="Bottom">
+                    <Editors:TextEdit IsReadOnly="True" EditValue="{Binding Path=LoanAmount2}">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="c" MaskType="Numeric"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Cash to/from Borrower:" VerticalAlignment="Bottom">
+                    <Editors:TextEdit IsReadOnly="True" EditValue="{Binding Path=CashToFromBorrower}">
+                        <Editors:TextEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="c" MaskType="Numeric"/>
+                        </Editors:TextEdit.TextInputSettings>
+                    </Editors:TextEdit>
+                </Layout:LayoutItem>
+            </Layout:LayoutGroup>
+        </Layout:LayoutGroup>
+    </Layout:LayoutControl>
+</Common:DemoModuleView>

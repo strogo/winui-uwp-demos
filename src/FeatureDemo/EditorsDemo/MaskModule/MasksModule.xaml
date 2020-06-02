@@ -1,0 +1,95 @@
+﻿<Common:DemoModuleView
+    x:Class="EditorsDemo.MasksModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EditorsDemo"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    xmlns:dxmvvm="using:DevExpress.Mvvm.UI"
+    xmlns:dxmvvmi="using:DevExpress.Mvvm.UI.Interactivity"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    OptionsPaneWidth="350">
+
+    <Common:DemoModuleView.Resources>
+        <ResourceDictionary Source="ms-appx:///EditorsDemo/LayoutItemInvertedColors.xaml" />
+    </Common:DemoModuleView.Resources>
+    
+    <Grid>
+        <Layout:TabbedContainer Grid.Row="1" HorizontalAlignment="Stretch" Margin="0,40,0,0" VerticalAlignment="Stretch">
+            <Layout:TabbedContainerItem x:Name="numericMaskModuleContainer" Header="Numeric Mask">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*" />
+                        <RowDefinition Height="0.85*" />
+                    </Grid.RowDefinitions>
+                    <local:NumericMaskModule x:Name="numericMaskModule" Grid.Row="1" VerticalAlignment="Top"/>
+                </Grid>
+            </Layout:TabbedContainerItem>
+            <Layout:TabbedContainerItem x:Name="dateTimeMaskModuleContainer" Header="DateTime Mask">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*" />
+                        <RowDefinition Height="0.85*" />
+                    </Grid.RowDefinitions>
+                    <local:DateTimeMaskModule x:Name="dateTimeMaskModule" Grid.Row="1" VerticalAlignment="Top"/>
+                </Grid>
+            </Layout:TabbedContainerItem>
+            <Layout:TabbedContainerItem x:Name="timeSpanMaskModuleContainer" Header="TimeSpan Mask">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*" />
+                        <RowDefinition Height="0.85*" />
+                    </Grid.RowDefinitions>
+                    <local:TimeSpanMaskModule x:Name="timeSpanMaskModule" Grid.Row="1" VerticalAlignment="Top"/>
+                </Grid>
+            </Layout:TabbedContainerItem>
+            <Layout:TabbedContainerItem x:Name="regExMaskModuleContainer" Header="RegEx Mask">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*" />
+                        <RowDefinition Height="0.85*" />
+                    </Grid.RowDefinitions>
+                    <local:RegExMaskModule x:Name="regExMaskModule" Grid.Row="1" VerticalAlignment="Top"/>
+                </Grid>
+            </Layout:TabbedContainerItem>
+            <Layout:TabbedContainerItem x:Name="simpleMaskModuleContainer" Header="Simple Mask">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*" />
+                        <RowDefinition Height="0.85*" />
+                    </Grid.RowDefinitions>
+                    <local:SimpleMaskModule x:Name="simpleMaskModule" Grid.Row="1" VerticalAlignment="Top"/>
+                </Grid>
+            </Layout:TabbedContainerItem>
+            <Layout:TabbedContainerItem x:Name="regularMaskModuleContainer" Header="Regular Mask">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*" />
+                        <RowDefinition Height="0.85*" />
+                    </Grid.RowDefinitions>
+                    <local:RegularMaskModule x:Name="regularMaskModule" Grid.Row="1" VerticalAlignment="Top"/>
+                </Grid>
+            </Layout:TabbedContainerItem>
+        </Layout:TabbedContainer>
+    </Grid>
+
+    <Common:DemoModuleView.Options>
+        <Grid>
+            <Grid.Resources>
+                <dxmvvm:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            </Grid.Resources>
+            <ContentPresenter Content="{Binding ElementName=numericMaskModule, Path=Options}" Visibility="{Binding ElementName=numericMaskModuleContainer, Path=IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <ContentPresenter Content="{Binding ElementName=dateTimeMaskModule, Path=Options}" Visibility="{Binding ElementName=dateTimeMaskModuleContainer, Path=IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <ContentPresenter Content="{Binding ElementName=timeSpanMaskModule, Path=Options}" Visibility="{Binding ElementName=timeSpanMaskModuleContainer, Path=IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <ContentPresenter Content="{Binding ElementName=regExMaskModule, Path=Options}" Visibility="{Binding ElementName=regExMaskModuleContainer, Path=IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <ContentPresenter Content="{Binding ElementName=simpleMaskModule, Path=Options}" Visibility="{Binding ElementName=simpleMaskModuleContainer, Path=IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            <ContentPresenter Content="{Binding ElementName=regularMaskModule, Path=Options}" Visibility="{Binding ElementName=regularMaskModuleContainer, Path=IsSelected, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+        </Grid>
+    </Common:DemoModuleView.Options>
+    
+</Common:DemoModuleView>

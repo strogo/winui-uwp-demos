@@ -1,0 +1,36 @@
+﻿<UserControl
+    x:Class="LayoutDemo.LayoutContainers.ExpandContainerModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LayoutDemo.LayoutContainers"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    >
+    <Layout:LayoutGroup VerticalAlignment="Top" PortraitOrientation="Vertical">
+        <Layout:ExpandContainer Header="Expandable Options Group" >
+            <StackPanel>
+                <ToggleSwitch Header="Option1" IsOn="True"/>
+                <ToggleSwitch Header="Option2"/>
+            </StackPanel>
+        </Layout:ExpandContainer>
+        <Layout:ExpandContainer Header="Expandable Images Group">
+            <Layout:SplitPanel HorizontalItemSpacing="10" VerticalAlignment="Top">
+                <Rectangle Fill="Red" />
+                <Rectangle Fill="Green" />
+                <Rectangle Fill="Blue" />
+            </Layout:SplitPanel>
+        </Layout:ExpandContainer>
+        <Layout:ExpandContainer Header="Expandable Controls Group">
+            <StackPanel>
+                <TextBlock Text="Description"/>
+                <Grid HorizontalAlignment="Left">
+                    <Rectangle Fill="Gray" Width="160" Height="160" />
+                    <TextBlock Text="Image" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                </Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Action1"/>
+                    <Button Content="Action2"/>
+                </StackPanel>
+            </StackPanel>
+        </Layout:ExpandContainer>
+    </Layout:LayoutGroup>
+</UserControl>

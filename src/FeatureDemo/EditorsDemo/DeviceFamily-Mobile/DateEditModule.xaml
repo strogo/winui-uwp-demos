@@ -1,0 +1,68 @@
+﻿<UserControl
+    x:Class="EditorsDemo.DateEditModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EditorsDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors" 
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout" 
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+
+    <Layout:TabbedContainer Grid.Row="1" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Stretch" MinWidth="600">
+        <Layout:TabbedContainerItem Header="DatePicker">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.15*" />
+                    <RowDefinition Height="0.85*" />
+                </Grid.RowDefinitions>
+                <Editors:DateEdit x:Name="datePicker"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Top"
+                                  Grid.Row="1">
+                    <Editors:DateEdit.PopupSettings>
+                        <Editors:DateEditPopupSettings PopupAutoWidth="False"/>
+                    </Editors:DateEdit.PopupSettings>
+                </Editors:DateEdit>
+            </Grid>
+        </Layout:TabbedContainerItem>
+        <Layout:TabbedContainerItem Header="DateNavigator">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.15*" />
+                    <RowDefinition Height="0.85*" />
+                </Grid.RowDefinitions>
+                <Editors:DateEdit x:Name="dateNavigator"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Top"
+                                  Grid.Row="1">
+                    <Editors:DateEdit.PopupSettings>
+                        <Editors:DateNavigatorPopupSettings/>
+                    </Editors:DateEdit.PopupSettings>
+                </Editors:DateEdit>
+            </Grid>
+        </Layout:TabbedContainerItem>
+        <Layout:TabbedContainerItem Header="RadialTimeEdit">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.15*" />
+                    <RowDefinition Height="0.85*" />
+                </Grid.RowDefinitions>
+                <Editors:DateEdit x:Name="radialTimeEdit"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Top"
+                                  Grid.Row="1" MinWidth="300">
+                    <Editors:DateEdit.PopupSettings>
+                        <Editors:RadialTimeEditPopupSettings />
+                    </Editors:DateEdit.PopupSettings>
+                    <Editors:DateEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings Mask="T" MaskType="DateTime" />
+                    </Editors:DateEdit.TextInputSettings>
+                </Editors:DateEdit>
+            </Grid>
+        </Layout:TabbedContainerItem>
+    </Layout:TabbedContainer>
+</UserControl>

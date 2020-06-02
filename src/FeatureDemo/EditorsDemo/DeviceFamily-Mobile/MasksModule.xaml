@@ -1,0 +1,71 @@
+﻿<UserControl
+    x:Class="EditorsDemo.MasksModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EditorsDemo"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <Grid>
+        <Layout:TabbedContainer Grid.Row="1" HorizontalAlignment="Center" Margin="0,40,0,0" VerticalAlignment="Stretch">
+            <Layout:TabbedContainerItem Header="Numeric Mask">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*" />
+                        <RowDefinition Height="0.85*" />
+                    </Grid.RowDefinitions>
+                    <local:NumericMaskModule Grid.Row="1" VerticalAlignment="Top"/>
+                </Grid>
+            </Layout:TabbedContainerItem>
+            <Layout:TabbedContainerItem Header="DateTime Mask">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*" />
+                        <RowDefinition Height="0.85*" />
+                    </Grid.RowDefinitions>
+                    <local:DateTimeMaskModule Grid.Row="1" VerticalAlignment="Top"/>
+                </Grid>
+            </Layout:TabbedContainerItem>
+            <Layout:TabbedContainerItem Header="DateTimeAdvancingCaret Mask">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*" />
+                        <RowDefinition Height="0.85*" />
+                    </Grid.RowDefinitions>
+                    <local:DateTimeAdvancingCaretMaskModule Grid.Row="1" VerticalAlignment="Top"/>
+                </Grid>
+            </Layout:TabbedContainerItem>
+            <Layout:TabbedContainerItem Header="RegEx Mask">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*" />
+                        <RowDefinition Height="0.85*" />
+                    </Grid.RowDefinitions>
+                    <local:RegExMaskModule Grid.Row="1" VerticalAlignment="Top"/>
+                </Grid>
+            </Layout:TabbedContainerItem>
+            <Layout:TabbedContainerItem Header="Simple Mask">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*" />
+                        <RowDefinition Height="0.85*" />
+                    </Grid.RowDefinitions>
+                    <local:SimpleMaskModule Grid.Row="1" VerticalAlignment="Top"/>
+                </Grid>
+            </Layout:TabbedContainerItem>
+                <Layout:TabbedContainerItem Header="Regular Mask">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.15*" />
+                        <RowDefinition Height="0.85*" />
+                    </Grid.RowDefinitions>
+                    <local:RegularMaskModule Grid.Row="1" VerticalAlignment="Top"/>
+                </Grid>
+            </Layout:TabbedContainerItem>
+        </Layout:TabbedContainer>
+    </Grid>
+</UserControl>

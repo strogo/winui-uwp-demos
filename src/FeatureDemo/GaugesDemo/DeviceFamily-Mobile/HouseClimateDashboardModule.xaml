@@ -1,0 +1,290 @@
+﻿<UserControl
+    x:Class="GaugesDemo.HouseClimateDashboardModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GaugesDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Gauges="using:DevExpress.UI.Xaml.Gauges"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:demobase="using:FeatureDemo.Base"
+    BorderBrush="Transparent"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <Common:StringFormatConverter x:Key="formatConverter"/>
+
+        <Style x:Key="CustomTextStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI Light"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#FFF88E1D"/>
+        </Style>
+        <Style x:Key="ScaleHeader" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI Light"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="#FF908982"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        
+        <Style x:Key="ParameterHeader" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI Light"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="#FF908982"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+    </UserControl.Resources>
+    <Common:DemoModuleViewControl Style="{StaticResource ChartsDemoModuleViewControlStyle}">
+        <ScrollViewer HorizontalScrollMode="Disabled" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel Margin="0,20,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Outer" Style="{StaticResource ScaleHeader}"/>
+                    <Gauges:LinearGauge VerticalAlignment="Stretch" Margin="0, 0, 0, 50" Grid.Row="1" Grid.Column="0" FontSize="10">
+                        <Gauges:LinearScale ShowLine="False" ShowMajorTickmarks="True" StartValue="-50" EndValue="50" ShowLabels="True">
+                            <Gauges:LinearScale.LevelBars>
+                                <Gauges:LinearScaleLevelBar Value="{Binding OuterTemp}">
+                                    <Gauges:LinearScaleLevelBar.Animation>
+                                        <Gauges:IndicatorAnimation Duration="0:0:1"/>
+                                    </Gauges:LinearScaleLevelBar.Animation>
+                                    <Gauges:LinearScaleLevelBar.Options>
+                                        <Gauges:LinearScaleLevelBarOptions FactorThickness="0.7" Fill="#FFF88E1D" />
+                                    </Gauges:LinearScaleLevelBar.Options>
+                                </Gauges:LinearScaleLevelBar>
+                            </Gauges:LinearScale.LevelBars>
+                            <Gauges:LinearScale.Markers>
+                                <Gauges:LinearScaleMarker Value="{Binding OuterTemp}">
+                                    <Gauges:LinearScaleMarker.Options>
+                                        <Gauges:LinearScaleMarkerOptions Fill="#FFE8E8E8" Offset="0" FactorWidth="1.5"/>
+                                    </Gauges:LinearScaleMarker.Options>
+                                    <Gauges:LinearScaleMarker.Animation>
+                                        <Gauges:IndicatorAnimation Duration="0:0:1"/>
+                                    </Gauges:LinearScaleMarker.Animation>
+                                </Gauges:LinearScaleMarker>
+                            </Gauges:LinearScale.Markers>
+                            <Gauges:LinearScale.LabelOptions>
+                                <Gauges:LinearScaleLabelOptions Offset="24" />
+                            </Gauges:LinearScale.LabelOptions>
+                        </Gauges:LinearScale>
+                    </Gauges:LinearGauge>
+                    <TextBlock Text="1st Floor" Grid.Row="0" Grid.Column="1"  Style="{StaticResource ScaleHeader}"/>
+                    <Gauges:LinearGauge VerticalAlignment="Stretch" Margin="0, 0, 0, 50" Grid.Row="1" Grid.Column="1" FontSize="10">
+                        <Gauges:LinearScale ShowLine="False" ShowMajorTickmarks="True" StartValue="-20" EndValue="50" ShowLabels="True" MajorIntervalCount="7">
+                            <Gauges:LinearScale.Markers>
+                                <Gauges:LinearScaleMarker x:Name="LinearScaleMarker1stFloor" IsInteractive="True" Value="{Binding InnerStateFloor1.DesiredTemp, Mode=TwoWay}">
+                                    <Gauges:LinearScaleMarker.Options>
+                                        <Gauges:LinearScaleMarkerOptions Offset="-15"/>
+                                    </Gauges:LinearScaleMarker.Options>
+                                    <Gauges:LinearScaleMarker.Template>
+                                        <ControlTemplate>
+                                            <Grid RenderTransformOrigin="1, 0.5">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.6*"/>
+                                                    <ColumnDefinition Width="0.4*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Rectangle Grid.Column="1" Fill="#FFF88E1D" Height="2" Width="7"/>
+                                                <Ellipse Width="40" Height="40" Fill="Transparent" Stroke="#FFF88E1D" StrokeThickness="2"/>
+                                                <TextBlock Grid.Column="0"  Text="{Binding InnerStateFloor1.DesiredTemp, Converter={StaticResource formatConverter}, ConverterParameter='{}{0:0.#}'}" Foreground="#FFF88E1D" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Gauges:LinearScaleMarker.Template>
+                                </Gauges:LinearScaleMarker>
+                                <Gauges:LinearScaleMarker Value="{Binding InnerStateFloor1.InnerTemp}">
+                                    <Gauges:LinearScaleMarker.Options>
+                                        <Gauges:LinearScaleMarkerOptions Fill="#FFE8E8E8" Offset="0" FactorWidth="1.5"/>
+                                    </Gauges:LinearScaleMarker.Options>
+                                    <Gauges:LinearScaleMarker.Animation>
+                                        <Gauges:IndicatorAnimation Duration="0:0:1"/>
+                                    </Gauges:LinearScaleMarker.Animation>
+                                </Gauges:LinearScaleMarker>
+                            </Gauges:LinearScale.Markers>
+                            <Gauges:LinearScale.LevelBars>
+                                <Gauges:LinearScaleLevelBar Value="{Binding InnerStateFloor1.InnerTemp}">
+                                    <Gauges:LinearScaleLevelBar.Animation>
+                                        <Gauges:IndicatorAnimation Duration="0:0:1"/>
+                                    </Gauges:LinearScaleLevelBar.Animation>
+                                    <Gauges:LinearScaleLevelBar.Options>
+                                        <Gauges:LinearScaleLevelBarOptions FactorThickness="0.7" Fill="#FFF88E1D" />
+                                    </Gauges:LinearScaleLevelBar.Options>
+                                </Gauges:LinearScaleLevelBar>
+                            </Gauges:LinearScale.LevelBars>
+                            <Gauges:LinearScale.CustomElements>
+                                <Gauges:ScaleCustomElement HorizontalAlignment="Center" VerticalAlignment="Bottom" BorderThickness="3" Margin="0, 0, 0, -30" Visible="{Binding InnerStateFloor1.IndicatorVisible}">
+                                    <TextBlock Text="{Binding InnerStateFloor1.IndicatorText}" Style="{StaticResource CustomTextStyle}"/>
+                                </Gauges:ScaleCustomElement>
+                            </Gauges:LinearScale.CustomElements>
+                            <Gauges:LinearScale.LabelOptions>
+                                <Gauges:LinearScaleLabelOptions Offset="24" />
+                            </Gauges:LinearScale.LabelOptions>
+                        </Gauges:LinearScale>
+                    </Gauges:LinearGauge>
+                    <TextBlock Text="2nd Floor" Grid.Row="0" Grid.Column="2" Style="{StaticResource ScaleHeader}"/>
+                    <Gauges:LinearGauge VerticalAlignment="Stretch" Margin="0, 0, 0, 50"  Grid.Row="1" Grid.Column="2" FontSize="10">
+                        <Gauges:LinearScale ShowLine="False" ShowMajorTickmarks="False" StartValue="-20" EndValue="50" ShowLabels="True" MajorIntervalCount="7">
+                            <Gauges:LinearScale.Markers>
+                                <Gauges:LinearScaleMarker x:Name="LinearScaleMarker2ndFloor" IsInteractive="True" Value="{Binding InnerStateFloor2.DesiredTemp, Mode=TwoWay}">
+                                    <Gauges:LinearScaleMarker.Options>
+                                        <Gauges:LinearScaleMarkerOptions Offset="-15"/>
+                                    </Gauges:LinearScaleMarker.Options>
+                                    <Gauges:LinearScaleMarker.Template>
+                                        <ControlTemplate>
+                                            <Grid RenderTransformOrigin="1, 0.5">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="0.6*"/>
+                                                    <ColumnDefinition Width="0.4*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Rectangle Grid.Column="1" Fill="#FFF88E1D" Height="2" Width="7"/>
+                                                <Ellipse Width="40" Height="40" Fill="Transparent" Stroke="#FFF88E1D" StrokeThickness="2"/>
+                                                <TextBlock Grid.Column="0"  Text="{Binding InnerStateFloor2.DesiredTemp, Converter={StaticResource formatConverter}, ConverterParameter='{}{0:0.#}'}" Foreground="#FFF88E1D" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Gauges:LinearScaleMarker.Template>
+                                </Gauges:LinearScaleMarker>
+                                <Gauges:LinearScaleMarker Value="{Binding InnerStateFloor2.InnerTemp}">
+                                    <Gauges:LinearScaleMarker.Options>
+                                        <Gauges:LinearScaleMarkerOptions Fill="#FFE8E8E8" Offset="0" FactorWidth="1.5"/>
+                                    </Gauges:LinearScaleMarker.Options>
+                                    <Gauges:LinearScaleMarker.Animation>
+                                        <Gauges:IndicatorAnimation Duration="0:0:1"/>
+                                    </Gauges:LinearScaleMarker.Animation>
+                                </Gauges:LinearScaleMarker>
+                            </Gauges:LinearScale.Markers>
+                            <Gauges:LinearScale.LevelBars>
+                                <Gauges:LinearScaleLevelBar Value="{Binding InnerStateFloor2.InnerTemp}">
+                                    <Gauges:LinearScaleLevelBar.Animation>
+                                        <Gauges:IndicatorAnimation Duration="0:0:1"/>
+                                    </Gauges:LinearScaleLevelBar.Animation>
+                                    <Gauges:LinearScaleLevelBar.Options>
+                                        <Gauges:LinearScaleLevelBarOptions FactorThickness="0.7" Fill="#FFF88E1D" />
+                                    </Gauges:LinearScaleLevelBar.Options>
+                                </Gauges:LinearScaleLevelBar>
+                            </Gauges:LinearScale.LevelBars>
+                            <Gauges:LinearScale.CustomElements>
+                                <Gauges:ScaleCustomElement HorizontalAlignment="Center" VerticalAlignment="Bottom" BorderThickness="3" Visible="{Binding InnerStateFloor2.IndicatorVisible}" Margin="0, 0, 0, -30">
+                                    <TextBlock Text="{Binding InnerStateFloor2.IndicatorText}" Style="{StaticResource CustomTextStyle}"/>
+                                </Gauges:ScaleCustomElement>
+                            </Gauges:LinearScale.CustomElements>
+                            <Gauges:LinearScale.LabelOptions>
+                                <Gauges:LinearScaleLabelOptions Offset="24" />
+                            </Gauges:LinearScale.LabelOptions>
+                        </Gauges:LinearScale>
+                    </Gauges:LinearGauge>
+                </Grid>
+                <TextBlock Text="Energy Usage" Style="{StaticResource ScaleHeader}" />
+                <Gauges:CircularGauge VerticalAlignment="Stretch" HorizontalAlignment="Center" Grid.Row="1" Margin="0,-20,0,0" FontSize="10">
+                    <Gauges:ArcScale StartValue="0" EndValue="21" MajorIntervalCount="7" ShowSpindleCap="True" ShowLine="False">
+                        <Gauges:ArcScale.LabelOptions>
+                            <Gauges:ArcScaleLabelOptions Offset="-35"/>
+                        </Gauges:ArcScale.LabelOptions>
+                        <Gauges:ArcScale.MajorTickmarkOptions>
+                            <Gauges:MajorTickmarkOptions Fill="Transparent"/>
+                        </Gauges:ArcScale.MajorTickmarkOptions>
+                        <Gauges:ArcScale.Ranges>
+                            <Gauges:ArcScaleRange StartValue="0" EndValue="6">
+                                <Gauges:ArcScaleRange.Options>
+                                    <Gauges:RangeOptions/>
+                                </Gauges:ArcScaleRange.Options>
+                            </Gauges:ArcScaleRange>
+                            <Gauges:ArcScaleRange StartValue="6" EndValue="15">
+                                <Gauges:ArcScaleRange.Options>
+                                    <Gauges:RangeOptions Fill="#FFD19E38"/>
+                                </Gauges:ArcScaleRange.Options>
+                            </Gauges:ArcScaleRange>
+                            <Gauges:ArcScaleRange StartValue="15" EndValue="21">
+                                <Gauges:ArcScaleRange.Options>
+                                    <Gauges:RangeOptions Fill="#FFBA544D"/>
+                                </Gauges:ArcScaleRange.Options>
+                            </Gauges:ArcScaleRange>
+                        </Gauges:ArcScale.Ranges>
+                        <Gauges:ArcScale.Needles>
+                            <Gauges:ArcScaleNeedle Value="{Binding PowerUsage}">
+                                <Gauges:ArcScaleNeedle.Animation>
+                                    <Gauges:IndicatorAnimation Duration="0:0:6">
+                                        <Gauges:IndicatorAnimation.EasingFunction>
+                                            <ElasticEase Oscillations="4" Springiness="10"/>
+                                        </Gauges:IndicatorAnimation.EasingFunction>
+                                    </Gauges:IndicatorAnimation>
+                                </Gauges:ArcScaleNeedle.Animation>
+                            </Gauges:ArcScaleNeedle>
+                        </Gauges:ArcScale.Needles>
+                        <Gauges:ArcScale.CustomElements>
+                            <Gauges:ScaleCustomElement HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="kW" FontSize="12" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                                </Grid>
+                            </Gauges:ScaleCustomElement>
+                        </Gauges:ArcScale.CustomElements>
+                    </Gauges:ArcScale>
+                </Gauges:CircularGauge>
+                <TextBlock Text="Gas Usage" Style="{StaticResource ScaleHeader}" Grid.Column="1"/>
+                <Gauges:CircularGauge VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="0,-20,0,0" Grid.Column="1" Grid.Row="1" FontSize="10">
+                    <Gauges:ArcScale StartValue="0" EndValue="3" MajorIntervalCount="10" ShowSpindleCap="True" ShowLine="False">
+                        <Gauges:ArcScale.MajorTickmarkOptions>
+                            <Gauges:MajorTickmarkOptions Fill="Transparent"/>
+                        </Gauges:ArcScale.MajorTickmarkOptions>
+                        <Gauges:ArcScale.LabelOptions>
+                            <Gauges:ArcScaleLabelOptions FormatString="{}{0:0.#}" Offset="-35"/>
+                        </Gauges:ArcScale.LabelOptions>
+                        <Gauges:ArcScale.Ranges>
+                            <Gauges:ArcScaleRange StartValue="0" EndValue="1.2">
+                                <Gauges:ArcScaleRange.Options>
+                                    <Gauges:RangeOptions/>
+                                </Gauges:ArcScaleRange.Options>
+                            </Gauges:ArcScaleRange>
+                            <Gauges:ArcScaleRange StartValue="1.2" EndValue="2.1">
+                                <Gauges:ArcScaleRange.Options>
+                                    <Gauges:RangeOptions Fill="#FFD19E38"/>
+                                </Gauges:ArcScaleRange.Options>
+                            </Gauges:ArcScaleRange>
+                            <Gauges:ArcScaleRange StartValue="2.1" EndValue="3">
+                                <Gauges:ArcScaleRange.Options>
+                                    <Gauges:RangeOptions Fill="#FFBA544D"/>
+                                </Gauges:ArcScaleRange.Options>
+                            </Gauges:ArcScaleRange>
+                        </Gauges:ArcScale.Ranges>
+                        <Gauges:ArcScale.Needles>
+                            <Gauges:ArcScaleNeedle Value="{Binding GasUsage}">
+                                <Gauges:ArcScaleNeedle.Animation>
+                                    <Gauges:IndicatorAnimation Duration="0:0:6">
+                                        <Gauges:IndicatorAnimation.EasingFunction>
+                                            <ElasticEase Oscillations="4" Springiness="10"/>
+                                        </Gauges:IndicatorAnimation.EasingFunction>
+                                    </Gauges:IndicatorAnimation>
+                                </Gauges:ArcScaleNeedle.Animation>
+                            </Gauges:ArcScaleNeedle>
+                        </Gauges:ArcScale.Needles>
+                        <Gauges:ArcScale.CustomElements>
+                            <Gauges:ScaleCustomElement HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Text="m³/h" FontSize="12" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                                </Grid>
+                            </Gauges:ScaleCustomElement>
+                        </Gauges:ArcScale.CustomElements>
+                    </Gauges:ArcScale>
+                </Gauges:CircularGauge>    
+            </StackPanel>
+        </ScrollViewer>
+    </Common:DemoModuleViewControl>
+</UserControl>

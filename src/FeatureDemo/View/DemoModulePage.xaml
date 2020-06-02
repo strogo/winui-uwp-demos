@@ -1,0 +1,87 @@
+﻿<Layout:DXPage x:Class="FeatureDemo.View.DemoModulePage" x:Name="pageRoot"
+    IsTabStop="false"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FeatureDemo"
+    xmlns:ViewModel="using:FeatureDemo.ViewModel"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Core="using:DevExpress.Core"
+    xmlns:Controls="using:DevExpress.UI.Xaml.Controls"
+    xmlns:Ribbon="using:DevExpress.UI.Xaml.Ribbon"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Xaml="using:DevExpress.UI.Xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Common:ItemsSourceConverter x:Key="itemsSourceConverter" />
+        <Common:BooleanToNullableBooleanConverter x:Key="booleanToNullableBooleanConverter" />
+        <Core:BooleanToVisibilityConverter x:Name="booleanToVisibilityConverter" />
+        <Core:BooleanToVisibilityConverter x:Name="invertedBooleanToVisibilityConverter" Invert="True"/>
+        <DataTemplate x:Key="CodeViewItemTemplate">
+            <Controls:CodeViewItem FileName="{Binding Path=FileName}" CodeText="{Binding Path=GetCodeTextFunc}" />
+        </DataTemplate>
+
+        <Style TargetType="Common:DemoModulePivotItem">
+            <Setter Property="Background" Value="{ThemeResource PageBackground}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Common:DemoModulePivotItem">
+                        <Grid x:Name="rootGrid" Margin="0" Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="54" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.RowSpan="2" Foreground="{ThemeResource DemoModuleCaptionForegroundBrush}" FontSize="20" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" Text="{Binding DemoModule.Title, Mode=OneTime}"
+                                       Margin="20,0,0,0" VerticalAlignment="Center"/>
+                                <Ribbon:ToolbarControl Grid.Column="1" VerticalAlignment="Center">
+                                    <Ribbon:ToolbarGroup>
+                                        <Ribbon:ToolbarButton IconSource="ms-appx:///Images/DemoToolbar/Prev.svg"  Command="{Binding MainViewModel.ShowPrevCommand, Mode=OneTime}" Content="Prev" Visibility="{Binding MainViewModel.PrevNextEnabled, Converter={StaticResource booleanToVisibilityConverter}, Mode=OneTime}" />
+                                        <Ribbon:ToolbarButton IconSource="ms-appx:///Images/DemoToolbar/Next.svg"  Command="{Binding MainViewModel.ShowNextCommand, Mode=OneTime}" Content="Next" Visibility="{Binding MainViewModel.PrevNextEnabled, Converter={StaticResource booleanToVisibilityConverter}, Mode=OneTime}" FlyoutFlowBreakWithSeparator="True" />
+                                        <Ribbon:ToolbarToggleButton CheckedIconSource="ms-appx:///Images/DemoToolbar/Demo.svg"  CheckedContent="Show demo" Content="Show code" IconSource="ms-appx:///Images/DemoToolbar/Code.svg" IsChecked="{Binding IsCodeVisible, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, Converter={StaticResource booleanToNullableBooleanConverter}}" />
+                                        <Ribbon:ToolbarToggleButton IconSource="ms-appx:///Images/DemoToolbar/Settings.svg"
+                                                            Visibility="{TemplateBinding OptionsButtonVisibility}"
+                                                            IsEnabled="{TemplateBinding IsOptionsButtonEnabled}"
+                                                            IsChecked="{Binding IsOptionsPaneOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
+                                    </Ribbon:ToolbarGroup>
+                                </Ribbon:ToolbarControl>
+                            </Grid>
+                            <Grid x:Name="demoModuleContainer"
+                                  Grid.Row="1"
+                                  BorderThickness="0,1,0,0"
+                                  BorderBrush="{ThemeResource DemoModuleSeparatorBrush}"
+                                  Visibility="{Binding IsCodeVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}, Mode=OneWay}"/>
+                            <Border Grid.Row="2" Background="{ThemeResource DemoModuleDescriptionBackground}" MinHeight="62" Visibility="{Binding IsCodeVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource invertedBooleanToVisibilityConverter}, Mode=OneWay}">
+                                <TextBlock FontFamily="Segoe UI Light" Foreground="{ThemeResource DemoModuleForegroundBrush}" FontSize="16" TextWrapping="Wrap" TextTrimming="WordEllipsis" Text="{Binding DemoModule.About, Mode=OneTime}" VerticalAlignment="Center" Margin="29,20,29,20" />
+                            </Border>
+                            <Controls:CodeViewControl Visibility="{Binding IsCodeVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource booleanToVisibilityConverter}, Mode=OneWay}" 
+                                              ItemTemplate="{StaticResource CodeViewItemTemplate}" 
+                                              ItemsSource="{Binding SourceList, Mode=OneWay}"
+                                              SelectedItem="{Binding SelectedSource, Mode=TwoWay, Converter={StaticResource itemsSourceConverter}}"
+                                              Grid.Row="1"
+                                              Grid.RowSpan="2"/>
+
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+
+    <Grid Background="{ThemeResource PageBackground}">
+        <Common:DemoModuleLoadingIndicator Loaded="DemoModuleLoadingIndicator_Loaded"/>
+        <Common:DemoModulesPivot x:Name="pivot"  
+                            Margin="0,-44,0,0"
+                            DemoModules="{x:Bind ViewModel.FilteredDemoModules}"
+                            DemoModuleIndex="{x:Bind ViewModel.SelectedDemoModuleIndex, Mode=TwoWay}"
+                            Visibility="Collapsed"
+                            />
+    </Grid>
+</Layout:DXPage>

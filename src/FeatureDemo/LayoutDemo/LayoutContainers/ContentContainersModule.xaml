@@ -1,0 +1,94 @@
+﻿<Common:DemoModuleView
+    x:Class="LayoutDemo.LayoutContainers.ContentContainersModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:local="using:LayoutDemo.LayoutContainers"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    >
+    <Common:DemoModuleView.Resources>
+        <local:ContentContainersModuleViewModel x:Key="contentContainersModuleViewModel"/>
+        <Style TargetType="Rectangle">
+            <Setter Property="Width" Value="75"/>
+            <Setter Property="Height" Value="75"/>
+        </Style>
+        <Style TargetType="Layout:ExpandContainer">
+            <Setter Property="Padding" Value="0,20"/>
+        </Style>
+        <Style TargetType="Layout:LayoutGroup">
+            <Setter Property="HorizontalItemSpacing" Value="20"/>
+        </Style>
+    </Common:DemoModuleView.Resources>
+    <Layout:LayoutControl DataContext="{StaticResource contentContainersModuleViewModel}" Margin="40" VerticalContentAlignment="Stretch">
+        <Layout:PivotContainer DataContext="{Binding }">
+            <Layout:PivotContainerItem Header="GroupContainer Samples">
+                <local:GroupContainerModule/>
+            </Layout:PivotContainerItem>
+            <Layout:PivotContainerItem Header="GroupContainer Options">
+                <Layout:LayoutGroup VerticalAlignment="Top" PortraitOrientation="Vertical" IsAdaptive="True" >
+                    <Layout:GroupContainer Header="Header">
+                        <Layout:GroupContainer.HeaderStyle>
+                            <Style TargetType="Layout:GroupContainerHeader">
+                                <Setter Property="Foreground" Value="Red"/>
+                                <Setter Property="FontSize" Value="32"/>
+                            </Style>
+                        </Layout:GroupContainer.HeaderStyle>
+                        HeaderStyle option in action
+                    </Layout:GroupContainer>
+                    <Layout:GroupContainer Header="Header">
+                        <Layout:GroupContainer.HeaderTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Blue" BorderThickness="3">
+                                    <ContentPresenter Content="{Binding}" Margin="5"/>
+                                </Border>
+                            </DataTemplate>
+                        </Layout:GroupContainer.HeaderTemplate>
+                        HeaderTemplate option in action
+                    </Layout:GroupContainer>
+                    <Layout:GroupContainer Header="{Binding Path=Today}" 
+                        HeaderStringFormat="{}Today is {0:dd MMMM, yyyy}">
+                        HeaderStringFormat option in action
+                    </Layout:GroupContainer>
+                </Layout:LayoutGroup>
+            </Layout:PivotContainerItem>
+            <Layout:PivotContainerItem Header="ExpandContainer Samples">
+                <local:ExpandContainerModule/>
+            </Layout:PivotContainerItem>
+            <Layout:PivotContainerItem Header="ExpandContainer Options">
+                <Layout:LayoutGroup VerticalAlignment="Top" PortraitOrientation="Vertical" IsAdaptive="True" >
+                    <Layout:ExpandContainer Header="Header">
+                        <Layout:ExpandContainer.HeaderStyle>
+                            <Style TargetType="Layout:ExpandContainerHeader">
+                                <Setter Property="Foreground" Value="Red"/>
+                                <Setter Property="FontSize" Value="32"/>
+                            </Style>
+                        </Layout:ExpandContainer.HeaderStyle>
+                        HeaderStyle option in action
+                    </Layout:ExpandContainer>
+                    <Layout:ExpandContainer Header="Header">
+                        <Layout:ExpandContainer.ExpandButtonStyle>
+                            <Style TargetType="Layout:ExpandButton">
+                                <Setter Property="Foreground" Value="Red"/>
+                            </Style>
+                        </Layout:ExpandContainer.ExpandButtonStyle>
+                        ExpandButtonStyle option in action
+                    </Layout:ExpandContainer>
+                    <Layout:ExpandContainer Header="Header">
+                        <Layout:ExpandContainer.HeaderTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="Blue" BorderThickness="3">
+                                    <ContentPresenter Content="{Binding}" Margin="5"/>
+                                </Border>
+                            </DataTemplate>
+                        </Layout:ExpandContainer.HeaderTemplate>
+                        HeaderTemplate option in action
+                    </Layout:ExpandContainer>
+                    <Layout:ExpandContainer Header="{Binding Path=Today}"
+                        HeaderStringFormat="{}Today is {0:dd MMMM, yyyy}">
+                        HeaderStringFormat option in action
+                    </Layout:ExpandContainer>
+                </Layout:LayoutGroup>
+            </Layout:PivotContainerItem>
+        </Layout:PivotContainer>
+    </Layout:LayoutControl>
+</Common:DemoModuleView>

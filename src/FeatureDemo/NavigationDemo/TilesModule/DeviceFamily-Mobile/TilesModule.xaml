@@ -1,0 +1,134 @@
+﻿<UserControl
+    x:Class="NavigationDemo.TilesModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NavigationDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Core="using:DevExpress.Core"
+    xmlns:common="using:FeatureDemo.Common"
+    mc:Ignorable="d"
+    d:DesignHeight="768"
+    d:DesignWidth="1376">
+    <UserControl.DataContext>
+        <local:TilesModuleViewModel/>
+    </UserControl.DataContext>
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" HorizontalScrollMode="Disabled">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" >
+            <StackPanel.Resources>
+                <common:StringFormatConverter x:Key="stringFormatConverter"/>
+            </StackPanel.Resources>
+
+            <Layout:Tile Size="Large"  Grid.RowSpan="2"  Background="#FF6CBD45" BackContent="{Binding Listings}" AnimationInterval="0:0:7" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,5,0,0">
+                <Layout:Tile.BackContentTemplate>
+                    <DataTemplate>
+                        <ListView ItemsSource="{Binding}" SelectionMode="None" BorderThickness="0" Foreground="{Binding Foreground,RelativeSource={RelativeSource TemplatedParent}}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Address}" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold" FontSize="12"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Bedrooms, Converter={StaticResource stringFormatConverter}, ConverterParameter=\{0\} Bedrooms}" Margin="0,0,4,0"/>
+                                            <TextBlock Text="{Binding Baths, Converter={StaticResource stringFormatConverter}, ConverterParameter=\{0\} Baths}" Margin="0,0,4,0"/>
+                                            <TextBlock Text="{Binding Price, Converter={StaticResource stringFormatConverter}, ConverterParameter=\{0:C0\}}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </DataTemplate>
+                </Layout:Tile.BackContentTemplate>
+                <Layout:SlideDecorator ContentSource="{Binding Listings}" ContentChangeInterval="00:00:04.00" >
+                    <Layout:SlideDecorator.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Image Source="{Binding ImageSource}" Stretch="UniformToFill" HorizontalAlignment="Center"/>
+                                <Grid Background="#FF6CBD45" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                    <StackPanel Margin="4">
+                                        <TextBlock FontSize="14" Text="{Binding Bedrooms, Converter={StaticResource stringFormatConverter}, ConverterParameter=\{0\} Bedrooms}"/>
+                                        <TextBlock FontSize="14" Text="{Binding Baths, Converter={StaticResource stringFormatConverter}, ConverterParameter=\{0\} Baths}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Background="#FF6CBD45" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                    <StackPanel Margin="4">
+                                        <TextBlock FontSize="16" Text="{Binding Price, Converter={StaticResource stringFormatConverter}, ConverterParameter=\{0:C0\}}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </Layout:SlideDecorator.ContentTemplate>
+                </Layout:SlideDecorator>
+            </Layout:Tile>
+
+            <Layout:Tile  Grid.Row="2" Size="Large" Header="Employees" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Margin="0,10,0,10">
+                <Layout:MosaicDecorator ImageRowCount="3" ImageColumnCount="3" ContentSource="{Binding Employees}">
+                    <ContentControl.ContentTemplateSelector>
+                        <local:EmployeeTileTemplateSelector>
+                            <local:EmployeeTileTemplateSelector.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImageSource}" Stretch="Fill"/>
+                                </DataTemplate>
+                            </local:EmployeeTileTemplateSelector.ItemTemplate>
+                        </local:EmployeeTileTemplateSelector>
+                    </ContentControl.ContentTemplateSelector>
+                </Layout:MosaicDecorator>
+            </Layout:Tile>
+
+            <Layout:Tile Size="Wide" Background="#FF6652A2" Header="Statistics" Grid.Column="1" VerticalAlignment="Top">
+                <Image Margin="12" Source="../Images/Statistics.png" Stretch="None"/>
+            </Layout:Tile>
+            <Grid VerticalAlignment="Bottom" Margin="0,10,0,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Layout:Tile Grid.RowSpan="2" Background="#FF00ABDC" Header="User Management" Margin="0,0,0,0">
+                    <Image Source="../Images/UserManagment.png" Stretch="None"/>
+                </Layout:Tile>
+                <Layout:Tile Grid.Column="1" Size="Small" Background="#FF54AF0E" Margin="10,0,0,0" VerticalAlignment="Top">
+                    <Image Source="../Images/SystemSmall.png" Stretch="None"/>
+                </Layout:Tile>
+                <Layout:Tile Grid.Column="1" Grid.Row="1" Size="Small" Background="#FFD4AF00" Margin="10,0,0,0" VerticalAlignment="Bottom">
+                    <Image Source="../Images/ResearchSmall.png" Stretch="None"/>
+                </Layout:Tile>
+            </Grid>
+            <Grid Margin="0,0,0,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Layout:Tile  Size="Wide" Background="#FF7CA7D1" Header="Zillow" VerticalAlignment="Top" Grid.ColumnSpan="2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <Layout:SwingDecorator>
+                        <Layout:SwingDecorator.ContentTemplate>
+                            <DataTemplate>
+                                <Image Margin="12" Source="../Images/ZillowLogo.png" Stretch="None"/>
+                            </DataTemplate>
+                        </Layout:SwingDecorator.ContentTemplate>
+                        <Layout:SwingDecorator.TopContentTemplate>
+                            <DataTemplate>
+                                <TextBlock FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            Your <Bold>Edge</Bold> in <Bold>Real Estate</Bold>
+                                </TextBlock>
+                            </DataTemplate>
+                        </Layout:SwingDecorator.TopContentTemplate>
+                    </Layout:SwingDecorator>
+                </Layout:Tile>
+                <Layout:Tile Background="#FFE65E20" Header="Mortgage Rates" Grid.Row="1" Margin="0,10,0,0" HorizontalAlignment="Left">
+                    <Image Source="../Images/Rates.png" Stretch="None"/>
+                </Layout:Tile>
+                <Layout:Tile Background="#FFC3213F" Header="Loan Calculator" Grid.Row="1" Grid.Column="1" Margin="10,10,0,0">
+                    <Image Source="../Images/Calc.png" Stretch="None"/>
+                </Layout:Tile>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

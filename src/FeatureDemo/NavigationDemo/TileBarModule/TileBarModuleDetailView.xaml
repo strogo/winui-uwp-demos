@@ -1,0 +1,22 @@
+﻿<Layout:DXPage
+    x:Name="pageRoot"
+    x:Class="NavigationDemo.TileBarModuleDetailView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Xaml="using:DevExpress.UI.Xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid>
+        <Border Opacity="0.6">
+            <Border.Background>
+                <SolidColorBrush Color="{Binding Color}"/>
+            </Border.Background>
+        </Border>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Xaml:SvgIcon IconStretch="None" Source="{Binding Image}" UseLayoutRounding="True"/>
+            <TextBlock Foreground="White" FontSize="28" Text="Select any tile to navigate to a corresponding view." TextWrapping="WrapWholeWords" Margin="20,0,20,0" TextAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</Layout:DXPage>

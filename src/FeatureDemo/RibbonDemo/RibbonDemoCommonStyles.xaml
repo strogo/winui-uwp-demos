@@ -1,0 +1,457 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dxei="using:DevExpress.UI.Xaml.Editors.Internal.Calendar"
+    xmlns:controls="using:DevExpress.UI.Xaml.Controls"
+    xmlns:Core="using:DevExpress.Core"
+    xmlns:Xaml="using:DevExpress.UI.Xaml"
+    xmlns:Ribbon="using:DevExpress.UI.Xaml.Ribbon"
+    xmlns:dxcip="using:DevExpress.UI.Xaml.Controls.Internal.Pdf"
+    xmlns:Internal="using:DevExpress.UI.Xaml.Ribbon.Internal"
+    xmlns:dxmvvm="using:DevExpress.Mvvm.UI.Interactivity"
+    xmlns:local="using:RibbonDemo">
+
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Default">
+            <SolidColorBrush x:Key="IconAccentColorBrush" Core:ColorKey.Link="RibbonControlColors.HeaderBackground.Default" />
+            <x:String x:Key="BookmarkPath">M 0,0 L0,24 M0,24 L24,24 M5,1 L5,0 L19,0 L19,1 L19,12 L19,24 L12,14 L5,24 L5,12</x:String>
+            <x:String x:Key="ContinuousePath">M 0,2E-06 L0,24 M0,24 L24,24 M15,21 L18,21 L18,22 L15,22 z M15,18 L18,18 L18,19 L15,19 z M7.16667,16.1667 L7.16667,20.8333 L11.8333,20.8333 L11.8333,16.1667 z M15,15 L18,15 L18,16 L15,16 z M6,15 L13,15 L13,22 L6,22 z M3,12 L21,12 L21,24 L20,24 L20,13 L4,13 L4,24 L3,24 z M6,7 L18,7 L18,8 L6,8 z M6,4 L18,4 L18,5 L6,5 z M6,1 L18,1 L18,2 L6,2 z M3,0 L4,0 L4,9 L20,9 L20,0 L21,0 L21,10 L3,10 z</x:String>
+            <x:String x:Key="SinglePagePath">M 0,2E-06 L0,24 M0,24 L24,24 M6,21 L18,21 L18,22 L6,22 z M6,18 L18,18 L18,19 L6,19 z M6,15 L18,15 L18,16 L6,16 z M6,12 L18,12 L18,13 L6,13 z M15,9 L18,9 L18,10 L15,10 z M15,6 L18,6 L18,7 L15,7 z M7.16667,4.16667 L7.16667,8.83333 L11.8333,8.83333 L11.8333,4.16667 z M15,3 L18,3 L18,4 L15,4 z M6,3 L13,3 L13,10 L6,10 z M4,1 L4,23 L20,23 L20,1 z M3,0 L21,0 L21,24 L3,24 z</x:String>
+            <x:String x:Key="MultiColumnReportPath">[F#FFE1C678 L#2 T#1 W#20 H#23 M 0,23 L0,0 L4,0 L4,2 L16,2 L16,0 L20,0 L20,23 z][F#FF939393 L#3 T#4 W#18 H#18 M 0,0 l 18,0 0,18 -18,0 z][F#White L#4 T#5 W#16 H#16 M 0,0 l 16,0 0,16 -16,0 z][F#FF939393 L#5 W#14 H#21 M3,0 L11,0 L11,2 L3,2 z M8,5 L9,5 L9,21 L8,21 z M10,6 L14,6 L14,7 L10,7 z M10,8 L14,8 L14,9 L10,9 z M10,10 L14,10 L14,11 L10,11 z M10,12 L12,12 L12,13 L10,13 z M0,6 L7,6 L7,7 L0,7 z M0,8 L7,8 L7,9 L0,9 z M0,10 L7,10 L7,11 L0,11 z M0,12 L6,12 L6,13 L0,13 z]</x:String>
+            <x:String x:Key="ReportMasterPath">[F#E1C678 L#2 T#1 W#20 H#23 M0,23 L0,0 L4,0 L4,2 L16,2 L16,0 L20,0 L20,23][F#939393 L#3 T#4 W#18 H#16 M 0 0 l 18 0 0 16 -18 0 z][F#White L#4 T#5 W#16 H#16 M 0 0 l 16 0 0 16 -16 0 z][F#627EB4 L#5 T#17 W#14 H#3 M 0 0 l 14 0 0 3 -14 0 z][F#939393 L#5 W#14 H#16 M3,0 L11,0 L11,2 L3,2 z M4,13 L4,15 L8,15 L8,13 z M4,10 L4,12 L8,12 L8,10 z M4,7 L4,9 L8,9 L8,7 z M0,6 L14,6 L14,7 L9,7 L9,9 L14,9 L14,10 L9,10 L9,12 L14,12 L14,13 L9,13 L9,15 L14,15 L14,16 L0,16 L0,15 L3,15 L3,13 L0,13 L0,12 L3,12 L3,10 L0,10 L0,9 L3,9 L3,7 L0,7 z]</x:String>
+            <x:String x:Key="ReportMergedPath">[F#E1C678 L#2 T#1 W#20 H#23 M0,23 L0,0 L4,0 L4,2 L16,2 L16,0 L20,0 L20,23][F#939393 L#3 T#4 W#18 H#18 M 0 0 l 18 0 0 18 -18 0 z][F#White L#4 T#5 W#16 H#16 M 0 0 l 16 0 0 16 -16 0 z][F#627EB4 L#3 T#12 W#18 H#10 M1,0 L2,0 L2,2 L3,2 L3,0 L4,0 L4,2 L5,2 L5,0 L6,0 L6,2 L7,2 L7,0 L8,0 L8,2 L9,2 L9,0 L10,0 L10,2 L11,2 L11,0 L12,0 L12,2 L13,2 L13,0 L14,0 L14,2 L15,2 L15,0 L16,0 L16,2 L18,2 L18,10 L0,10 L0,2 L1,2 z][F#White L#5 T#16 W#13 H#3 M 0 0 L 13 0 0 1 -13 0 z m 0 1 l 13 0 0 1 -13 0 z][F#939393 L#5 W#13 H#9 M3,0 L11,0 L11,2 L3,2 z M0,6 L13,6 L13,7 L0,7 z M0,8 L13,8 L13,9 L0,9 z]</x:String>
+            <SolidColorBrush x:Key="BrowseButtonIconForeground" Color="Black"/>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush x:Key="IconAccentColorBrush" Core:ColorKey.Link="RibbonControlColors.HeaderBackground.Light" />
+            <x:String x:Key="BookmarkPath">M 0,0 L0,24 M0,24 L24,24 M5,1 L5,0 L19,0 L19,1 L19,12 L19,24 L12,14 L5,24 L5,12</x:String>
+            <x:String x:Key="ContinuousePath">M 0,2E-06 L0,24 M0,24 L24,24 M15,21 L18,21 L18,22 L15,22 z M15,18 L18,18 L18,19 L15,19 z M7.16667,16.1667 L7.16667,20.8333 L11.8333,20.8333 L11.8333,16.1667 z M15,15 L18,15 L18,16 L15,16 z M6,15 L13,15 L13,22 L6,22 z M3,12 L21,12 L21,24 L20,24 L20,13 L4,13 L4,24 L3,24 z M6,7 L18,7 L18,8 L6,8 z M6,4 L18,4 L18,5 L6,5 z M6,1 L18,1 L18,2 L6,2 z M3,0 L4,0 L4,9 L20,9 L20,0 L21,0 L21,10 L3,10 z</x:String>
+            <x:String x:Key="SinglePagePath">M 0,2E-06 L0,24 M0,24 L24,24 M6,21 L18,21 L18,22 L6,22 z M6,18 L18,18 L18,19 L6,19 z M6,15 L18,15 L18,16 L6,16 z M6,12 L18,12 L18,13 L6,13 z M15,9 L18,9 L18,10 L15,10 z M15,6 L18,6 L18,7 L15,7 z M7.16667,4.16667 L7.16667,8.83333 L11.8333,8.83333 L11.8333,4.16667 z M15,3 L18,3 L18,4 L15,4 z M6,3 L13,3 L13,10 L6,10 z M4,1 L4,23 L20,23 L20,1 z M3,0 L21,0 L21,24 L3,24 z</x:String>
+            <x:String x:Key="MultiColumnReportPath">[F#FFE1C678 L#2 T#1 W#20 H#23 M 0,23 L0,0 L4,0 L4,2 L16,2 L16,0 L20,0 L20,23 z][F#FF939393 L#3 T#4 W#18 H#18 M 0,0 l 18,0 0,18 -18,0 z][F#White L#4 T#5 W#16 H#16 M 0,0 l 16,0 0,16 -16,0 z][F#FF939393 L#5 W#14 H#21 M3,0 L11,0 L11,2 L3,2 z M8,5 L9,5 L9,21 L8,21 z M10,6 L14,6 L14,7 L10,7 z M10,8 L14,8 L14,9 L10,9 z M10,10 L14,10 L14,11 L10,11 z M10,12 L12,12 L12,13 L10,13 z M0,6 L7,6 L7,7 L0,7 z M0,8 L7,8 L7,9 L0,9 z M0,10 L7,10 L7,11 L0,11 z M0,12 L6,12 L6,13 L0,13 z]</x:String>
+            <x:String x:Key="ReportMasterPath">[F#E1C678 L#2 T#1 W#20 H#23 M0,23 L0,0 L4,0 L4,2 L16,2 L16,0 L20,0 L20,23][F#939393 L#3 T#4 W#18 H#16 M 0 0 l 18 0 0 16 -18 0 z][F#White L#4 T#5 W#16 H#16 M 0 0 l 16 0 0 16 -16 0 z][F#627EB4 L#5 T#17 W#14 H#3 M 0 0 l 14 0 0 3 -14 0 z][F#939393 L#5 W#14 H#16 M3,0 L11,0 L11,2 L3,2 z M4,13 L4,15 L8,15 L8,13 z M4,10 L4,12 L8,12 L8,10 z M4,7 L4,9 L8,9 L8,7 z M0,6 L14,6 L14,7 L9,7 L9,9 L14,9 L14,10 L9,10 L9,12 L14,12 L14,13 L9,13 L9,15 L14,15 L14,16 L0,16 L0,15 L3,15 L3,13 L0,13 L0,12 L3,12 L3,10 L0,10 L0,9 L3,9 L3,7 L0,7 z]</x:String>
+            <x:String x:Key="ReportMergedPath">[F#E1C678 L#2 T#1 W#20 H#23 M0,23 L0,0 L4,0 L4,2 L16,2 L16,0 L20,0 L20,23][F#939393 L#3 T#4 W#18 H#18 M 0 0 l 18 0 0 18 -18 0 z][F#White L#4 T#5 W#16 H#16 M 0 0 l 16 0 0 16 -16 0 z][F#627EB4 L#3 T#12 W#18 H#10 M1,0 L2,0 L2,2 L3,2 L3,0 L4,0 L4,2 L5,2 L5,0 L6,0 L6,2 L7,2 L7,0 L8,0 L8,2 L9,2 L9,0 L10,0 L10,2 L11,2 L11,0 L12,0 L12,2 L13,2 L13,0 L14,0 L14,2 L15,2 L15,0 L16,0 L16,2 L18,2 L18,10 L0,10 L0,2 L1,2 z][F#White L#5 T#16 W#13 H#3 M 0 0 L 13 0 0 1 -13 0 z m 0 1 l 13 0 0 1 -13 0 z][F#939393 L#5 W#13 H#9 M3,0 L11,0 L11,2 L3,2 z M0,6 L13,6 L13,7 L0,7 z M0,8 L13,8 L13,9 L0,9 z]</x:String>
+            <SolidColorBrush x:Key="BrowseButtonIconForeground" Color="#FFE1C678"/>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
+    <DataTemplate x:Key="ReportMergedIconTemplate">
+        <Canvas Height="24" Width="24" UseLayoutRounding="True" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Path Data="M0,23 L0,0 L4,0 L4,2 L16,2 L16,0 L20,0 L20,23" Fill="#FFE1C678" Height="23" Canvas.Left="2" Stroke="Black" Canvas.Top="1" Width="20" StrokeThickness="0"/>
+            <Rectangle Fill="#FF939393" Height="18" Canvas.Left="3" Stroke="Black" StrokeThickness="0" Canvas.Top="4" Width="18"/>
+            <Rectangle Fill="White" Height="16" Canvas.Left="4" Stroke="Black" StrokeThickness="0" Canvas.Top="5" Width="16"/>
+            <Path Data="M1,0 L2,0 L2,2 L3,2 L3,0 L4,0 L4,2 L5,2 L5,0 L6,0 L6,2 L7,2 L7,0 L8,0 L8,2 L9,2 L9,0 L10,0 L10,2 L11,2 L11,0 L12,0 L12,2 L13,2 L13,0 L14,0 L14,2 L15,2 L15,0 L16,0 L16,2 L18,2 L18,10 L0,10 L0,2 L1,2 z" 
+                  Fill="#FF627EB4" Height="10" Canvas.Left="3" Stretch="Fill" Stroke="Black" StrokeThickness="0" Canvas.Top="12" Width="18"/>
+
+            <Rectangle Fill="White" Height="1" Canvas.Left="5" StrokeThickness="0" Canvas.Top="16" Width="13"/>
+            <Rectangle Fill="White" Height="1" Canvas.Left="5" StrokeThickness="0" Canvas.Top="18" Width="13"/>
+
+            <Path Data="M3,0 L11,0 L11,2 L3,2 z M0,6 L13,6 L13,7 L0,7 z M0,8 L13,8 L13,9 L0,9 z" 
+                  Fill="#FF939393" Height="9" Canvas.Left="5" Stretch="Fill" Stroke="Black" StrokeThickness="0" Width="13"/>
+        </Canvas>
+    </DataTemplate>
+    <DataTemplate x:Key="ReportSubIconTemplate">
+        <Canvas Height="24" Width="24" UseLayoutRounding="True" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Path Data="M0,23 L0,0 L4,0 L4,2 L16,2 L16,0 L20,0 L20,23" Fill="#FFE1C678" Height="23" Canvas.Left="2" Stroke="Black" Canvas.Top="1" Width="20" StrokeThickness="0"/>
+            <Rectangle Fill="#FF939393" Height="18" Canvas.Left="3" Stroke="Black" StrokeThickness="0" Canvas.Top="4" Width="18"/>
+            <Rectangle Fill="White" Height="16" Canvas.Left="4" Stroke="Black" StrokeThickness="0" Canvas.Top="5" Width="16"/>
+            <Path Data="M3,0 L11,0 L11,2 L3,2 z M0,5.99999 L14,5.99999 L14,6.99999 L0,6.99999 z M0,7.99999 L14,7.99999 L14,8.99999 L0,8.99999 z M0,18 L14,18 L14,19 L0,19 z" Fill="#FF939393" Height="19" Canvas.Left="5" Stretch="Fill" Stroke="Black" StrokeThickness="0" Width="14"/>
+            <Rectangle Fill="#FF627EB4" Height="7" Canvas.Left="5" Stroke="Black" StrokeThickness="0" Canvas.Top="10" Width="14"/>
+            <Path Data="M0,0 L11,0 L11,1 L0,1 z M4E-06,1.99999 L11,1.99999 L11,2.99999 L4E-06,2.99999 z M4E-06,3.99999 L9,3.99999 L9,4.99999 L4E-06,4.99999 z" Fill="White" Height="5" Canvas.Left="6" Stretch="Fill" Stroke="Black" StrokeThickness="0" Canvas.Top="11" Width="11"/>
+        </Canvas>
+    </DataTemplate>
+    <DataTemplate x:Key="ReportTableIconTemplate">
+        <Canvas Height="24" Width="24" UseLayoutRounding="True" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Path Data="M0,23 L0,0 L4,0 L4,2 L16,2 L16,0 L20,0 L20,23" Fill="#FFE1C678" Height="23" Canvas.Left="2" Stroke="Black" Canvas.Top="1" UseLayoutRounding="False" Width="20" StrokeThickness="0"/>
+            <Rectangle Fill="#FF939393" Height="18" Canvas.Left="3" Stroke="Black" StrokeThickness="0" Canvas.Top="4" Width="18"/>
+            <Rectangle Fill="White" Height="16" Canvas.Left="4" Stroke="Black" StrokeThickness="0" Canvas.Top="5" Width="16"/>
+            <Path Data="M3,16 L3,18 L7,18 L7,16 z M3,13 L3,15 L7,15 L7,13 z M3,10 L3,12 L7,12 L7,10 z M3,7 L3,9 L7,9 L7,7 z M0,6 L14,6 L14,7 L8,7 L8,9 L14,9 L14,10 L8,10 L8,12 L14,12 L14,13 L8,13 L8,15 L14,15 L14,16 L8,16 L8,18 L14,18 L14,19 L0,19 L0,18 L2,18 L2,16 L0,16 L0,15 L2,15 L2,13 L0,13 L0,12 L2,12 L2,10 L0,10 L0,9 L2,9 L2,7 L0,7 z M3,0 L11,0 L11,2 L3,2 z" Fill="#FF939393" Height="19" Canvas.Left="5" Stretch="Fill" Stroke="Black" StrokeThickness="0" Width="14"/>
+        </Canvas>
+    </DataTemplate>
+    <DataTemplate x:Key="FitWidthIconTemplate">
+        <Canvas Height="24" Width="24" UseLayoutRounding="True" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Path Data="M0,0 L1,0 L1,2 L2,2 L2,1 L3,1 L3,0 L4,0 L4,2 L14,2 L14,0 L15,0 L15,1 L16,1 L16,2 L17,2 L17,0 L18,0 L18,6 L17,6 L17,3 L16,3 L16,4 L15,4 L15,5 L14,5 L14,3 L4,3 L4,5 L3,5 L3,4 L2,4 L2,3 L1,3 L1,6 L0,6 z" Fill="#FF627EB4" Height="6" Canvas.Left="3" Stretch="Fill" StrokeThickness="0"  Width="18"/>
+            <Path Data="M3,15 L15,15 L15,16 L3,16 z M3,12 L15,12 L15,13 L3,13 z M12,9 L15,9 L15,10 L12,10 z M12,6 L15,6 L15,7 L12,7 z M4.16667,4.16667 L4.16667,8.83333 L8.83333,8.83333 L8.83333,4.16667 z M12,3 L15,3 L15,4 L12,4 z M3,3 L10,3 L10,10 L3,10 z M0,0 L18,0 L18,18 L17,18 L17,1 L1,1 L1,18 L0,18 z" Fill="Black" Height="18" Canvas.Left="3" Stretch="Fill" Stroke="Black" StrokeThickness="0" Canvas.Top="6" Width="18" />
+        </Canvas>
+    </DataTemplate>
+    <DataTemplate x:Key="FitHeightIconTemplate">
+        <Canvas Height="24" Width="24" UseLayoutRounding="True" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Path Data="M3,21 L15,21 L15,22 L3,22 z M3,18 L15,18 L15,19 L3,19 z M3,15 L15,15 L15,16 L3,16 z M3,12 L15,12 L15,13 L3,13 z M12,9 L15,9 L15,10 L12,10 z M12,6 L15,6 L15,7 L12,7 z M4.16667,4.16667 L4.16667,8.83333 L8.83333,8.83333 L8.83333,4.16667 z M12,3 L15,3 L15,4 L12,4 z M3,3 L10,3 L10,10 L3,10 z M1,1 L1,23 L17,23 L17,1 z M0,0 L18,0 L18,24 L0,24 z" Fill="Black" Height="24" Canvas.Left="6" Stretch="Fill"  StrokeThickness="0" Width="18"/>
+            <Path Data="M0,0 L6,0 L6,1 L3,1 L3,2 L4,2 L4,3 L5,3 L5,4 L3,4 L3,20 L5,20 L5,21 L4,21 L4,22 L3,22 L3,23 L6,23 L6,24 L0,24 L0,23 L2,23 L2,22 L1,22 L1,21 L0,21 L0,20 L2,20 L2,4 L0,4 L0,3 L1,3 L1,2 L2,2 L2,1 L0,1 z" Fill="#FF627EB4" Height="24" Stretch="Fill" StrokeThickness="0" Width="6"/>
+        </Canvas>
+    </DataTemplate>
+    <DataTemplate x:Key="FitIntoPageLevelIconTemplate">
+        <Canvas Height="24" Width="24" UseLayoutRounding="True" VerticalAlignment="Top" HorizontalAlignment="Left">
+            <Path Data="M1,1 L1,23 L23,23 L23,1 z M0,0 L24,0 L24,24 L0,24 z" Fill="#FF627EB4" Height="24" Stretch="Fill" StrokeThickness="0" Width="24"/>
+            <Path Data="M1,1 L1,21 L15,21 L15,1 z M0,0 L16,0 L16,22 L0,22 z" Fill="#FF627EB4" Height="22" Canvas.Left="4" Stretch="Fill" StrokeThickness="0" Canvas.Top="1" Width="16"/>
+            <Path Data="M0,15 L10,15 L10,16 L0,16 z M0,12 L10,12 L10,13 L0,13 z M0,9 L10,9 L10,10 L0,10 z M0,6 L10,6 L10,7 L0,7 z M0,3 L10,3 L10,4 L0,4 z M0,0 L10,0 L10,1 L0,1 z" Fill="Black" Height="16" Canvas.Left="7" Stretch="Fill" StrokeThickness="0" Canvas.Top="4" Width="10"/>
+        </Canvas>
+    </DataTemplate>
+
+    <Core:BooleanToDoubleConverter x:Key="BoolToOpacityConverter" ValueTrue="1" ValueFalse="0" />
+
+    <Style TargetType="local:DemoRichEditBoxExtended">
+        <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}" />
+        <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}" />
+        <Setter Property="Foreground" Value="{ThemeResource TextBoxForegroundThemeBrush}" />
+        <Setter Property="Background" Value="{ThemeResource TextBoxBackgroundThemeBrush}" />
+        <Setter Property="SelectionHighlightColor" Value="{ThemeResource TextSelectionHighlightColorThemeBrush}" />
+        <Setter Property="BorderBrush" Value="{ThemeResource TextBoxBorderThemeBrush}" />
+        <Setter Property="BorderThickness" Value="{ThemeResource TextControlBorderThemeThickness}" />
+        <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
+		<Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled" />
+        <Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled" />
+        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="Padding" Value="{ThemeResource TextControlThemePadding}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:DemoRichEditBoxExtended">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border x:Name="BackgroundElement"
+                                Grid.Row="1"
+                                Background="{TemplateBinding Background}"
+                                Margin="{TemplateBinding BorderThickness}"
+                                Grid.ColumnSpan="2"
+                                Grid.RowSpan="2"/>
+                        <Border x:Name="BorderElement"
+                                Grid.Row="1"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Grid.ColumnSpan="2"
+                                Grid.RowSpan="1"/>
+                        <ContentPresenter x:Name="HeaderContentPresenter"
+                                          Grid.Row="0"
+                                          Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}"
+                                          Margin="0,4,0,4"
+                                          Grid.ColumnSpan="2"
+                                          Content="{TemplateBinding Header}"
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                          FontWeight="Semilight" />
+                        <ScrollViewer x:Name="ContentElement"
+                                      Grid.Row="1"
+                                      HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                      VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                      IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+                                      IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+                                      IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                      Margin="{TemplateBinding BorderThickness}"
+                                      Padding="{TemplateBinding Padding}"
+                                      IsTabStop="False"
+                                      ZoomMode="Disabled" 
+                                      AutomationProperties.AccessibilityView="Raw"/>
+                        <ContentControl x:Name="PlaceholderTextContentPresenter"
+                                      Grid.Row="1"
+                                      Foreground="{ThemeResource TextBoxPlaceholderTextThemeBrush}"
+                                      Margin="{TemplateBinding BorderThickness}"
+                                      Padding="{TemplateBinding Padding}"
+                                      IsTabStop="False"
+                                      Grid.ColumnSpan="2"
+                                      Content="{TemplateBinding PlaceholderText}" 
+                                      IsHitTestVisible="False"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MenuPathButtonStyle" TargetType="controls:PathButton">
+        <Setter Property="IconWidth" Value="32"/>
+        <Setter Property="IconHeight" Value="32"/>
+        <Setter Property="MinWidth" Value="32"/>
+        <Setter Property="Fill" Value="#99333333"/>
+        <Setter Property="FillHover" Value="#CC333333"/>
+        <Setter Property="FillPressed" Value="#B2333333"/>
+    </Style>
+
+    <Style x:Key="PathButtonTextSearchEditorIcon" TargetType="controls:PathButton" BasedOn="{StaticResource MenuPathButtonStyle}">
+        <Setter Property="IconWidth" Value="24"/>
+        <Setter Property="IconHeight" Value="24"/>
+        <Setter Property="MinWidth" Value="24"/>
+        <Setter Property="Data" Value="F1 M 27.0038,12.0017C 31.975,12.0017 36.005,16.0317 36.005,21.0029C 36.005,25.9742 31.975,30.0042 27.0038,30.0042C 25.287,30.0042 23.6825,29.5236 22.3175,28.6896L 16.1998,34.8073C 15.6296,35.5057 15.0149,36.005 14.502,36.005C 13.1211,36.005 12.0017,34.8856 12.0017,33.5047C 12.0017,32.9918 12.501,32.377 13.1995,31.8068L 19.3171,25.6892C 18.4831,24.3242 18.0025,22.7197 18.0025,21.0029C 18.0025,16.0317 22.0325,12.0017 27.0038,12.0017 Z 
+                M 27.0038,15.0021C 23.6896,15.0021 21.0029,17.6888 21.0029,21.0029C 21.0029,24.3171 23.6896,27.0038 27.0038,27.0038C 30.3179,27.0038 33.0046,24.3171 33.0046,21.0029C 33.0046,17.6888 30.3179,15.0021 27.0038,15.0021 Z"/>
+    </Style>
+
+    <Style x:Key="PathButtonClearTextEditorIcon" TargetType="controls:PathButton" BasedOn="{StaticResource MenuPathButtonStyle}">
+        <Setter Property="IconWidth" Value="24"/>
+        <Setter Property="IconHeight" Value="24"/>
+        <Setter Property="MinWidth" Value="24"/>
+        <Setter Property="Data" Value="F1 M 12.0017,0C 18.63,0 24.0033,5.37333 24.0033,12.0017C 24.0033,18.63 18.63,24.0033 12.0017,24.0033C 5.37333,24.0033 -9.93403e-009,18.63 -9.93403e-009,12.0017C -9.93403e-009,5.37333 5.37333,0 12.0017,0 Z 
+                M 6.00084,8.00111L 10.0014,12.0017L 6.00084,16.0022L 8.00112,18.0025L 12.0017,14.0019L 16.0022,18.0025L 18.0025,16.0022L 14.002,12.0017L 18.0025,8.00111L 16.0022,6.00083L 12.0017,10.0014L 8.00112,6.00083L 6.00084,8.00111 Z"/>
+    </Style>
+
+    <Style x:Key="PathButtonTextSearchPreviousResultStyle" TargetType="controls:PathButton" BasedOn="{StaticResource MenuPathButtonStyle}">
+        <Setter Property="Data" Value="F1 M 24.0033,20.0028L 33.0046,20.0028L 33.0046,28.0039L 24.0033,28.0039L 24.0033,35.0049L 13.0018,24.0033L 24.0033,13.0018L 24.0033,20.0028 Z
+            M 24.0033,0C 37.26,0 48.0067,10.7467 48.0067,24.0033C 48.0067,37.26 37.26,48.0067 24.0033,48.0067C 10.7467,48.0067 0,37.26 0,24.0033C 0,10.7467 10.7467,0 24.0033,0 Z
+            M 24.0033,3.00042C 12.4037,3.00042 3.00042,12.4037 3.00042,24.0033C 3.00042,35.6029 12.4037,45.0063 24.0033,45.0063C 35.6029,45.0063 45.0063,35.6029 45.0063,24.0033C 45.0063,12.4037 35.6029,3.00042 24.0033,3.00042 Z"/>
+    </Style>
+
+    <Style x:Key="PathButtonTextSearchNextResultStyle" TargetType="controls:PathButton" BasedOn="{StaticResource MenuPathButtonStyle}">
+        <Setter Property="Data" Value="F1 M 23.0032,20.0028L 23.0032,13.0018L 34.0047,24.0034L 23.0032,35.0049L 23.0032,28.0039L 14.002,28.0039L 14.002,20.0028L 23.0032,20.0028 Z 
+                M 24.0033,-1.14441e-005C 37.26,-1.14441e-005 48,10.7467 48,24.0033C 48,37.26 37.26,48 24.0033,48C 10.7467,48 -7.94729e-008,37.26 -7.94729e-008,24.0033C -7.94729e-008,10.7467 10.7467,-1.14441e-005 24.0033,-1.14441e-005 Z 
+                M 24.0033,3.00041C 12.4037,3.00041 3.00042,12.4037 3.00042,24.0033C 3.00042,35.6029 12.4037,45.0063 24.0033,45.0063C 35.6029,45.0063 45.0063,35.6029 45.0063,24.0033C 45.0063,12.4037 35.6029,3.00041 24.0033,3.00041 Z"/>
+    </Style>
+
+    <Style x:Key="RibbonTextSearchBoxStyle" TargetType="dxcip:TextSearchBox">
+        <Setter Property="Core:StyleHelper.BindableSetters">
+            <Setter.Value>
+                <Core:BindableSetterCollection>
+                    <Core:BindableSetter Property="FindTextCommandParameter" Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=Self}}"/>
+                </Core:BindableSetterCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="MinWidth" Value="{ThemeResource TextControlThemeMinWidth}"/>
+        <Setter Property="MinHeight" Value="{ThemeResource TextControlThemeMinHeight}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled" Value="False"/>
+        <Setter Property="Height" Value="48"/>
+        <Setter Property="SearchBoxCornerRadius" Value="24"/>
+        <Setter Property="Padding" Value="24,11,24,10"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="dxcip:TextSearchBox">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" 
+                                                                       Storyboard.TargetName="BackgroundElement">
+                                            <DiscreteObjectKeyFrame KeyTime="0" 
+                                                                    Value="{ThemeResource TextBoxDisabledBackgroundThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" 
+                                                                       Storyboard.TargetName="ContentElement">
+                                            <DiscreteObjectKeyFrame KeyTime="0" 
+                                                                    Value="{ThemeResource TextBoxDisabledForegroundThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" 
+                                                                       Storyboard.TargetName="PlaceholderTextContentPresenter">
+                                            <DiscreteObjectKeyFrame KeyTime="0" 
+                                                                    Value="{ThemeResource TextBoxDisabledForegroundThemeBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Normal">
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                </VisualState>
+                                <VisualState x:Name="Focused"/>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="ButtonStates">
+                                <VisualState x:Name="ButtonVisible">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" 
+                                                                       Storyboard.TargetName="DeleteButton">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="ButtonCollapsed"/>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border x:Name="BackgroundElement"
+                                BorderThickness="1"
+                                BorderBrush="#99333333"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="{TemplateBinding SearchBoxCornerRadius}"
+                                Grid.ColumnSpan="2" 
+                                Margin="{TemplateBinding BorderThickness}" 
+                                Grid.Row="1" 
+                                Grid.RowSpan="1"/>
+                        <ContentPresenter x:Name="HeaderContentPresenter" 
+                                          Grid.ColumnSpan="2" 
+                                          ContentTemplate="{TemplateBinding HeaderTemplate}" 
+                                          Content="{TemplateBinding Header}" 
+                                          Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}" 
+                                          FontWeight="Semilight" 
+                                          Margin="10,4,0,4" 
+                                          Grid.Row="0"/>
+                        <ScrollViewer x:Name="ContentElement" 
+                                      AutomationProperties.AccessibilityView="Raw" 
+                                      HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" 
+                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" 
+                                      IsTabStop="False" 
+                                      IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}" 
+                                      IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}" 
+                                      IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}" 
+                                      Margin="{TemplateBinding BorderThickness}" 
+                                      Padding="{TemplateBinding Padding}" 
+                                      Foreground="#99333333" 
+                                      Grid.Row="1"
+                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" 
+                                      VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" 
+                                      ZoomMode="Disabled"/>
+                        <ContentControl x:Name="PlaceholderTextContentPresenter" 
+                                        Grid.ColumnSpan="2" 
+                                        Content="{TemplateBinding PlaceholderText}" 
+                                        IsHitTestVisible="False" 
+                                        IsTabStop="False" 
+                                        Margin="{TemplateBinding BorderThickness}" 
+                                        Padding="{TemplateBinding Padding}" 
+                                        Grid.Row="1"/>
+                        <StackPanel Orientation="Horizontal" 
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Margin="0,0,10,0">
+                            <controls:PathButton x:Name="DeleteButton" 
+                                                 Style="{StaticResource PathButtonClearTextEditorIcon}"
+                                                 FontSize="{TemplateBinding FontSize}"
+                                                 IsTabStop="False"
+                                                 Visibility="Collapsed"/>
+                            <controls:PathButton Style="{StaticResource PathButtonTextSearchEditorIcon}"
+                                                 Command="{TemplateBinding FindTextCommand}"
+                                                 CommandParameter="{TemplateBinding FindTextCommandParameter}"
+                                                 FontSize="{TemplateBinding FontSize}"
+                                                 IsTabStop="False"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="local:RibbonTextSearchBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:RibbonTextSearchBox">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition MinWidth="200"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <dxcip:TextSearchBox Style="{StaticResource RibbonTextSearchBoxStyle}"
+                                                 FindTextCommand="{Binding Owner.FindTextCommand, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        <controls:PathButton Style="{StaticResource PathButtonTextSearchPreviousResultStyle}"
+                                                 Grid.Column="1"
+                                                 Command="{Binding Owner.FindPreviousTextCommand, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        <controls:PathButton Style="{StaticResource PathButtonTextSearchNextResultStyle}"
+                                                 Grid.Column="2"
+                                                 Command="{Binding Owner.FindNextTextCommand, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="local:RichEditPreviewControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:RichEditPreviewControl">
+                    <ScrollViewer x:Name="PART_scroll" 
+                                  ZoomMode="Enabled" 
+                                  HorizontalScrollMode="Auto"
+                                  VerticalScrollMode="Auto"
+                                  Background="White"
+                                  HorizontalScrollBarVisibility="Hidden"
+                                  VerticalScrollBarVisibility="Hidden">
+                        <local:DemoRichEditBox x:Name="PART_editbox"
+                                               Padding="50"
+                                               Background="White"
+                                               Foreground="Black"
+                                               RTFText="{Binding RTFText, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                               Width="600"
+                                               Height="800"
+                                               IsHitTestVisible="False"/>
+                    </ScrollViewer>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="PreviewButtonTemplate" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="PART_Background"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="PART_Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="PART_Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="#26000000"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="PART_Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="#42000000"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PART_Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="0.6"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter Content="{TemplateBinding Content}"
+                                          Foreground="{TemplateBinding Foreground}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="local:DemoScrollArea">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:DemoScrollArea">
+                    <ScrollViewer x:Name="PART_Scroll"
+                                  Background="LightGray"
+                                  ZoomMode="Enabled"
+                                  MaxZoomFactor="1.5"
+                                  MinZoomFactor="0.1"
+                                  HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollMode="Auto"
+                                  HorizontalScrollMode="Enabled">
+                        <ContentPresenter/>
+                    </ScrollViewer>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

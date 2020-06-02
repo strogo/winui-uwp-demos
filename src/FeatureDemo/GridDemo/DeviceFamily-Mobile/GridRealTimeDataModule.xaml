@@ -1,0 +1,35 @@
+﻿<local:GridDemoUserControl
+    x:Class="GridDemo.GridRealTimeDataModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GridDemo"
+    xmlns:common="using:FeatureDemo.Common"
+    xmlns:Grid="using:DevExpress.UI.Xaml.Grid"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:FeatureDemo.Data"
+    BorderBrush="Transparent"
+    mc:Ignorable="d"
+    d:DesignHeight="610"
+    d:DesignWidth="450">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <local:GridRealTimeDataStylesResourceDictionary/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid:GridControl ItemsSource="{x:Bind Model.Data, Mode=OneWay}" x:Name="grid" AllowLiveDataShaping="True" AutoGenerateColumns="False" NavigationStyle="None" ShowFixedTotalSummary="True" AllowColumnFiltering="False">
+            <Grid:GridControl.Columns>
+                <Grid:GridTemplateColumn FieldName="CompanyName" Header="Symbol" CellTemplate="{StaticResource symbolCellTemplate}" />
+                <Grid:GridTemplateColumn FieldName="Price" Header="Price ($)" CellTemplate="{StaticResource priceCellTemplate}"/>
+                <Grid:GridTemplateColumn FieldName="PriceHistory" Header="Stock" CellTemplate="{StaticResource priceHistoryCellTemplate}"/>
+            </Grid:GridControl.Columns>
+            <Grid:GridControl.TotalSummary>
+                <Grid:GridSummaryItem SummaryType="Count" Alignment="Left"/>
+                <Grid:GridSummaryItem x:Name="chartSummary" SummaryType="Custom" FieldName="Price" Alignment="Right" FixedTotalSummaryItemTemplate="{StaticResource stockChartSummaryTemplate}"/>
+            </Grid:GridControl.TotalSummary>
+        </Grid:GridControl>
+    </Grid>
+</local:GridDemoUserControl>

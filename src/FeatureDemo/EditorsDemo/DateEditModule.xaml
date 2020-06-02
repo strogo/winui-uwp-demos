@@ -1,0 +1,71 @@
+﻿<Common:DemoModuleView
+    x:Class="EditorsDemo.DateEditModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EditorsDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors" 
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout" 
+    mc:Ignorable="d">
+
+    <Common:DemoModuleView.Resources>
+        <ResourceDictionary Source="ms-appx:///EditorsDemo/LayoutItemInvertedColors.xaml" />
+    </Common:DemoModuleView.Resources>
+
+    <Grid Background="#F3F3F3" BorderBrush="LightGray" BorderThickness="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="DatePicker:" TextAlignment="Right" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Foreground="#FF505050"/>
+        <TextBlock Text="DateNavigator:" TextAlignment="Right" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Foreground="#FF505050"/>
+        <TextBlock Text="RadialTimeEdit:" TextAlignment="Right" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Foreground="#FF505050"/>
+        <Editors:DateEdit x:Name="datePicker"
+                          Margin="15,5"
+                          Grid.Row="1"
+                          Grid.Column="2"
+                          HorizontalAlignment="Stretch"
+                          MaxWidth="900"
+                          MinWidth="240">
+            <Editors:DateEdit.PopupSettings>
+                <Editors:DateEditPopupSettings/>
+            </Editors:DateEdit.PopupSettings>
+        </Editors:DateEdit>
+        <Editors:DateEdit x:Name="dateNavigator"
+                          Margin="15,5"
+                          Grid.Row="2"
+                          Grid.Column="2"
+                          HorizontalAlignment="Stretch"
+                          MaxWidth="900"
+                          MinWidth="240">
+            <Editors:DateEdit.PopupSettings>
+                <Editors:DateNavigatorPopupSettings/>
+            </Editors:DateEdit.PopupSettings>
+        </Editors:DateEdit>
+        <Editors:DateEdit x:Name="radialTimeEdit"
+                          Margin="15,5"
+                          Grid.Row="3"
+                          Grid.Column="2"
+                          HorizontalAlignment="Stretch"
+                          MaxWidth="900"
+                          MinWidth="240">
+            <Editors:DateEdit.PopupSettings>
+                <Editors:RadialTimeEditPopupSettings />
+            </Editors:DateEdit.PopupSettings>
+            <Editors:DateEdit.TextInputSettings>
+                <Editors:TextInputMaskSettings Mask="T" MaskType="DateTime" />
+            </Editors:DateEdit.TextInputSettings>
+        </Editors:DateEdit>
+    </Grid>
+</Common:DemoModuleView>

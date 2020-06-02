@@ -1,0 +1,70 @@
+﻿<Common:DemoModuleView
+    x:Class="LayoutDemo.LayoutControl.LayoutGroupOptionsDemoModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:local="using:LayoutDemo.LayoutControl"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    >
+    <Layout:LayoutControl Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Stretch" MaxWidth="500" VerticalItemSpacing="25" Margin="40,40">
+        <Layout:LayoutGroup Header="HorizontalItemSpacing:" 
+                    Height="125" VerticalContentAlignment="Stretch" HorizontalItemSpacing="25">
+                <Rectangle Fill="Red" />
+                <Rectangle Fill="Green" />
+                <Rectangle Fill="Blue" />
+        </Layout:LayoutGroup>
+
+
+        <Layout:LayoutGroup Header="LayoutGroup.StretchRatio:" HorizontalItemSpacing="1"
+                    Height="125" VerticalContentAlignment="Stretch">
+            <Border Background="Red" Layout:LayoutGroup.StretchRatio="0.5">
+                <TextBlock FontSize="18" Foreground="LightGray" Text="0.5x" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Border>
+            <Border Background="Green" Layout:LayoutGroup.StretchRatio="1">
+                <TextBlock FontSize="18" Foreground="LightGray" Text="1x" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Border>
+            <Border Background="Blue" Layout:LayoutGroup.StretchRatio="2">
+                <TextBlock FontSize="18" Foreground="LightGray" Text="2x" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Border>
+        </Layout:LayoutGroup>
+        
+        <Layout:LayoutGroup Orientation="Vertical">
+            <Layout:LayoutGroup Header="LayoutGroup.SizeMode:" HorizontalItemSpacing="5" VerticalAlignment="Top">
+                <Rectangle Fill="Yellow"/>
+                <Rectangle Fill="Red" Width="25" Height="25"  Layout:LayoutGroup.SizeMode="AutoSize"/>
+                <Rectangle Fill="Green" Width="50" Height="50" Layout:LayoutGroup.SizeMode="AutoSize"/>
+                <Rectangle Fill="Blue" Width="100" Height="100" Layout:LayoutGroup.SizeMode="AutoSize"/>
+            </Layout:LayoutGroup>
+            <Layout:LayoutGroup>
+                <TextBlock FontSize="12" Text="SizeMode: Stretch(Default)" TextWrapping="Wrap" HorizontalAlignment="Left"
+                   Opacity="0.6"/>
+                <TextBlock FontSize="12" Text="SizeMode: Autosize" TextWrapping="Wrap" HorizontalAlignment="Right"
+                   Opacity="0.6"/>
+            </Layout:LayoutGroup>
+        </Layout:LayoutGroup>
+
+        <Layout:LayoutGroup Header="LayoutGroup.Index:" HorizontalItemSpacing="10"
+                    Height="200" VerticalContentAlignment="Stretch">
+            <Layout:LayoutGroup.Resources>
+                <Style TargetType="Rectangle">
+                    <Setter Property="Width" Value="100"/>
+                    <Setter Property="Height" Value="100"/>
+                </Style>
+            </Layout:LayoutGroup.Resources>
+            <Rectangle Fill="Red" HorizontalAlignment="Left" VerticalAlignment="Top" Layout:LayoutGroup.Index="0"/>
+            <Rectangle Fill="Green" HorizontalAlignment="Center" VerticalAlignment="Center" Layout:LayoutGroup.Index="0"/>
+            <Rectangle Fill="Blue" HorizontalAlignment="Right" VerticalAlignment="Bottom" Layout:LayoutGroup.Index="0"/>
+            <Border Layout:LayoutGroup.Index="0" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,15,0,0">
+                <TextBlock FontSize="24" Foreground="White" Text="Index: 0" Margin="5"/>
+            </Border>
+
+            <Rectangle Fill="Red"  HorizontalAlignment="Left" VerticalAlignment="Top" Layout:LayoutGroup.Index="1"/>
+            <Rectangle Fill="Green" HorizontalAlignment="Center" VerticalAlignment="Center" Layout:LayoutGroup.Index="1"/>
+            <Rectangle Fill="Blue" HorizontalAlignment="Right" VerticalAlignment="Bottom" Layout:LayoutGroup.Index="1"/>
+            <Border Layout:LayoutGroup.Index="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,15,0,0">
+                <TextBlock FontSize="24" Foreground="White" Text="Index: 1" Margin="5"/>
+            </Border>
+        </Layout:LayoutGroup>
+    </Layout:LayoutControl>
+</Common:DemoModuleView>

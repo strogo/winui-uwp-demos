@@ -1,0 +1,149 @@
+﻿<Common:DemoModuleView
+    x:Class="ControlsDemo.SimplePadModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Controls="using:DevExpress.UI.Xaml.Controls" 
+    xmlns:Charts="using:DevExpress.UI.Xaml.Charts"
+    xmlns:Xaml="using:DevExpress.UI.Xaml" 
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors" 
+    xmlns:local="using:ControlsDemo"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <Common:DemoModuleView.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="RadialContextMenuTemplatedCommandContainerFontsTemplate">
+                <ListBox ItemsSource="{Binding Path=Command.DataContext.Fonts}" SelectedItem="{Binding Path=Command.DataContext.Font, Mode=TwoWay}" DisplayMemberPath="Source"/>
+            </DataTemplate>
+            <DataTemplate x:Key="RadialContextMenuTemplatedCommandContainerFontSizesTemplate">
+                <ListBox ItemsSource="{Binding Path=Command.DataContext.FontSizes}" SelectedItem="{Binding Path=Command.DataContext.FontSize, Mode=TwoWay}"/>
+            </DataTemplate>
+            <local:TextAlignmentToBooleanConverter x:Key="TextAlignmentToBooleanConverter"/>
+        </ResourceDictionary>
+    </Common:DemoModuleView.Resources>
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.15*" />
+                <RowDefinition Height="0.85*" />
+            </Grid.RowDefinitions>
+            <Controls:ContextMenuContainer x:Name="flyout" PlacementTarget="{Binding ElementName=tb}" HorizontalContentAlignment="Stretch"  VerticalContentAlignment="Stretch">
+                <Controls:ContextMenuContainer.Settings>
+                    <Xaml:FlyoutSettings Placement="Right"/>
+                </Controls:ContextMenuContainer.Settings>
+                <Controls:RadialContextMenuControl x:Name="contextMenu">
+                    <Controls:RadialContextMenuControl.RootItem>
+                        <Controls:RadialContextMenuCommandContainer>
+                            <Controls:RadialContextMenuSeparator/>
+                            <Controls:RadialContextMenuTemplatedCommand 
+                                Uri="ms-appx:///ControlsDemo/Images/Font_32x32.png" 
+                                Label="Font" 
+                                ContainerTemplate="{StaticResource RadialContextMenuTemplatedCommandContainerFontsTemplate}">
+                            </Controls:RadialContextMenuTemplatedCommand>
+                            <Controls:RadialContextMenuSeparator/>
+                            <Controls:RadialContextMenuTemplatedCommand
+                                Uri="ms-appx:///ControlsDemo/Images/FontSize_32x32.png" 
+                                Label="Font Size"
+                                ContainerTemplate="{StaticResource RadialContextMenuTemplatedCommandContainerFontSizesTemplate}">
+                            </Controls:RadialContextMenuTemplatedCommand>
+                            <Controls:RadialContextMenuSeparator/>
+                            <Controls:RadialContextMenuCommandContainer
+                                Uri="ms-appx:///ControlsDemo/Images/AlignLeft_32x32.png" 
+                                Label="Alignment"
+                                Command="{Binding Path=TextAlignmentCommand}"
+                                CommandParameter="Left">
+                                <Controls:RadialContextMenuSeparator/>
+                                <Controls:RadialContextMenuSeparator/>
+                                <Controls:RadialContextMenuSeparator/>
+                                <Controls:RadialContextMenuCommand
+                                    Uri="ms-appx:///ControlsDemo/Images/AlignLeft_32x32.png" 
+                                    Label="Left"
+                                    Command="{Binding Path=TextAlignmentCommand}"
+                                    CommandParameter="Left"
+                                    CommandType="Toggle"
+                                    IsChecked="{Binding Path=TextAlignment, Converter={StaticResource TextAlignmentToBooleanConverter}, ConverterParameter=Left}">
+                                </Controls:RadialContextMenuCommand>
+                                <Controls:RadialContextMenuCommand
+                                    Uri="ms-appx:///ControlsDemo/Images/AlignCenter_32x32.png" 
+                                    Label="Center"
+                                    Command="{Binding Path=TextAlignmentCommand}"
+                                    CommandParameter="Center"
+                                    CommandType="Toggle"
+                                    IsChecked="{Binding Path=TextAlignment, Converter={StaticResource TextAlignmentToBooleanConverter}, ConverterParameter=Center}">
+                                </Controls:RadialContextMenuCommand>
+                                <Controls:RadialContextMenuCommand
+                                    Uri="ms-appx:///ControlsDemo/Images/AlignRight_32x32.png" 
+                                    Label="Right"
+                                    Command="{Binding Path=TextAlignmentCommand}"
+                                    CommandParameter="Right"
+                                    CommandType="Toggle"
+                                    IsChecked="{Binding Path=TextAlignment, Converter={StaticResource TextAlignmentToBooleanConverter}, ConverterParameter=Right}">
+                                </Controls:RadialContextMenuCommand>
+                                <Controls:RadialContextMenuCommand
+                                    Uri="ms-appx:///ControlsDemo/Images/AlignJustify_32x32.png" 
+                                    Label="Justify"
+                                    Command="{Binding Path=TextAlignmentCommand}"
+                                    CommandParameter="Justify"
+                                    CommandType="Toggle"
+                                    IsChecked="{Binding Path=TextAlignment, Converter={StaticResource TextAlignmentToBooleanConverter}, ConverterParameter=Justify}">
+                                </Controls:RadialContextMenuCommand>
+                            </Controls:RadialContextMenuCommandContainer>
+                            <Controls:RadialContextMenuSeparator/>
+                            <Controls:RadialContextMenuCommandContainer
+                                    Uri="ms-appx:///ControlsDemo/Images/Copy_32x32.png" 
+                                    Label="Copy">
+                                <Controls:RadialContextMenuSeparator/>
+                                <Controls:RadialContextMenuSeparator/>
+                                <Controls:RadialContextMenuCommand 
+                                    Uri="ms-appx:///ControlsDemo/Images/Cut_32x32.png" 
+                                    Label="Cut"
+                                    Command="{Binding Path=CutCommand}"
+                                    CommandParameter="{Binding ElementName=tb}">
+                                </Controls:RadialContextMenuCommand>
+                                <Controls:RadialContextMenuCommand 
+                                    Uri="ms-appx:///ControlsDemo/Images/Copy_32x32.png" 
+                                    Label="Copy"
+                                    Command="{Binding Path=CopyCommand}"
+                                    CommandParameter="{Binding ElementName=tb}">
+                                </Controls:RadialContextMenuCommand>
+                                <Controls:RadialContextMenuCommand 
+                                    Uri="ms-appx:///ControlsDemo/Images/Paste_32x32.png" 
+                                    Label="Paste"
+                                    Command="{Binding Path=PasteCommand}"
+                                    CommandParameter="{Binding ElementName=tb}">
+                                </Controls:RadialContextMenuCommand>
+                                <Controls:RadialContextMenuCommand 
+                                    Uri="ms-appx:///ControlsDemo/Images/Delete_32x32.png" 
+                                    Label="Delete"
+                                    Command="{Binding Path=DeleteCommand}"
+                                    CommandParameter="{Binding ElementName=tb}">
+                                </Controls:RadialContextMenuCommand>
+                            </Controls:RadialContextMenuCommandContainer>
+                            <Controls:RadialContextMenuCommand/>
+                            <Controls:RadialContextMenuCommand/>
+                        </Controls:RadialContextMenuCommandContainer>
+                    </Controls:RadialContextMenuControl.RootItem>
+                </Controls:RadialContextMenuControl>
+            </Controls:ContextMenuContainer>
+
+            <Layout:LayoutControl Grid.Row="1" HorizontalAlignment="Center" Orientation="Vertical"  MinWidth="600">
+                <Layout:LayoutItem>
+                    <TextBox 
+                        x:Name="tb" 
+                        TextAlignment="{Binding Path=TextAlignment, Mode=TwoWay}"
+                        FontSize="{Binding Path=FontSize, Mode=TwoWay}"
+                        FontFamily="{Binding Path=Font, Mode=TwoWay}">
+                    </TextBox>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem HorizontalContentAlignment="Center">
+                    <Button x:Name="bt" Content="Tap to show context menu"/>
+                </Layout:LayoutItem>
+            </Layout:LayoutControl>
+        </Grid>
+    </Grid>
+</Common:DemoModuleView>
+

@@ -1,0 +1,130 @@
+﻿<UserControl
+    x:Class="RibbonDemo.OpenFileBackstageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:RibbonDemo"
+    xmlns:Xaml="using:DevExpress.UI.Xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    >
+    <UserControl.DataContext>
+        <local:BackstageOpenTabViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <CollectionViewSource x:Name="recentDocs" IsSourceGrouped="True" ItemsPath="Documents" Source="{x:Bind ViewModel.RecentGroups}"/>
+    </UserControl.Resources>
+    <Border HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="DeviceFamilyStates">
+                <VisualState x:Name="IoT">
+                    <VisualState.StateTriggers>
+                        <Xaml:DeviceFamilyTrigger DeviceFamilyName="Windows.IoT" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="openFileButton.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+            <VisualStateGroup>
+                
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PART_FilesList.ItemTemplate">
+                            <Setter.Value>
+                                <DataTemplate x:DataType="local:RecentDocumentViewModel">
+                                    <Grid HorizontalAlignment="Stretch">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Canvas Grid.RowSpan="2" VerticalAlignment="Center" Width="24" Height="24" Margin="0 0 20 0">
+                                            <Path Fill="White" StrokeThickness="0" Data="m 0 0 l 0 26 20 0 0 -19 -5 -6 z"/>
+                                            <Path Fill="#FF959595" StrokeThickness="0" Data="m 0 0 l 0 1 0 26 21 0 0 -19 -6 -8 z M 1 1 l 13 0 0 8 6 0 0 17 -19 0 z M 15 1.25 l 5 6.75 -5 0 z"/>
+                                            <Path Fill="#FF7890BE" StrokeThickness="0" Data="M 4 11 l 13 0 0 1 -13 0 M 4 13 l 13 0 0 1 -13 0 M 4 15 l 13 0 0 1 -13 0 M 4 17 l 13 0 0 1 -13 0 M 4 19 l 13 0 0 1 -13 0 M 4 21 l 13 0 0 1 -13 0 z"/>
+                                        </Canvas>
+                                        <Grid Grid.Column="1">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="{x:Bind Title}" FontSize="14" Foreground="Black"/>
+                                            <TextBlock Text="{x:Bind Path}" FontSize="12" Foreground="Gray" Grid.Row="1"/>
+                                        </Grid>
+                                        <TextBlock Margin="50 0 0 0" x:Name="PART_Date" Text="{x:Bind DateCreate}" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14" Foreground="Gray" Grid.Column="2" Grid.RowSpan="2"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" FlowDirection="LeftToRight" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Bottom" Text="Open" FontSize="30" FontWeight="ExtraLight" Margin="20,0,40,0" Height="45"/>
+                <Button BorderThickness="1" Foreground="Black"
+                        BorderBrush="LightGray" 
+                        Command="{x:Bind ViewModel.OpenFileCommand}" Background="Transparent" Padding="8,4" Name="openFileButton">
+                    <Button.Content>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Path Fill="{ThemeResource BrowseButtonIconForeground}" StrokeThickness="0" Width="24" Height="24" Data="M 1 15 l 0 -12 9 0 1 2.5 9 0 0.25 1.5 -17.25 0 M 1 20 l 3 -12 19 0 -2 12 z"/>
+                            <TextBlock Grid.Column="1" Text="Browse" VerticalAlignment="Center" Margin="8,0"/>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <ListView ItemsSource="{Binding Source={StaticResource recentDocs}}" HorizontalContentAlignment="Stretch" Grid.Row="1" Margin="20 0 0 0" SelectionMode="None" x:Name="PART_FilesList">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:RecentDocumentViewModel">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Canvas VerticalAlignment="Center" Width="24" Height="24" Margin="0 0 20 0">
+                                <Path Fill="White" StrokeThickness="0" Data="m 0 0 l 0 26 20 0 0 -19 -5 -6 z"/>
+                                <Path Fill="#FF959595" StrokeThickness="0" Data="m 0 0 l 0 1 0 26 21 0 0 -19 -6 -8 z M 1 1 l 13 0 0 8 6 0 0 17 -19 0 z M 15 1.25 l 5 6.75 -5 0 z"/>
+                                <Path Fill="#FF7890BE" StrokeThickness="0" Data="M 4 11 l 13 0 0 1 -13 0 M 4 13 l 13 0 0 1 -13 0 M 4 15 l 13 0 0 1 -13 0 M 4 17 l 13 0 0 1 -13 0 M 4 19 l 13 0 0 1 -13 0 M 4 21 l 13 0 0 1 -13 0 z"/>
+                            </Canvas>
+                            <Grid Grid.Column="1" HorizontalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{x:Bind Title}" FontSize="14" Foreground="Black"/>
+                                <TextBlock Text="{x:Bind Path}" FontSize="12" Foreground="Gray" Grid.Row="1"/>
+                                <TextBlock Text="{x:Bind DateCreate}" VerticalAlignment="Center" FontSize="14" Foreground="Gray" Grid.Row="2"/>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.GroupStyle>
+                    <GroupStyle HidesIfEmpty="True">
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate x:DataType="local:RecentDocumentsGroupViewModel">
+                                <TextBlock Text="{x:Bind Title}" HorizontalAlignment="Stretch" TextAlignment="Left"/>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+            </ListView>
+        </Grid>
+    </Border>
+</UserControl>

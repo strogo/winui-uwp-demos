@@ -1,0 +1,53 @@
+﻿<UserControl
+    x:Class="EditorsDemo.TextEditModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EditorsDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout" 
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="200">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,7,0,3"></Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
+    <StackPanel Margin="20,0">
+        <TextBlock Text="Simple TextEdit:"/>
+            <Editors:TextEdit />
+        
+        <TextBlock Text="Read-Only:"/>
+            <Editors:TextEdit Text="This editor is readonly" IsReadOnly="True"/>
+        <TextBlock Text="Disabled:"/>
+            <Editors:TextEdit Text="This editor is disabled" IsEnabled="False"/>
+        <TextBlock Text="Non Editable:"/>
+            <Editors:TextEdit Text="This editor is not editable" IsTextEditable="False"/>
+        <TextBlock Text="Null Text:"/>
+            <Editors:TextEdit NullText="Please, enter a value"/>
+
+        <TextBlock Text="Clear Button Visibility (Auto):"/>
+            <Editors:TextEdit Text="value">
+                <Editors:TextEdit.Buttons>
+                    <Editors:DeleteButtonInfo IsDefault="True" VisibleMode="Auto"/>
+                </Editors:TextEdit.Buttons>
+            </Editors:TextEdit>
+        <TextBlock Text="Clear Button Visibility (Focused):"/>
+            <Editors:TextEdit Text="value">
+                <Editors:TextEdit.Buttons>
+                    <Editors:DeleteButtonInfo IsDefault="True" VisibleMode="OnFocus"/>
+                </Editors:TextEdit.Buttons>
+            </Editors:TextEdit>
+        <TextBlock Text="Custom Button:"/>
+            <Editors:TextEdit Text="value">
+                <Editors:TextEdit.Buttons>
+                    <Editors:DeleteButtonInfo IsDefault="True" Content="Clear" GlyphKind="None" ButtonKind="Simple"/>
+                </Editors:TextEdit.Buttons>
+            </Editors:TextEdit>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

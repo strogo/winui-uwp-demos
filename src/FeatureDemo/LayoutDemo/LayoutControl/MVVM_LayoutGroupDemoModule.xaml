@@ -1,0 +1,61 @@
+﻿<Common:DemoModuleView
+    x:Class="LayoutDemo.LayoutControl.MVVM_LayoutGroupDemoModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LayoutDemo.LayoutControl"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    >
+    <Common:DemoModuleView.Resources>
+        <local:Contact x:Key="contact" />
+    </Common:DemoModuleView.Resources>
+    <Layout:LayoutControl DataContext="{StaticResource contact}"
+                            Header="{Binding FullName}" HeaderStringFormat="{}Contact: {0}"
+                            Orientation="Vertical" MaxWidth="700"
+                            VerticalAlignment="Center" HorizontalAlignment="Stretch">
+        <Layout:LayoutGroup IsAdaptive="True" >
+            <Layout:LayoutGroup Orientation="Vertical" VerticalAlignment="Bottom" MinWidth="150">
+                <Layout:LayoutItem Header="First Name:" HeaderPosition="Top" Required="True">
+                    <Editors:TextEdit EditValue="{Binding FirstName, Mode=TwoWay}" />
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Last Name:" HeaderPosition="Top" Required="True">
+                    <Editors:TextEdit EditValue="{Binding LastName, Mode=TwoWay}" />
+                </Layout:LayoutItem>
+            </Layout:LayoutGroup>
+            <Layout:LayoutItem>
+                <Image Source="{Binding Photo}" Width="150" Stretch="UniformToFill" VerticalAlignment="Center"/>
+            </Layout:LayoutItem>
+        </Layout:LayoutGroup>
+        <Layout:LayoutGroup Header="Phones"
+            ItemsSource="{Binding PhoneNumbers}" Orientation="Vertical">
+            <Layout:LayoutGroup.ItemTemplate>
+                <DataTemplate>
+                    <Layout:LayoutItem Header="{Binding Type}" HeaderStringFormat="{}{0}:" Required="{Binding IsRequired}">
+                        <Editors:TextEdit EditValue="{Binding Value}">
+                            <Editors:TextEdit.TextInputSettings>
+                                <Editors:TextInputMaskSettings Mask="(999) 000-0000" MaskType="Simple" IgnoreBlank="True" SaveLiteral="True"/>
+                            </Editors:TextEdit.TextInputSettings>
+                        </Editors:TextEdit>
+                    </Layout:LayoutItem>
+                </DataTemplate>
+            </Layout:LayoutGroup.ItemTemplate>
+        </Layout:LayoutGroup>
+        <Layout:LayoutGroup Header="Emails"
+            ItemsSource="{Binding Emails}" Orientation="Vertical">
+            <Layout:LayoutGroup.ItemTemplate>
+                <DataTemplate>
+                    <Layout:LayoutItem Header="{Binding Type}" HeaderStringFormat="{}{0}:" Required="{Binding IsRequired}">
+                        <Editors:TextEdit EditValue="{Binding Value}">
+                            <Editors:TextEdit.TextInputSettings>
+                                <Editors:TextInputMaskSettings 
+                                    Mask="{}[a-z0-9._%-]+@[a-z0-9.-]+\.[a-z]{2,4}"
+                                    MaskType="RegEx" IgnoreBlank="True" SaveLiteral="True"/>
+                            </Editors:TextEdit.TextInputSettings>
+                        </Editors:TextEdit>
+                    </Layout:LayoutItem>
+                </DataTemplate>
+            </Layout:LayoutGroup.ItemTemplate>
+        </Layout:LayoutGroup>
+    </Layout:LayoutControl>
+</Common:DemoModuleView>

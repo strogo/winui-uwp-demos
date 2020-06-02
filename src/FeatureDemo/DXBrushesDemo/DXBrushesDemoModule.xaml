@@ -1,0 +1,156 @@
+﻿<Common:DemoModuleView
+    x:Class="DXBrushesDemo.DXBrushesDemoModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DXBrushesDemo"
+    xmlns:Core="using:DevExpress.Core"
+    xmlns:ViewModel="using:FeatureDemo.ViewModel"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <Common:DemoModuleView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="GridViewForegroundBrush" Core:ColorKey.Link="DateNavigatorColors.DecorationTodayBackground.Light" />
+                    <SolidColorBrush x:Key="ForegroundBrush" Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.Foreground.Light" />
+                    <SolidColorBrush x:Key="ForegroundHoveredBrush" Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.ForegroundHovered.Light" />
+                    <SolidColorBrush x:Key="ForegroundSelectedBrush" Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.ForegroundSelected.Light" />
+                    <SolidColorBrush x:Key="BackgroundBrush" Core:ColorKey.Link="HamburgerMenuColors.Background.Light" />                    
+                    <SolidColorBrush x:Key="BackgroundHoveredBrush" Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.BackgroundHovered.Light"/>
+                    <SolidColorBrush x:Key="BackgroundPressedBrush"  Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.BackgroundPressed.Light"/>
+                    <SolidColorBrush x:Key="BackgroundSelectedBrush"  Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.BackgroundSelected.Light"/>
+                    <SolidColorBrush x:Key="BackgroundSelectedPressedBrush"  Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.BackgroundSelectedPressed.Light"/>
+                    <SolidColorBrush x:Key="BackgroundSelectedHoveredBrush"  Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.BackgroundSelectedHovered.Light"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Default">
+                    <SolidColorBrush x:Key="GridViewForegroundBrush" Core:ColorKey.Link="HamburgerMenuHyperlinkButtonColors.Foreground.Default" />
+                    <SolidColorBrush x:Key="ForegroundBrush" Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.Foreground.Default" />
+                    <SolidColorBrush x:Key="ForegroundHoveredBrush" Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.ForegroundHovered.Default" />
+                    <SolidColorBrush x:Key="ForegroundSelectedBrush" Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.ForegroundSelected.Default" />
+                    <SolidColorBrush x:Key="BackgroundBrush" Core:ColorKey.Link="HamburgerMenuColors.Background.Default" />
+                    <SolidColorBrush x:Key="BackgroundHoveredBrush" Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.BackgroundHovered.Default"/>
+                    <SolidColorBrush x:Key="BackgroundPressedBrush"  Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.BackgroundPressed.Default"/>
+                    <SolidColorBrush x:Key="BackgroundSelectedBrush"  Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.BackgroundSelected.Default"/>
+                    <SolidColorBrush x:Key="BackgroundSelectedPressedBrush"  Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.BackgroundSelectedPressed.Default"/>
+                    <SolidColorBrush x:Key="BackgroundSelectedHoveredBrush"  Core:ColorKey.Link="HamburgerMenuNavigationButtonColors.BackgroundSelectedHovered.Default"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+            <Core:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <Style x:Key="CustomListViewItemStyle" TargetType="ListViewItem">
+                <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+                <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+                <Setter Property="Background" Value="{ThemeResource BackgroundBrush}"/>
+                <Setter Property="Foreground" Value="{ThemeResource ForegroundBrush}"/>
+                <Setter Property="TabNavigation" Value="Local"/>
+                <Setter Property="IsHoldingEnabled" Value="True"/>
+                <Setter Property="Padding" Value="12,0,12,0"/>
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListViewItem">
+                            <ListViewItemPresenter ContentMargin="{TemplateBinding Padding}"
+                                                   CheckMode="Inline"
+                                                   ContentTransitions="{TemplateBinding ContentTransitions}"
+                                                   SelectedForeground="{ThemeResource ForegroundSelectedBrush}"
+                                                   PointerOverForeground="{ThemeResource ForegroundHoveredBrush}"                                                   
+                                                   PressedBackground="{ThemeResource BackgroundPressedBrush}"
+                                                   PointerOverBackground="{ThemeResource BackgroundHoveredBrush}"
+                                                   SelectedPressedBackground="{ThemeResource BackgroundSelectedPressedBrush}"
+                                                   SelectedPointerOverBackground="{ThemeResource BackgroundSelectedHoveredBrush}"
+                                                   SelectedBackground="{ThemeResource BackgroundSelectedBrush}"
+                                                   FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+                                                   FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                                                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"                                                   
+                                                   ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"                                                   
+                                                   SelectionCheckMarkVisualEnabled="True"
+                                                   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Common:DemoModuleView.Resources>
+
+    <Grid>
+        <ListView ItemContainerStyle="{StaticResource CustomListViewItemStyle}" VerticalAlignment="Center" SelectedIndex="1">
+            <x:String>Cut</x:String>
+            <x:String>Copy</x:String>
+            <x:String>Paste</x:String>
+            <x:String>Delete</x:String>
+        </ListView>
+    </Grid>
+    <Common:DemoModuleView.Options>
+        <Common:OptionsPanel>
+            <Common:OptionGroupHeader Text="Accent Color:" />
+            <ListView ItemsSource="{x:Bind Path=ColorList}" SelectedItem="{x:Bind SelectedColor, Mode=TwoWay}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+                        <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+                        <Setter Property="TabNavigation" Value="Local"/>
+                        <Setter Property="IsHoldingEnabled" Value="True"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="MinWidth" Value="{ThemeResource GridViewItemMinWidth}"/>
+                        <Setter Property="MinHeight" Value="{ThemeResource GridViewItemMinHeight}"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListViewItem">
+                                    <ListViewItemPresenter
+                        ContentTransitions="{TemplateBinding ContentTransitions}"
+                        SelectionCheckMarkVisualEnabled="True"
+                        CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                        CheckBoxBrush="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
+                        DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+                        DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                        FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+                        FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                        PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                        PointerOverBackground="{ThemeResource SystemControlHighlightListLowBrush}"
+                        PointerOverForeground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                        SelectedBackground="{ThemeResource GridViewForegroundBrush}"
+                        SelectedForeground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                        SelectedPointerOverBackground="{ThemeResource GridViewForegroundBrush}"
+                        PressedBackground="{ThemeResource SystemControlHighlightListMediumBrush}"
+                        SelectedPressedBackground="{ThemeResource SystemControlHighlightListAccentHighBrush}"
+                        DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                        DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                        ReorderHintOffset="{ThemeResource GridViewItemReorderHintThemeOffset}"
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                        ContentMargin="{TemplateBinding Padding}"
+                        CheckMode="Overlay"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="ViewModel:AccentColorInfo">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Width="24" Height="24">
+                                <Border.Background>
+                                    <SolidColorBrush Color="{x:Bind AccentColor}" />
+                                </Border.Background>
+                            </Border>
+                            <TextBlock Text="{x:Bind Name}" Grid.Column="1" Margin="10,0,0,0"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Common:OptionsPanel>
+    </Common:DemoModuleView.Options>
+</Common:DemoModuleView>

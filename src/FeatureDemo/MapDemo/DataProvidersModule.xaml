@@ -1,0 +1,39 @@
+﻿<Common:DemoModuleView
+    x:Name="page"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:MapDemo"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Map="using:DevExpress.UI.Xaml.Map"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:demobase="using:FeatureDemo.Base"
+    x:Class="MapDemo.DataProvidersModule"
+    BorderBrush="Transparent"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <local:DemoValuesProvider x:Key="DemoValuesProvider"/>
+            <Map:OpenStreetMapDataProvider x:Key="OpenStreetMapDataProvider" UserAgent="DevExpress Map Demo"/>
+            <Map:BingMapDataProvider x:Key="BingMapDataProvider" UserAgent="DevExpress Map Demo" Kind="Hybrid" BingKey="{Binding DevexpressBingKey, Source={StaticResource DemoValuesProvider}}"/>
+            <SolidColorBrush x:Key="BingBackground" Color="#010413"/>
+            <SolidColorBrush x:Key="OpenStreetBackground" Color="#B5D0D0"/>
+        </ResourceDictionary>
+
+    </UserControl.Resources>
+    <Map:MapControl x:Name="map" ZoomLevel="2" Background="{Binding ElementName=page, Path=MapBackground}">
+        <Map:ImageTilesLayer DataProvider="{Binding ElementName=page, Path=DataProvider}"/>
+    </Map:MapControl>
+
+    <Common:DemoModuleView.Options>
+        <Common:OptionsPanel>
+            <Common:OptionGroupHeader Text="Data Provider" />
+            <RadioButton Content="Bing Maps" GroupName="dataProvider" IsChecked="{Binding IsBingMapsChecked, Mode=TwoWay}" />
+            <RadioButton Content="OpenStreetMap" GroupName="dataProvider" IsChecked="{Binding IsOpenStreetMapsChecked, Mode=TwoWay}" />
+        </Common:OptionsPanel>
+    </Common:DemoModuleView.Options>
+</Common:DemoModuleView>

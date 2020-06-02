@@ -1,0 +1,79 @@
+﻿<Common:DemoModuleView
+    x:Class="SpashScreenDemo.SplashScreenModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Local="using:SplashScreenDemo"
+    xmlns:Core="using:DevExpress.Core"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:dxmvvmui="using:DevExpress.Mvvm.UI"
+    xmlns:dxmvvmi="using:DevExpress.Mvvm.UI.Interactivity"
+    mc:Ignorable="d"
+    d:DesignHeight="700"
+    d:DesignWidth="700"
+    MaxMargin="20"
+    MinMargin="20">
+    <Common:DemoModuleView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="CustomSplashScreenBackground" Core:ColorKey.Link="ProgressRingSplashScreenViewColors.Background.Light"/>
+                    <SolidColorBrush x:Key="CustomSplashScreenForeground" Core:ColorKey.Link="ProgressRingSplashScreenViewColors.Foreground.Light"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Default">
+                    <SolidColorBrush x:Key="CustomSplashScreenBackground" Core:ColorKey.Link="ProgressRingSplashScreenViewColors.Background.Default"/>
+                    <SolidColorBrush x:Key="CustomSplashScreenForeground" Core:ColorKey.Link="ProgressRingSplashScreenViewColors.Foreground.Default"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+            <Common:StringFormatConverter x:Key="stringFormatConverter" />
+        </ResourceDictionary>
+    </Common:DemoModuleView.Resources>
+    <dxmvvmi:Interaction.Behaviors>
+        <dxmvvmui:SplashScreenService />
+        <dxmvvmui:SplashScreenService x:Name="ProgressSplashScreen"/>
+        <dxmvvmui:SplashScreenService Name="CustomSplashScreen" >
+            <dxmvvmui:SplashScreenService.ViewTemplate>
+                <DataTemplate x:DataType="dxmvvmui:SplashScreenViewModel">
+                    <Border Background="{ThemeResource CustomSplashScreenBackground}" >
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ProgressRing Width="180" Height="180" IsActive="{x:Bind IsActive, Mode=OneWay}" Foreground="{ThemeResource CustomSplashScreenForeground}"/>
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <TextBlock Text="{x:Bind State, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18" Foreground="{ThemeResource CustomSplashScreenForeground}"/>
+                                <TextBlock Text="{x:Bind Progress, Mode=OneWay, Converter={StaticResource stringFormatConverter}, ConverterParameter=\{0\}% }"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" Foreground="{ThemeResource CustomSplashScreenForeground}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </dxmvvmui:SplashScreenService.ViewTemplate>
+        </dxmvvmui:SplashScreenService>
+        <dxmvvmui:SplashScreenService Name="CancelableSplashScreen" CancelCommand="{Binding CancelSplashScreenCommand}">
+            <dxmvvmui:SplashScreenService.ViewTemplate>
+                <DataTemplate x:DataType="dxmvvmui:SplashScreenViewModel">
+                    <Border Background="{ThemeResource CustomSplashScreenBackground}" >
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ProgressRing Width="60" Height="60" IsActive="{x:Bind IsActive, Mode=OneWay}" Foreground="{ThemeResource CustomSplashScreenForeground}"/>
+                            <HyperlinkButton Content="Click this link or the Back button to cancel the operation." Command="{Binding ParentViewModel.CancelSplashScreenCommand}" Margin="0,20,0,0" />
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </dxmvvmui:SplashScreenService.ViewTemplate>
+        </dxmvvmui:SplashScreenService>
+    </dxmvvmi:Interaction.Behaviors>
+    <Common:DemoModuleView.DataContext>
+        <Local:SplashScreenViewModel />
+    </Common:DemoModuleView.DataContext>
+    
+    <HyperlinkButton Content="Click to show Splash Screen" Command="{Binding ShowSplashScreenCommand}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+
+    <Common:DemoModuleView.Options>
+        <Common:OptionsPanel>
+            <Common:OptionGroupHeader Text="Scenarious" />
+            <RadioButton GroupName="SplashScreenScenario" Content="Progress Ring" IsChecked="{Binding IsProgressRingScenarioChecked, Mode=TwoWay}" />
+            <RadioButton GroupName="SplashScreenScenario" Content="Progress Bar" IsChecked="{Binding IsProgressBarScenarioChecked, Mode=TwoWay}"/>
+            <RadioButton GroupName="SplashScreenScenario" Content="Custom Template" IsChecked="{Binding IsCustomTemplateScenarioChecked, Mode=TwoWay}" />
+            <RadioButton GroupName="SplashScreenScenario" Content="Cancelable Template" IsChecked="{Binding IsCancelableSplashScreenScenarioChecked, Mode=TwoWay}" />
+        </Common:OptionsPanel>
+    </Common:DemoModuleView.Options>
+</Common:DemoModuleView>
+

@@ -1,0 +1,130 @@
+﻿<UserControl
+    x:Class="EditorsDemo.RegularMaskModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EditorsDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout" 
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors" mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,7,0,3"></Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Hidden">
+        <StackPanel Margin="20,0">
+            <TextBlock Text="Phone:"/>
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="(\d?\d?\d?)\d\d\d-\d\d-\d\d" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+
+            <TextBlock Text="Phone alternative:"/>
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="(\d{0,3})\d{3}-\d{2}-\d{2}" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+
+            <TextBlock Text="Date:"/>
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="\d?\d?/\d\d/\d\d" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+
+            <TextBlock Text="Long time:"/>
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="\d?\d:\d\d:\d\d >[PA]M" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+
+            <TextBlock Text="Short time:"/>
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="\d?\d:\d\d" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+
+            <TextBlock Text="Extension:"/>
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="\d?\d?\d?\d?\d?" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+
+            <TextBlock Text="Social security:"/>
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="\d\d\d-\d\d-\d\d\d\d" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+
+            <TextBlock Text="Long Zip code:"/>
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="\d\d\d\d\d-\d?\d?\d?\d?" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+
+            <TextBlock Text="Short Zip code:"/>
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="\d\d\d\d\d" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+            
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

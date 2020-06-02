@@ -1,0 +1,23 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="using:DevExpress.Core"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout">
+
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Default">
+            <SolidColorBrush x:Key="RatingItemCustomHoverBrush" Color="#FF0FD1A8"/>
+            <SolidColorBrush x:Key="RatingItemCustomSelectedBrush" Color="#FF0FD1A8"/>
+            <SolidColorBrush x:Key="RatingItemCustomBackgroundBrush" Color="#FF979797"/>
+            <SolidColorBrush x:Key="CustomValueTextBrush" Color="#FF505050"/>
+            <SolidColorBrush x:Key="CustomValueLabelBrush" Color="#FF505050"/>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush x:Key="RatingItemCustomHoverBrush" Color="#FF0FD1A8"/>
+            <SolidColorBrush x:Key="RatingItemCustomSelectedBrush" Color="#FF0FD1A8"/>
+            <SolidColorBrush x:Key="RatingItemCustomBackgroundBrush" Color="#FF979797"/>
+            <SolidColorBrush x:Key="CustomValueTextBrush" Color="#FFFFFFFF"/>
+            <SolidColorBrush x:Key="CustomValueLabelBrush" Color="#FFFFFFFF"/>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

@@ -1,0 +1,76 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MapDemo"
+    xmlns:Map="using:DevExpress.UI.Xaml.Map">
+    <local:DemoValuesProvider x:Key="DemoValuesProvider"/>
+    <Style TargetType="local:MapNavigationWindow">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:MapNavigationWindow">
+                    <Grid x:Name="elementsContainer">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="VisibleStates">
+                                <VisualState x:Name="Visible">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="elementsContainer" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="elementsContainer" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Invisible">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="elementsContainer" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <EasingDoubleKeyFrame KeyTime="00:00:00.5" Value="0"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="elementsContainer" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00.5">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Collapsed</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Border Background="#FF2D2D2D"/>
+                        <Border Background="White" Margin="3"/>
+                        <Grid Width="512" Height="512" Margin="4,4,0,0">
+                            <Map:MapControl x:Name="PART_Map" EnableScrolling="False" EnableZooming="False">
+                                <Map:MapControl.NavigationPanelOptions>
+                                    <Map:NavigationPanelOptions
+                                                ShowZoomTrackbar="False"
+                                                ShowScrollButtons="False"
+                                                ShowCoordinates="False"
+                                                ShowKilometersScale="False"
+                                                ShowMilesScale="False"/>
+                                </Map:MapControl.NavigationPanelOptions>
+                                <Map:ImageTilesLayer x:Name="imageLayer">
+                                    <Map:ImageTilesLayer.DataProvider>
+                                        <Map:OpenStreetMapDataProvider/>
+                                    </Map:ImageTilesLayer.DataProvider>
+                                </Map:ImageTilesLayer>
+                                <Map:VectorItemsLayer ItemsSource="{Binding CitySmallIcons}"/>
+                            </Map:MapControl>
+                            <Canvas x:Name="PART_Canvas">
+                                <Grid x:Name="PART_LocationRect">
+                                    <Border BorderBrush="#FFF88E1D" BorderThickness="6" Opacity="0.25" Background="#FFF88E1D"/>
+                                    <Border BorderBrush="#FFF88E1D" BorderThickness="2" Margin="6" Opacity="0.5" Background="#FFF88E1D"/>
+                                </Grid>
+                            </Canvas>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

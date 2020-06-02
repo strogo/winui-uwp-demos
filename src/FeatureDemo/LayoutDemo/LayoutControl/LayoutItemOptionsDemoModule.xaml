@@ -1,0 +1,84 @@
+﻿<Common:DemoModuleView
+    x:Class="LayoutDemo.LayoutControl.LayoutItemOptionsDemoModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:local="using:LayoutDemo.LayoutControl"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    >
+
+    <Layout:LayoutControl Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Stretch" MaxWidth="700" Margin="0,40,0,0">
+        <Layout:LayoutGroup Header="Header alignment" IsAdaptive="True" >
+            <Layout:LayoutGroup  Orientation="Vertical" ItemHeadersAlignment="Local">
+                <Layout:LayoutItem Header="Header:">
+                    <Editors:TextEdit />
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Long Header:">
+                    <Editors:TextEdit />
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Disabled header alignment:" HeaderAlignment="None">
+                    <Editors:TextEdit />
+                </Layout:LayoutItem>
+            </Layout:LayoutGroup>
+            <Layout:LayoutGroup  Orientation="Vertical" ItemHeadersAlignment="None">
+                <Layout:LayoutItem Header="1:">
+                    <Editors:TextEdit />
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="123:">
+                    <Editors:TextEdit />
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="12345:" HeaderAlignment="None">
+                    <Editors:TextEdit />
+                </Layout:LayoutItem>
+            </Layout:LayoutGroup>
+        </Layout:LayoutGroup>
+
+        <Layout:LayoutGroup ItemHeadersAlignment="Local" IsAdaptive="True" >
+            <Layout:LayoutGroup Orientation="Vertical"  Header="Header position: Default" >
+                <Layout:LayoutItem Header="Item:">
+                    <Editors:TextEdit />
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Item:">
+                    <Editors:TextEdit />
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Item:">
+                    <Editors:TextEdit />
+                </Layout:LayoutItem>
+            </Layout:LayoutGroup>
+            <Layout:LayoutGroup Orientation="Vertical"  Header="Header position: Top" >
+                <Layout:LayoutItem Header="Item:" HeaderPosition="Top">
+                    <Editors:TextEdit />
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Item:" HeaderPosition="Top">
+                    <Editors:TextEdit />
+                </Layout:LayoutItem>
+            </Layout:LayoutGroup>            
+        </Layout:LayoutGroup>
+
+        <Layout:LayoutGroup Header="Header highlighting" ItemHeadersAlignment="Local"
+                    Orientation="Vertical">
+            <Layout:LayoutItem Header="Disabled Item:">
+                <Editors:TextEdit Text="IsEnabled=false" IsEnabled="False"/>
+            </Layout:LayoutItem>
+
+            <Layout:LayoutItem Header="Required item:" Required="True">
+                <Editors:TextEdit />
+            </Layout:LayoutItem>
+            <Layout:LayoutItem Header="Disabled header highlighting:" AllowHeaderHighlighting="False">
+                <Editors:TextEdit />
+            </Layout:LayoutItem>
+
+        </Layout:LayoutGroup>
+
+        <Layout:LayoutGroup Header="Header formatting" ItemHeadersAlignment="Local">
+            <Layout:LayoutItem Header="{Binding Path=EditValue, ElementName=edit}" HeaderStringFormat="{}{0:dddd}:">
+                <Editors:DateEdit x:Name="edit">
+                    <Editors:DateEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings MaskType="DateTimeAdvancingCaret" Mask="dd MMMM, yyyy" />
+                    </Editors:DateEdit.TextInputSettings>
+                </Editors:DateEdit>
+            </Layout:LayoutItem>
+        </Layout:LayoutGroup>
+    </Layout:LayoutControl>
+</Common:DemoModuleView>

@@ -1,0 +1,141 @@
+﻿<Common:DemoModuleView
+    x:Class="FeatureDemo.DXItemsControlModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:local="using:FeatureDemo"
+    xmlns:Core="using:DevExpress.Core"
+    xmlns:Xaml="using:DevExpress.UI.Xaml"
+    xmlns:Controls="using:DevExpress.UI.Xaml.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Common:DemoModuleView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="SelectionBorderBrush" Color="#40000000"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Default">
+                    <SolidColorBrush x:Key="SelectionBorderBrush" Color="#40FFFFFF"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+            <local:SelectionModeVisibilityConverter x:Key="SelectionModeConverter"/>
+            <local:SelectionModeToBooleanConverter x:Key="SelectionModeToBooleanConverter"/>
+            <local:SelectionModeToBooleanConverter x:Key="SelectionModeToBooleanConverterInvert" Invert="True"/>
+            <DataTemplate x:Key="GroupHeaderTemplate">
+                <Border Padding="0, 6, 0, 6">
+                    <TextBlock Text="{Binding Key}" FontSize="18" FontWeight="Bold"/>
+                </Border>
+            </DataTemplate>
+            <DataTemplate x:Key="ItemTemplate">
+                <TextBlock Text="{Binding}" FontSize="14"/>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Common:DemoModuleView.Resources>
+    <Grid>
+        <Grid VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="DXListView Control" FontSize="18" HorizontalAlignment="Center" Margin="0,20"/>
+                <Xaml:DXListView MaxHeight="400" MinHeight="32" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="40,20"
+                                 BorderThickness="1" 
+                                 BorderBrush="{ThemeResource SelectionBorderBrush}" 
+                                 Grid.Row="1"
+                                 ItemsSource="{Binding ItemsSource}" 
+                                 GroupItemsPath=""
+                                 x:Name="listView"
+                                 AllowNullSelection="{Binding AllowNullSelection}"
+                                 IsGrouping="{Binding IsGrouping}"
+                                 SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                                 SelectedItems="{Binding SelectedItems}"
+                                 ShowCheckBoxes="{Binding ShowCheckBoxes}"
+                                 ShowSelectAllItem="{Binding ShowSelectAllItem}"
+                                 ShowNullValueItem="{Binding ShowClearSelection}"
+                                 SelectionMode="{Binding SelectionMode}"
+                                 ItemTemplate="{StaticResource ItemTemplate}">
+                    <Xaml:DXSelector.GroupStyle>
+                        <GroupStyle HeaderTemplate="{StaticResource GroupHeaderTemplate}"/>
+                    </Xaml:DXSelector.GroupStyle>
+                </Xaml:DXListView>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="DXComboBox Control" FontSize="18" HorizontalAlignment="Center" Margin="0,20"/>
+                <Controls:DXComboBox VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="40,20" 
+                                     Grid.Row="1"
+                                     x:Name="comboBox"
+                                     AllowNullSelection="{Binding AllowNullSelection}"
+                                     ClosePopupOnClickMode="Cancel"
+                                     IsGrouping="{Binding IsGrouping}"
+                                     ItemsSource="{Binding ItemsSource}" 
+                                     SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                                     SelectedItems="{Binding SelectedItems}"
+                                     SelectionMode="{Binding SelectionMode}"
+                                     ShowCheckBoxes="{Binding ShowCheckBoxes}"
+                                     ShowSelectAllItem="{Binding ShowSelectAllItem}"
+                                     ShowNullValueItem="{Binding ShowClearSelection}"
+                                     ShowPopupFooterButtons="{Binding ShowFooterItems}"
+                                     ItemTemplate="{StaticResource ItemTemplate}">
+                    <Xaml:DXSelector.GroupStyle>
+                        <GroupStyle HeaderTemplate="{StaticResource GroupHeaderTemplate}"/>
+                    </Xaml:DXSelector.GroupStyle>
+                    <Controls:DXComboBox.FlyoutSettings>
+                        <Xaml:FlyoutSettings Placement="Bottom"/>
+                    </Controls:DXComboBox.FlyoutSettings>
+                </Controls:DXComboBox>
+            </Grid>
+        </Grid>
+    </Grid>
+
+    <Common:DemoModuleView.Options>
+        <Common:OptionsPanel>
+            <Common:OptionItem Header="Source type" HeaderOrientation="Vertical">
+                <StackPanel Orientation="Vertical">
+                    <RadioButton GroupName="SourceType" Content="Simple" IsChecked="True" Checked="SimpleChecked"/>
+                    <RadioButton GroupName="SourceType" Content="Grouped" Checked="GroupedChecked"/>
+                </StackPanel>
+            </Common:OptionItem>
+            <Common:OptionItem Header="Options" HeaderOrientation="Vertical">
+                <StackPanel Orientation="Vertical">
+                    <local:SelectionModeComboBox ItemsSource="{Binding SelectionModes}" HorizontalAlignment="Stretch" SelectedItem="{Binding SelectionMode, Mode=TwoWay}"/>
+                    <CheckBox Content="Allow Null Selection"
+                              IsChecked="{Binding AllowNullSelection, Mode=TwoWay}"
+                              IsEnabled="{Binding SelectionMode, Converter={StaticResource SelectionModeToBooleanConverterInvert}}"/>
+                    <CheckBox Content="Show CheckBoxes" 
+                              IsChecked="{Binding ShowCheckBoxes, Mode=TwoWay}" 
+                              IsEnabled="{Binding SelectionMode, Converter={StaticResource SelectionModeToBooleanConverter}}"/>
+                    <CheckBox Content="Show Select All Item" IsChecked="{Binding ShowSelectAllItem, Mode=TwoWay}" IsEnabled="{Binding SelectionMode, Converter={StaticResource SelectionModeToBooleanConverter}}"/>
+                    <CheckBox Content="Show Clear Item" IsChecked="{Binding ShowClearSelection, Mode=TwoWay}" IsEnabled="{Binding AllowClearSelection}"/>
+                    <CheckBox Content="Show Footer Items" IsChecked="{Binding ShowFooterItems, Mode=TwoWay}" IsEnabled="{Binding SelectionMode, Converter={StaticResource SelectionModeToBooleanConverter}}"/>
+                </StackPanel>
+            </Common:OptionItem>
+            <Common:OptionItem Header="Selection" HeaderOrientation="Vertical">
+                <Grid BorderThickness="1" 
+                      BorderBrush="{ThemeResource SelectionBorderBrush}" 
+                      MinHeight="42" >
+                    <ContentControl ContentTemplate="{StaticResource ItemTemplate}" 
+                                    Content="{Binding SelectedItem}"
+                                    VerticalAlignment="Center"
+                                    Padding="8"
+                                    Visibility="{Binding SelectionMode, Converter={StaticResource SelectionModeConverter}, ConverterParameter=False}"/>
+                    <ListView ItemsSource="{Binding SelectedItems}" 
+                              Height="140"
+                              ItemTemplate="{StaticResource ItemTemplate}"
+                              Visibility="{Binding SelectionMode, Converter={StaticResource SelectionModeConverter}, ConverterParameter=True}">
+                    </ListView>
+                </Grid>
+            </Common:OptionItem>
+        </Common:OptionsPanel>
+    </Common:DemoModuleView.Options>
+</Common:DemoModuleView>

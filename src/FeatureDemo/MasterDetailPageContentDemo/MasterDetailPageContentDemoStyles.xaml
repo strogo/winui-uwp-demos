@@ -1,0 +1,74 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Core="using:DevExpress.Core">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush x:Key="SelectedPointerOverBackground" Core:ColorKey.Link="ToolbarToggleButtonColors.ContentBackgroundCheckedHovered.Light" />
+            <SolidColorBrush x:Key="PointerOverBackground" Core:ColorKey.Link="ToolbarToggleButtonColors.BackgroundHovered.Light" />
+            <SolidColorBrush x:Key="SelectedBackground" Core:ColorKey.Link="ToolbarToggleButtonColors.ContentBackgroundChecked.Light" />
+            <SolidColorBrush x:Key="SelectedPressedBackground" Core:ColorKey.Link="ToolbarToggleButtonColors.BackgroundCheckedPressed.Light" />
+            <SolidColorBrush x:Key="PressedBackground" Core:ColorKey.Link="ToolbarToggleButtonColors.BackgroundPressed.Light" />
+            <SolidColorBrush x:Key="Background" Color="#FFF9F9F9" />
+            <SolidColorBrush x:Key="SubjectForeground" Color="#FF717171" />
+            <SolidColorBrush x:Key="BorderBrush" Color="#FFDEDEDE" />
+            <Thickness x:Key="BorderThickness">0,0,1,0</Thickness>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Default">
+            <SolidColorBrush x:Key="SelectedPointerOverBackground" Core:ColorKey.Link="ToolbarToggleButtonColors.ContentBackgroundCheckedHovered.Default" />
+            <SolidColorBrush x:Key="SelectedBackground" Core:ColorKey.Link="ToolbarToggleButtonColors.ContentBackgroundChecked.Default" />
+            <SolidColorBrush x:Key="PointerOverBackground" Core:ColorKey.Link="ToolbarToggleButtonColors.BackgroundHovered.Default" />
+            <SolidColorBrush x:Key="SelectedPressedBackground" Core:ColorKey.Link="ToolbarToggleButtonColors.BackgroundCheckedPressed.Default" />
+            <SolidColorBrush x:Key="PressedBackground" Core:ColorKey.Link="ToolbarToggleButtonColors.BackgroundPressed.Default" />
+            <SolidColorBrush x:Key="Background" Color="#FF1A1A1A" />
+            <SolidColorBrush x:Key="SubjectForeground" Color="#FFD2D2D2" />
+            <SolidColorBrush x:Key="BorderBrush" Color="Transparent" />
+            <Thickness x:Key="BorderThickness">0</Thickness>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+    <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
+        <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+        <Setter Property="BorderBrush" Value="{ThemeResource BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="{ThemeResource BorderThickness}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}" />
+        <Setter Property="TabNavigation" Value="Local"/>
+        <Setter Property="IsHoldingEnabled" Value="True"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="MinWidth" Value="{ThemeResource GridViewItemMinWidth}"/>
+        <Setter Property="MinHeight" Value="{ThemeResource GridViewItemMinHeight}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <ListViewItemPresenter
+                        ContentTransitions="{TemplateBinding ContentTransitions}"
+                        SelectionCheckMarkVisualEnabled="True"
+                        CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                        CheckBoxBrush="{ThemeResource SystemControlBackgroundChromeMediumBrush}"
+                        DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+                        DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                        FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+                        FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                        PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                        PointerOverBackground="{ThemeResource PointerOverBackground}"
+                        PointerOverForeground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                        SelectedBackground="{ThemeResource SelectedBackground}"
+                        SelectedForeground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                        SelectedPointerOverBackground="{ThemeResource SelectedPointerOverBackground}"
+                        PressedBackground="{ThemeResource PressedBackground}"
+                        SelectedPressedBackground="{ThemeResource SelectedPressedBackground}"
+                        DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                        DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                        ReorderHintOffset="{ThemeResource GridViewItemReorderHintThemeOffset}"
+                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                        ContentMargin="{TemplateBinding Padding}"
+                        CheckMode="Inline"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

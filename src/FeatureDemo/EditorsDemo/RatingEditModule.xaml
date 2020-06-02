@@ -1,0 +1,124 @@
+﻿<Common:DemoModuleView 
+    x:Class="EditorsDemo.RatingEditModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EditorsDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"    
+    xmlns:Ribbon="using:DevExpress.UI.Xaml.Ribbon"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    xmlns:Controls="using:DevExpress.UI.Xaml.Controls"                       
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Core="using:DevExpress.Core"
+    mc:Ignorable="d"
+    d:DesignHeight="600"
+    d:DesignWidth="800"
+    OptionsPaneWidth="300">
+    <Common:DemoModuleView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///EditorsDemo/RatingEditModuleColors.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Common:StringFormatConverter x:Key="TextValueConverter"/>
+            <x:String x:Key="TextValueConverterParam">{0:F1}</x:String>
+            <Core:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <local:PrecisionToEditMaskConverter x:Key="PrecisionToEditMaskConverter"/>
+        </ResourceDictionary>
+    </Common:DemoModuleView.Resources>
+    <Common:DemoModuleView.DataContext>
+        <local:RatingEditViewModel>
+            <local:RatingEditViewModel.RatingItemStyleSelector>
+                <local:RatingCustomStyleSelector>
+                    <local:RatingCustomStyleSelector.DefaultStyle>
+                        <Style TargetType="Editors:RatingItem"/>
+                    </local:RatingCustomStyleSelector.DefaultStyle>
+                    <local:RatingCustomStyleSelector.CustomStyle>
+                        <Style TargetType="Editors:RatingItem">
+                            <Setter Property="Padding" Value="1"/>
+                            <Setter Property="Geometry" Value="F0 M 0 6 A 6 6 180 1 1 12 6 A 6 6 180 1 1 0 6 z M 2 5 h 3 l 1 -3 1 3 h3 l-2.5 1.7 1 2.8 -2.5 -1.8 -2.5 1.8 1 -2.8 z"/>
+                            <Setter Property="HoverBackground" Value="{ThemeResource RatingItemCustomHoverBrush}"/>
+                            <Setter Property="SelectedBackground" Value="{ThemeResource RatingItemCustomSelectedBrush}"/>
+                            <Setter Property="Background" Value="{ThemeResource RatingItemCustomBackgroundBrush}"/>
+                        </Style>
+                    </local:RatingCustomStyleSelector.CustomStyle>
+                </local:RatingCustomStyleSelector>
+            </local:RatingEditViewModel.RatingItemStyleSelector>
+        </local:RatingEditViewModel>
+    </Common:DemoModuleView.DataContext>
+
+    <StackPanel Orientation="{Binding Orientation}" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Editors:RatingEdit x:Name="Editor" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10" 
+                                Value="{Binding Value, Mode=TwoWay}"
+                                ItemsCount="{Binding ItemsCount}"
+                                Maximum="{Binding ItemsCount}"
+                                ItemWidth="{Binding ItemWidth}"
+                                ItemHeight="{Binding ItemHeight}"
+                                Orientation="{Binding Orientation}"
+                                Precision="{Binding Precision}"
+                                ItemStyle="{Binding CalculatedRatingItemStyle}">
+        </Editors:RatingEdit>
+        <Border Width="75" Height="75" CornerRadius="37.5" Background="{ThemeResource RatingItemCustomSelectedBrush}" Visibility="{Binding CustomTextVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding Value, Converter={StaticResource TextValueConverter}, ConverterParameter={StaticResource TextValueConverterParam}}" 
+                           FontFamily="Segoe UI"
+                           HorizontalAlignment="Center"
+                           Foreground="{ThemeResource CustomValueTextBrush}"
+                           FontSize="26"
+                           FontWeight="Bold"/>
+                <TextBlock FontFamily="Segoe UI"
+                           Text="RATING"
+                           HorizontalAlignment="Center"
+                           Foreground="{ThemeResource CustomValueLabelBrush}"
+                           FontSize="12"
+                           Margin="0,-4,0,6"/>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+
+    <Common:DemoModuleView.Options>
+        <Common:OptionsPanel>
+            <Common:OptionGroupHeader Text="View"/>
+            <RadioButton GroupName="RatingEdit view" Content="Default" IsChecked="{Binding IsDefaultStyleChecked, Mode=TwoWay}"/>
+            <RadioButton GroupName="RatingEdit view" Content="Custom" IsChecked="{Binding IsCustomStyleChecked, Mode=TwoWay}"/>
+
+            <Common:OptionGroupHeader Text="Settings" />
+            <Common:OptionItem Header="Value:">
+                <Editors:SpinEdit EditValue="{Binding Value, Mode=TwoWay}" MinValue="0" MaxValue="{Binding ItemsCount}" HorizontalAlignment="Stretch"
+                                  Increment="{Binding Increment}">
+                    <Editors:SpinEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings Mask="{Binding SelectedItem, ElementName=PrecisionCombo, Converter={StaticResource PrecisionToEditMaskConverter}}"/>
+                    </Editors:SpinEdit.TextInputSettings>
+                </Editors:SpinEdit>
+            </Common:OptionItem>
+            <Common:OptionItem Header="Items:">
+                <Editors:SpinEdit EditValue="{Binding ItemsCount, Mode=TwoWay}" MinValue="1" MaxValue="10" HorizontalAlignment="Stretch">
+                    <Editors:SpinEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings Mask="d" MaskType="Numeric"/>
+                    </Editors:SpinEdit.TextInputSettings>
+                </Editors:SpinEdit>
+            </Common:OptionItem>
+            <Common:OptionItem Header="Item Width:">
+                <Editors:SpinEdit EditValue="{Binding ItemWidth, Mode=TwoWay}" MinValue="10" HorizontalAlignment="Stretch">
+                    <Editors:SpinEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings Mask="d" MaskType="Numeric"/>
+                    </Editors:SpinEdit.TextInputSettings>
+                </Editors:SpinEdit>
+            </Common:OptionItem>
+            <Common:OptionItem Header="Item Height:">
+                <Editors:SpinEdit EditValue="{Binding ItemHeight, Mode=TwoWay}" MinValue="10" HorizontalAlignment="Stretch">
+                    <Editors:SpinEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings Mask="d" MaskType="Numeric"/>
+                    </Editors:SpinEdit.TextInputSettings>
+                </Editors:SpinEdit>
+            </Common:OptionItem>
+            <Common:OptionItem Header="Orientation:">
+                <Common:OrientationComboBox SelectedItem="{Binding Orientation, Mode=TwoWay}"/>
+            </Common:OptionItem>
+            <Common:OptionItem Header="Precision:">
+                <Common:RatingPrecisionComboBox x:Name="PrecisionCombo"
+                                                SelectedItem="{Binding Precision, Mode=TwoWay}"/>
+            </Common:OptionItem>
+        </Common:OptionsPanel>
+    </Common:DemoModuleView.Options>
+</Common:DemoModuleView>

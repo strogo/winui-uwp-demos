@@ -1,0 +1,101 @@
+﻿<Common:DemoModuleView
+    x:Class="FeatureDemo.ControlsDemo.BarCodeSample"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FeatureDemo.ControlsDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Controls="using:DevExpress.UI.Xaml.Controls"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:demobase="using:FeatureDemo.Base"
+    BorderBrush="Transparent"
+    mc:Ignorable="d"
+    d:DesignHeight="600"
+    d:DesignWidth="1200">
+    <Common:DemoModuleView.Resources>
+        <ResourceDictionary>
+            <local:BarCodeSymbologyCoverter x:Key="barCodeSymbologyCoverter"/>
+            <local:BarCodeSymbologyWrapperConverter x:Key="barCodeSymbologyWrapperConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///ControlsDemo/BarCodeSymbologyDataTemplates.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Common:DemoModuleView.Resources>
+
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup>
+            <VisualState>
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowHeight="1000" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter Target="barCodeControlGrid.Margin" Value="50,150"/>
+                </VisualState.Setters>
+            </VisualState>
+            <VisualState>
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowHeight="500" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter Target="barCodeControlGrid.Margin" Value="50,100"/>
+                </VisualState.Setters>
+            </VisualState>
+            <VisualState>
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowHeight="0" />
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter Target="barCodeControlGrid.Margin" Value="5"/>
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+    <Grid x:Name="barCodeControlGrid" >
+        <Controls:BarCodeControl x:Name="barCodeControl"
+                                ShowText="{Binding ShowText}"   
+                                Text="{Binding Text}"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                VerticalTextAlignment="Center"
+                                HorizontalTextAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                HorizontalContentAlignment="Center"
+                                Module="{Binding BarCodeModule}"
+                                AutoModule="{Binding AutoModule}"
+                                Symbology="{x:Bind ViewModel.BarCodeSymbology, Converter={StaticResource barCodeSymbologyCoverter}, Mode=OneWay}">
+
+        </Controls:BarCodeControl>
+    </Grid>
+    <Common:DemoModuleView.Options>
+        <Common:OptionsPanel>
+            <CheckBox Content="Auto Module" IsChecked="{Binding AutoModule, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Common:OptionItem Header="Module:">
+                <Editors:TextEdit Text="{Binding BarCodeModule, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings Mask="[0-9]{1,3}" MaskType="RegEx"/>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+            </Common:OptionItem>
+
+            <CheckBox Content="Show Text" IsChecked="{Binding ShowText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Common:OptionItem Header="Text:">
+                <Editors:TextEdit Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings Mask=".{1,20}" MaskType="RegEx"/>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+            </Common:OptionItem>
+            <Common:OptionItem Header="Symbology" HeaderOrientation="Vertical">
+                <ComboBox IsTabStop="False" ItemsSource="{Binding BarCodeTypes, Mode=OneTime}" SelectedItem="{Binding BarCodeSymbology, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
+            </Common:OptionItem>
+            
+            <ContentControl Content="{Binding Tag, Converter={StaticResource barCodeSymbologyWrapperConverter}, RelativeSource={RelativeSource Self}}" 
+                                                ContentTemplateSelector="{StaticResource barCodeTypeTemplateSelector}"
+                                                Tag="{Binding BarCodeSymbology, Converter={StaticResource barCodeSymbologyCoverter}}"
+                                                HorizontalContentAlignment="Stretch"/>
+        </Common:OptionsPanel>
+    </Common:DemoModuleView.Options>
+</Common:DemoModuleView>

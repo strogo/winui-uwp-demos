@@ -1,0 +1,109 @@
+﻿<UserControl
+    Name="page"
+    x:Class="MapDemo.PhotoGallery"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MapDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Map="using:DevExpress.UI.Xaml.Map"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:demobase="using:FeatureDemo.Base"
+    BorderBrush="Transparent"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///MapDemo/Controls/CityInformationControl.xaml"/>
+                <ResourceDictionary Source="ms-appx:///MapDemo/Controls/LabelControl.xaml"/>
+                <ResourceDictionary Source="ms-appx:///MapDemo/Controls/MapNavigationWindow.xaml"/>
+                <ResourceDictionary Source="ms-appx:///MapDemo/Controls/PhotoGalleryButton.xaml"/>
+                <ResourceDictionary Source="ms-appx:///MapDemo/Controls/PhotoGalleryControl.xaml"/>
+                <ResourceDictionary Source="ms-appx:///MapDemo/Controls/PhotoGalleryItemControl.xaml"/>
+                <ResourceDictionary Source="ms-appx:///MapDemo/Controls/PlaceInfoControl.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <DataTemplate x:Key="citySmallIconTemplate">
+                <Image Source="ms-appx:///MapDemo/Data/Images/PhotoGallery/CitySmallIcon.png" Stretch="None">
+                    <Image.RenderTransform>
+                        <TranslateTransform X="-6" Y="-6"/>
+                    </Image.RenderTransform>
+                </Image>
+            </DataTemplate>
+            <local:DemoValuesProvider x:Key="DemoValuesProvider"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Name="LayoutRoot">
+        <Map:MapControl x:Name="map"
+                        Background="#FF2D2D2D"
+                        EnableZooming="False"
+                        ZoomLevel="{Binding ZoomLevel, Mode=TwoWay}"
+                        CenterPoint="{Binding CenterPoint, Mode=TwoWay}"
+                        FlowDirection="LeftToRight">
+            <Map:MapControl.NavigationPanelOptions>
+                <Map:NavigationPanelOptions
+                    ShowZoomTrackbar="False"
+                    ShowScrollButtons="False"
+                    ShowCoordinates="False"
+                    ShowKilometersScale="False"
+                    ShowMilesScale="False"/>
+            </Map:MapControl.NavigationPanelOptions>
+            <Map:ImageTilesLayer Name="tileLayer">
+                <Map:ImageTilesLayer.DataProvider>
+                    <!--<Map:BingMapDataProvider Kind="Area" BingKey="{Binding DevexpressBingKey, Source={StaticResource DemoValuesProvider}}"/>-->
+                    <Map:OpenStreetMapDataProvider/>
+                </Map:ImageTilesLayer.DataProvider>
+            </Map:ImageTilesLayer>
+            <Map:VectorItemsLayer ItemsSource="{Binding Cities}"/>
+            <Map:VectorItemsLayer>
+                <Map:MapCustomElement x:Name="placePointer" Location="{Binding Content.SelectedPlace.Location, RelativeSource={RelativeSource Self}}" >
+                    <Map:MapCustomElement.ContentTemplate>
+                        <DataTemplate>
+                            <local:LabelControl Visible="{Binding IsDetailView}"/>
+                        </DataTemplate>
+                    </Map:MapCustomElement.ContentTemplate>
+                </Map:MapCustomElement>
+            </Map:VectorItemsLayer>
+        </Map:MapControl>
+
+        <local:MapNavigationWindow x:Name="navWindow"
+                                   Margin="20"
+                                   Width="100"
+                                   Height="100"
+                                   HorizontalAlignment="Left" 
+                                   VerticalAlignment="Top"
+                                   FlowDirection="LeftToRight"
+                                   Visible="{Binding IsMapView}"
+                                   CenterPoint="{Binding CenterPoint, Mode=TwoWay}"/>
+
+        <local:PhotoGalleryControl x:Name="photoGallery" AnchorPoint="{Binding CityPoint, Mode=TwoWay}" 
+                                       ItemsSource="{Binding Path=SelectedCity.Places}"
+                                       Title="{Binding Path=SelectedCity.Name}" PointerReleased="photoGallery_PointerReleased"
+                                       Visible="{Binding IsGalleryView}">
+            <local:PhotoGalleryControl.ItemTemplate>
+                <DataTemplate>
+                    <local:PhotoGalleryItemControl Margin="15" Click="GalleryItemClick"/>
+                </DataTemplate>
+            </local:PhotoGalleryControl.ItemTemplate>
+        </local:PhotoGalleryControl>
+
+        <local:PlaceInfoControl x:Name="placeControl" Margin="10,10,10,0" HorizontalAlignment="Right"  
+                                 ShowNextPlace="placeControl_ShowNextSight" ShowPrevPlace="placeControl_ShowPreviousSight"
+                                 PlaceInfo="{Binding SelectedPlace}"
+                                 Visible="{Binding IsDetailView}"/>
+
+        <StackPanel HorizontalAlignment="Left" Margin="15" Orientation="Horizontal" VerticalAlignment="Top">
+            <local:PhotoGalleryButton x:Name="backButton" Click="OnBackClick" 
+                                          Visible="{Binding IsDetailView}">
+                <local:PhotoGalleryButton.Content>
+                    <Image Source="ms-appx:///MapDemo/Data/Images/PhotoGallery/BackButton.png" Stretch="None"/>
+                </local:PhotoGalleryButton.Content>
+            </local:PhotoGalleryButton>
+        </StackPanel>
+    </Grid>
+
+</UserControl>
+

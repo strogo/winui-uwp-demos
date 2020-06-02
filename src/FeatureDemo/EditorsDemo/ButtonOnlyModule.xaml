@@ -1,0 +1,80 @@
+﻿<UserControl
+    x:Class="EditorsDemo.ButtonOnlyModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EditorsDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout" 
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="600">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="ms-appx:///EditorsDemo/LayoutItemInvertedColors.xaml" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="0.85*" />
+        </Grid.RowDefinitions>
+
+        <Layout:LayoutControl Grid.Row="1" HorizontalAlignment="Center" Orientation="Vertical" MinWidth="600">
+            <Layout:LayoutItem Header="DropDown Button:">
+                <Editors:TextEdit ShowText="False">
+                    <Editors:TextEdit.Buttons>
+                        <Editors:PopupButtonInfo
+                            GlyphKind="DropDown"
+                            ImageSource="ms-appx:///Images/Module1.Icon.png"
+                            Content="{Binding DropDownDate}"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            ImagePadding="0,0,10,0"
+                            Padding="6,0,9,0">
+                            <Editors:PopupButtonInfo.PopupSettings>
+                                <Editors:PopupSettings
+                                    PopupAutoWidth="True"
+                                    PopupMaxHeight="300">
+                                    <Editors:PopupSettings.PopupContent>
+                                        <Editors:DatePickerEdit x:Name="popupEditor1" EditValue="{Binding DropDownDate, Mode=TwoWay}"></Editors:DatePickerEdit>
+                                    </Editors:PopupSettings.PopupContent>
+                                </Editors:PopupSettings>
+                            </Editors:PopupButtonInfo.PopupSettings>
+                        </Editors:PopupButtonInfo>
+                    </Editors:TextEdit.Buttons>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+
+            <Layout:LayoutItem Header="DropDown Split Button:">
+                <Editors:TextEdit ShowText="False">
+                    <Editors:TextEdit.Buttons>
+                        <Editors:ButtonInfo
+                            ImageSource="ms-appx:///Images/Module1.Icon.png"
+                            Content="{Binding SplitDate}"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            ImagePadding="0,0,10,0"/>
+                        <Editors:PopupButtonInfo
+                            GlyphKind="DropDown"
+                            HorizontalAlignment="Right">
+                            <Editors:PopupButtonInfo.PopupSettings>
+                                <Editors:PopupSettings
+                                    PopupAutoWidth="True"
+                                    PopupMaxHeight="300">
+                                    <Editors:PopupSettings.PopupContent>
+                                        <Editors:DatePickerEdit x:Name="popupEditor2" EditValue="{Binding SplitDate, Mode=TwoWay}"></Editors:DatePickerEdit>
+                                    </Editors:PopupSettings.PopupContent>
+                                </Editors:PopupSettings>
+                            </Editors:PopupButtonInfo.PopupSettings>
+                        </Editors:PopupButtonInfo>
+                    </Editors:TextEdit.Buttons>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+        </Layout:LayoutControl>
+    </Grid>
+</UserControl>

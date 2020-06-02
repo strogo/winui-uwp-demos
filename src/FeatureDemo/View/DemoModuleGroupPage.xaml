@@ -1,0 +1,104 @@
+﻿<Layout:DXPage
+    x:Class="FeatureDemo.View.DemoModuleGroupPage"
+    IsTabStop="false"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:common="using:FeatureDemo.Common"
+    xmlns:view="using:FeatureDemo.View"
+    xmlns:Core="using:DevExpress.Core"
+    xmlns:ViewModel="using:FeatureDemo.ViewModel"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style x:Key="SnappedGridViewItemContainerStyle" TargetType="ContentControl">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="Margin" Value="0" />
+            </Style>
+            <DataTemplate x:Key="DemoModuleTileGroupHeaderTemplate" x:DataType="ViewModel:DemoModuleGroupViewModel">
+                <TextBlock Margin="0,0,0,5" Foreground="{ThemeResource DemoModuleTileGroupHeaderBrush}" FontSize="21" FontWeight="Light" Text="{x:Bind Path=Group.Title, Mode=OneTime}" TextTrimming="WordEllipsis" />
+            </DataTemplate>
+            <common:TypeTemplateSelector x:Key="DemoModuleTileTemplateSelector" ConditionMember="DemoModule.IsHighlighted">
+                <DataTemplate x:Key=":False" x:DataType="ViewModel:DemoModuleViewModel">
+                    <Grid Margin="10,10,10,12">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{x:Bind Path=DemoModule.Title, Mode=OneTime}" TextWrapping="Wrap" TextTrimming="WordEllipsis" TextAlignment="Left" VerticalAlignment="Top" HorizontalAlignment="Stretch" />
+                        <Grid VerticalAlignment="Stretch" Grid.Row="1" Margin="0,0,0,2">
+                            <Grid Background="#FFA7FF71" Margin="0,0,9,-4" Visibility="{x:Bind DemoModule.IsUpdated, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneTime}"
+                              VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                <TextBlock Text="UPDATED" TextAlignment="Left" FontSize="9" Margin="5,4,4,1" VerticalAlignment="Bottom" HorizontalAlignment="Left" 
+                                        Foreground="#FF3D3D3D"/>
+                            </Grid>
+                            <Grid Background="#FFFFD756" Margin="0,0,9,-4" Visibility="{x:Bind DemoModule.IsNew, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneTime}" 
+                              VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                <TextBlock Text="NEW" TextAlignment="Left" FontSize="9" Margin="5,4,4,1" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                                        Foreground="#FF3D3D3D"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </DataTemplate>
+                <DataTemplate x:Key=":True" x:DataType="ViewModel:DemoModuleViewModel">
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Image Source="{x:Bind DemoModule.FullImagePath, Mode=OneTime}" Stretch="None"/>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,10,0,0" VerticalAlignment="Bottom" Height="20">
+                            <Border Background="#FFA7FF71" Margin="0,0,9,0" Visibility="{x:Bind DemoModule.IsUpdated, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneTime}">
+                                <TextBlock Text="UPDATED" TextAlignment="Left" FontSize="11" Margin="5,0,4,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF3D3D3D" />
+                            </Border>
+                            <Border Background="#FFFFD756" Margin="0,0,9,0" Visibility="{x:Bind DemoModule.IsNew, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneTime}">
+                                <TextBlock Text="NEW" TextAlignment="Left" FontSize="11" Margin="5,0,4,0" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="#FF3D3D3D" />
+                            </Border>
+                            <TextBlock Text="{x:Bind Path=DemoModule.Title, Mode=OneTime}" TextWrapping="Wrap" TextTrimming="WordEllipsis" TextAlignment="Left" FontSize="13" 
+                               VerticalAlignment="Center" HorizontalAlignment="Left" LineStackingStrategy="BlockLineHeight"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </common:TypeTemplateSelector>
+            <common:TypeStyleSelector x:Key="DemoModuleTileStyleSelector" ConditionMember="DemoModule.IsHighlighted">
+                <Style x:Key=":False" TargetType="Layout:DXGridViewItem" BasedOn="{StaticResource TileGridViewItem}">
+                    <Setter Property="Margin" Value="0,0,10,10" />
+                    <Setter Property="common:VerticalTilePanel.TileSize" Value="Small" />
+                </Style>
+                <Style x:Key=":True" TargetType="Layout:DXGridViewItem" BasedOn="{StaticResource TileGridViewItem}">
+                    <Setter Property="Margin" Value="0,0,10,10" />
+                    <Setter Property="common:VerticalTilePanel.TileSize" Value="Large" />
+                </Style>
+            </common:TypeStyleSelector>
+            <DataTemplate x:Key="DemoModuleGroupTemplate" x:DataType="ViewModel:DemoModuleGroupViewModel">
+                <Layout:DXGridView ItemsSource="{x:Bind DemoModules, Mode=OneTime}"
+                               ItemTemplateSelector="{StaticResource DemoModuleTileTemplateSelector}"
+                               ItemContainerStyleSelector="{StaticResource DemoModuleTileStyleSelector}"                               
+                               ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                               Margin="0,0,0,0"
+                               SelectionMode="None" IsItemClickEnabled="True"
+                               ItemClickCommand="{x:Bind MainViewModel.ItemClickCommand, Mode=OneTime}">
+                    <Layout:DXGridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <common:VerticalTilePanel SmallTileWidth="140" SmallTileHeight="100" Margin="0,0,30,30" />
+                        </ItemsPanelTemplate>
+                    </Layout:DXGridView.ItemsPanel>
+                </Layout:DXGridView>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Background="{ThemeResource PageBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="66,0,0,0">
+            <!--<Path Data="{x:Bind ViewModel.SelectedGroup.Group.Icon, Mode=OneTime}" Width="24" Height="24"  Fill="{StaticResource DemoModuleTileGroupHeaderBrush}" Stretch="Fill" Margin="0,0,10,0" VerticalAlignment="Center" UseLayoutRounding="True"/>-->
+            <TextBlock Foreground="{ThemeResource DemoModuleTileGroupHeaderBrush}" FontSize="30" FontWeight="Light" Text="{x:Bind ViewModel.SelectedGroup.Group.Title, Mode=OneTime}" TextTrimming="WordEllipsis" VerticalAlignment="Center"/>
+        </StackPanel>
+        
+        <ContentControl Grid.Row="1" Margin="66,0,66,20" Content="{x:Bind ViewModel.SelectedGroup, Mode=OneTime}" ContentTemplate="{StaticResource DemoModuleGroupTemplate}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" />
+    </Grid>
+</Layout:DXPage>

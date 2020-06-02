@@ -1,0 +1,181 @@
+﻿<Common:DemoModuleView
+    x:Class="NavigationDemo.TilesModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NavigationDemo"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Xaml="using:DevExpress.UI.Xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Core="using:DevExpress.Core"
+    mc:Ignorable="d"
+    d:DesignHeight="2000"
+    d:DesignWidth="1000">
+    <Common:DemoModuleView.DataContext>
+        <local:TilesModuleViewModel/>
+    </Common:DemoModuleView.DataContext>
+    <Common:DemoModuleView.Resources>
+        <Style TargetType="Layout:Tile">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Common:StringFormatConverter x:Key="stringFormatConverter"/>
+    </Common:DemoModuleView.Resources>
+    <ScrollViewer x:Name="scrollViewer" VerticalScrollBarVisibility="Auto" VerticalScrollMode="Auto" Margin="40,0">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <Xaml:ControlAdaptiveTrigger MinControlWidth="1290" Control="{Binding ElementName=scrollViewer}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TileGroup2.(RelativePanel.RightOf)" Value="StatisticsTile" />
+                        <Setter Target="TileGroup2.(RelativePanel.Below)" Value="" />
+                        <Setter Target="StatisticsTile.(RelativePanel.RightOf)" Value="ListingsTile" />
+                        <Setter Target="StatisticsTile.(RelativePanel.Below)" Value="" />
+                        <Setter Target="TileGroup1.(RelativePanel.RightOf)" Value="ListingsTile" />
+                        <Setter Target="TileGroup1.(RelativePanel.Below)" Value="StatisticsTile" />
+                        <Setter Target="EmployeesTile.(RelativePanel.RightOf)" Value="TileGroup2" />
+                        <Setter Target="EmployeesTile.(RelativePanel.Below)" Value="" />
+                    </VisualState.Setters>
+                </VisualState>
+
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <Xaml:ControlAdaptiveTrigger MinControlWidth="970" Control="{Binding ElementName=scrollViewer}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TileGroup2.(RelativePanel.RightOf)" Value="StatisticsTile" />
+                        <Setter Target="TileGroup2.(RelativePanel.Below)" Value="" />
+                        <Setter Target="StatisticsTile.(RelativePanel.RightOf)" Value="ListingsTile" />
+                        <Setter Target="StatisticsTile.(RelativePanel.Below)" Value="" />
+                        <Setter Target="TileGroup1.(RelativePanel.RightOf)" Value="ListingsTile" />
+                        <Setter Target="TileGroup1.(RelativePanel.Below)" Value="StatisticsTile" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <Xaml:ControlAdaptiveTrigger MinControlWidth="650" Control="{Binding ElementName=scrollViewer}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="TileGroup2.(RelativePanel.RightOf)" Value="ListingsTile" />
+                        <Setter Target="TileGroup2.(RelativePanel.Below)" Value="" />
+                        <Setter Target="StatisticsTile.(RelativePanel.RightOf)" Value="EmployeesTile" />
+                        <Setter Target="StatisticsTile.(RelativePanel.Below)" Value="TileGroup2" />
+                        <Setter Target="TileGroup2.Margin" Value="0,0,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <RelativePanel>
+            <Layout:Tile Name="ListingsTile" Size="Large"  Grid.RowSpan="2"  Background="#FF6CBD45" BackContent="{Binding Listings}" AnimationInterval="0:0:7" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Layout:Tile.BackContentTemplate>
+                    <DataTemplate>
+                        <ListView ItemsSource="{Binding}" SelectionMode="None" BorderThickness="0" Foreground="{Binding Foreground,RelativeSource={RelativeSource TemplatedParent}}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Address}" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Bedrooms, Converter={StaticResource stringFormatConverter}, ConverterParameter=\{0\} Bedrooms}" Margin="0,0,4,0"/>
+                                            <TextBlock Text="{Binding Baths, Converter={StaticResource stringFormatConverter}, ConverterParameter=\{0\} Baths}" Margin="0,0,4,0"/>
+                                            <TextBlock Text="{Binding Price, Converter={StaticResource stringFormatConverter}, ConverterParameter=\{0:C0\}}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </DataTemplate>
+                </Layout:Tile.BackContentTemplate>
+                <Layout:SlideDecorator ContentSource="{Binding Listings}" ContentChangeInterval="00:00:04.00" >
+                    <Layout:SlideDecorator.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Image Source="{Binding ImageSource}" Stretch="UniformToFill" HorizontalAlignment="Center"/>
+                                <Grid Background="#FF6CBD45" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                    <StackPanel Margin="4">
+                                        <TextBlock FontSize="14" Text="{Binding Bedrooms, Converter={StaticResource stringFormatConverter}, ConverterParameter=\{0\} Bedrooms}"/>
+                                        <TextBlock FontSize="14" Text="{Binding Baths, Converter={StaticResource stringFormatConverter}, ConverterParameter=\{0\} Baths}"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Background="#FF6CBD45" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                    <StackPanel Margin="4">
+                                        <TextBlock FontSize="16" Text="{Binding Price, Converter={StaticResource stringFormatConverter}, ConverterParameter=\{0:C0\}}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </Layout:SlideDecorator.ContentTemplate>
+                </Layout:SlideDecorator>
+            </Layout:Tile>
+            <Layout:Tile Name="EmployeesTile" RelativePanel.Below="ListingsTile"  Grid.Row="2" Size="Large" Header="Employees" HorizontalAlignment="Left" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                <Layout:MosaicDecorator ImageRowCount="3" ImageColumnCount="3" ContentSource="{Binding Employees}">
+                    <ContentControl.ContentTemplateSelector>
+                        <local:EmployeeTileTemplateSelector>
+                            <local:EmployeeTileTemplateSelector.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding ImageSource}" Stretch="Fill"/>
+                                </DataTemplate>
+                            </local:EmployeeTileTemplateSelector.ItemTemplate>
+                        </local:EmployeeTileTemplateSelector>
+                    </ContentControl.ContentTemplateSelector>
+                </Layout:MosaicDecorator>
+            </Layout:Tile>
+            <Layout:Tile Name="StatisticsTile" RelativePanel.Below="EmployeesTile" Size="Wide" Background="#FF6652A2" Header="Statistics" Grid.Column="1" VerticalAlignment="Top">
+                <Xaml:SvgIcon Margin="12" Source="ms-appx:///NavigationDemo/Images/Statistics.svg" />
+            </Layout:Tile>
+
+            <Grid Name="TileGroup1" RelativePanel.Below="StatisticsTile" RelativePanel.AlignLeftWith="StatisticsTile" VerticalAlignment="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Layout:Tile Grid.RowSpan="2" Background="#FF00ABDC" Header="User Management">
+                    <Xaml:SvgIcon Source="ms-appx:///NavigationDemo/Images/UserManagment.svg" />
+                </Layout:Tile>
+                <Layout:Tile Grid.Column="1" Size="Small" Background="#FF54AF0E" >
+                    <Xaml:SvgIcon Source="ms-appx:///NavigationDemo/Images/System.svg" Width="40" Height="40"/>
+                </Layout:Tile>
+                <Layout:Tile Grid.Column="1" Grid.Row="1" Size="Small" Background="#FFD4AF00" >
+                    <Xaml:SvgIcon Source="ms-appx:///NavigationDemo/Images/Research.svg" Width="40" Height="40"/>
+                </Layout:Tile>
+            </Grid>
+            <Grid Name="TileGroup2" RelativePanel.Below="TileGroup1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Layout:Tile  Size="Wide" Background="#FF7CA7D1" Header="Zillow" VerticalAlignment="Top" Grid.ColumnSpan="2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <Layout:SwingDecorator>
+                        <Layout:SwingDecorator.ContentTemplate>
+                            <DataTemplate>
+                                <Xaml:SvgIcon Margin="12" Source="ms-appx:///NavigationDemo/Images/ZillowLogo.svg" />
+                            </DataTemplate>
+                        </Layout:SwingDecorator.ContentTemplate>
+                        <Layout:SwingDecorator.TopContentTemplate>
+                            <DataTemplate>
+                                <TextBlock FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            Your <Bold>Edge</Bold> in <Bold>Real Estate</Bold>
+                                </TextBlock>
+                            </DataTemplate>
+                        </Layout:SwingDecorator.TopContentTemplate>
+                    </Layout:SwingDecorator>
+                </Layout:Tile>
+                <Layout:Tile Background="#FFE65E20" Header="Mortgage Rates" Grid.Row="1">
+                    <Xaml:SvgIcon Source="ms-appx:///NavigationDemo/Images/Rates.svg" />
+                </Layout:Tile>
+                <Layout:Tile Background="#FFC3213F" Header="Loan Calculator" Grid.Row="1" Grid.Column="1">
+                    <Xaml:SvgIcon Source="ms-appx:///NavigationDemo/Images/Calc.svg" />
+                </Layout:Tile>
+            </Grid>
+        </RelativePanel>
+    </ScrollViewer>
+</Common:DemoModuleView>

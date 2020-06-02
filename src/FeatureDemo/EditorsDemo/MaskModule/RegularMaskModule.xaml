@@ -1,0 +1,197 @@
+﻿<Common:DemoSubModuleView
+    x:Class="EditorsDemo.RegularMaskModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:EditorsDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Core="using:DevExpress.Core"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout" 
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors" 
+    xmlns:dxmvvm="using:DevExpress.Mvvm.UI"
+    xmlns:dxmvvmi="using:DevExpress.Mvvm.UI.Interactivity"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///EditorsDemo/LayoutItemInvertedColors.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <local:RegularMaskViewModel x:Key="viewModel"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid DataContext="{StaticResource viewModel}">
+        <dxmvvmi:Interaction.Behaviors>
+            <dxmvvm:MessageBoxService />
+        </dxmvvmi:Interaction.Behaviors>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="0.85*" />
+        </Grid.RowDefinitions>
+
+        <Layout:LayoutControl Grid.Row="1" HorizontalAlignment="Center" Orientation="Vertical"  MinWidth="600">
+            <Layout:LayoutItem Header="Phone:">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="(\d?\d?\d?)\d\d\d-\d\d-\d\d" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                    <dxmvvmi:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand EventName="GotFocus" Command="{Binding OnEditorGotFocusCommand}" CommandParameter="{Binding Path='AssociatedObject', RelativeSource={RelativeSource Mode=Self}}"/>
+                        <dxmvvm:FocusBehavior/>
+                    </dxmvvmi:Interaction.Behaviors>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+            <Layout:LayoutItem Header="Phone alternative:">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="(\d{0,3})\d{3}-\d{2}-\d{2}" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                    <dxmvvmi:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand EventName="GotFocus" Command="{Binding OnEditorGotFocusCommand}" CommandParameter="{Binding Path='AssociatedObject', RelativeSource={RelativeSource Mode=Self}}"/>
+                    </dxmvvmi:Interaction.Behaviors>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+            <Layout:LayoutItem Header="Date:">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="\d?\d?/\d\d/\d\d" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                    <dxmvvmi:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand EventName="GotFocus" Command="{Binding OnEditorGotFocusCommand}" CommandParameter="{Binding Path='AssociatedObject', RelativeSource={RelativeSource Mode=Self}}"/>
+                    </dxmvvmi:Interaction.Behaviors>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+            <Layout:LayoutItem Header="Long time:">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="\d?\d:\d\d:\d\d >[PA]M" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                    <dxmvvmi:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand EventName="GotFocus" Command="{Binding OnEditorGotFocusCommand}" CommandParameter="{Binding Path='AssociatedObject', RelativeSource={RelativeSource Mode=Self}}"/>
+                    </dxmvvmi:Interaction.Behaviors>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+            <Layout:LayoutItem Header="Short time:">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="\d?\d:\d\d" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                    <dxmvvmi:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand EventName="GotFocus" Command="{Binding OnEditorGotFocusCommand}" CommandParameter="{Binding Path='AssociatedObject', RelativeSource={RelativeSource Mode=Self}}"/>
+                    </dxmvvmi:Interaction.Behaviors>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+            <Layout:LayoutItem Header="Extension:">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="\d?\d?\d?\d?\d?" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                    <dxmvvmi:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand EventName="GotFocus" Command="{Binding OnEditorGotFocusCommand}" CommandParameter="{Binding Path='AssociatedObject', RelativeSource={RelativeSource Mode=Self}}"/>
+                    </dxmvvmi:Interaction.Behaviors>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+            <Layout:LayoutItem Header="Social security:">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="\d\d\d-\d\d-\d\d\d\d" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                    <dxmvvmi:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand EventName="GotFocus" Command="{Binding OnEditorGotFocusCommand}" CommandParameter="{Binding Path='AssociatedObject', RelativeSource={RelativeSource Mode=Self}}"/>
+                    </dxmvvmi:Interaction.Behaviors>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+            <Layout:LayoutItem Header="Long Zip code:">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="\d\d\d\d\d-\d?\d?\d?\d?" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                    <dxmvvmi:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand EventName="GotFocus" Command="{Binding OnEditorGotFocusCommand}" CommandParameter="{Binding Path='AssociatedObject', RelativeSource={RelativeSource Mode=Self}}"/>
+                    </dxmvvmi:Interaction.Behaviors>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+            <Layout:LayoutItem Header="Short Zip code:">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings 
+                            Mask="\d\d\d\d\d" 
+                            MaskType="Regular" 
+                            IgnoreBlank="True"
+                            SaveLiteral="True">
+                        </Editors:TextInputMaskSettings>
+                    </Editors:TextEdit.TextInputSettings>
+                    <dxmvvmi:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand EventName="GotFocus" Command="{Binding OnEditorGotFocusCommand}" CommandParameter="{Binding Path='AssociatedObject', RelativeSource={RelativeSource Mode=Self}}"/>
+                    </dxmvvmi:Interaction.Behaviors>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+        </Layout:LayoutControl>
+    </Grid>
+
+    <Common:DemoSubModuleView.Options>
+        <Common:OptionsPanel DataContext="{StaticResource viewModel}">
+            <Common:OptionItem Header="Edit value:">
+                <Editors:TextEdit IsReadOnly="True" EditValue="{Binding Path=FocusedEditor.EditValue}"/>
+            </Common:OptionItem>
+            <Common:OptionItem Header="Edit mask:">
+                <Editors:TextEdit EditValue="{Binding Mask, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ValidateOnEnterKeyPressed="True" ValidateOnTextInput="False" />
+            </Common:OptionItem>
+            <Common:OptionItem Header="Placeholder:">
+                <Editors:TextEdit EditValue="{Binding Path=TextInputSettings.PlaceHolder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <Editors:TextEdit.TextInputSettings>
+                        <Editors:TextInputMaskSettings MaskType="Regular" Mask="." UseAsDisplayFormat="True" ShowPlaceHolders="True"/>
+                    </Editors:TextEdit.TextInputSettings>
+                </Editors:TextEdit>
+            </Common:OptionItem>
+            <CheckBox Content="Ignore mask blank" IsChecked="{Binding Path=TextInputSettings.IgnoreBlank, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <CheckBox Content="Save literal" IsChecked="{Binding Path=TextInputSettings.SaveLiteral, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <CheckBox Content="Use mask as display format" IsChecked="{Binding Path=TextInputSettings.UseAsDisplayFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </Common:OptionsPanel>
+    </Common:DemoSubModuleView.Options>
+
+</Common:DemoSubModuleView>

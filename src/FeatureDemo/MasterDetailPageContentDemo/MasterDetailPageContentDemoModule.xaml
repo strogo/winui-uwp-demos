@@ -1,0 +1,83 @@
+﻿<Common:DemoModuleView
+    x:Class="MasterDetailPageContentDemo.MasterDetailPageContentDemoModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MasterDetailPageContentDemo"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:RibbonDemo="using:RibbonDemo"
+    xmlns:mvvmui="using:DevExpress.Mvvm.UI"
+    xmlns:Interactivity="using:DevExpress.Mvvm.UI.Interactivity"
+    xmlns:Core="using:DevExpress.Core"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    MinMargin="0"
+    MaxMargin="0"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    ShowOptionsInOverlay="True">
+    <Common:DemoModuleView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///MasterDetailPageContentDemo/MasterDetailPageContentDemoStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Common:DemoModuleView.Resources>
+    <Common:DemoModuleView.DataContext>
+        <local:MasterDetailPageContentDemoViewModel />
+    </Common:DemoModuleView.DataContext>
+    <Layout:MasterDetailPageContent x:Name="MasterDetailPageContent"
+                                     MasterPaneMaxWidthInSideBySideState="350"
+                                     MasterPaneMinWidthInSideBySideState="250"
+                                     StackedStateThreshold="300"
+                                     Background="White"
+                                     EnableSplitter="{Binding EnableSplitter, Mode=OneWay}"
+                                     SplitterMode="{Binding SplitterMode, Mode=OneWay}"
+                                     >
+        <Layout:MasterDetailPageContent.MasterPane>
+            <ListView ItemsSource="{Binding Messages}"
+                      SelectedItem="{Binding SelectedMessage, Mode=TwoWay}"
+                      IsItemClickEnabled="True"
+                      Background="{ThemeResource PageBackground}"
+                      ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:MessageViewModel">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Border Grid.RowSpan="2" VerticalAlignment="Center" Width="40" Height="40" CornerRadius="20" Margin="0,0,0,0">
+                                <Border.Background>
+                                    <SolidColorBrush Color="{x:Bind Color}" />
+                                </Border.Background>
+                                <TextBlock Text="{x:Bind Initials}" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="18" Foreground="White" />
+                            </Border>
+                            <TextBlock Text="{x:Bind From}" Grid.Column="1" FontSize="18" Margin="10,10,0,0" FontFamily="Segoe UI" />
+                            <TextBlock Text="{x:Bind Subject}" Grid.Column="1" Grid.Row="1" Margin="10,2,0,10"  FontFamily="Segoe UI" FontSize="14" Foreground="{ThemeResource SubjectForeground}" TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Text="{x:Bind Date}" Grid.RowSpan="2" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10"  FontFamily="Segoe UI" FontSize="14"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <Interactivity:Interaction.Behaviors>
+                    <mvvmui:EventToCommand EventName="ItemClick" Command="{Binding ElementName=MasterDetailPageContent, Path=ShowContentPaneCommand}" />
+                </Interactivity:Interaction.Behaviors>
+            </ListView>
+        </Layout:MasterDetailPageContent.MasterPane>
+        <Common:DemoWebView Text="{Binding SelectedMessage.Text, Mode=TwoWay}" Padding="10,10,10,0"/>
+    </Layout:MasterDetailPageContent>
+    <Common:DemoModuleView.Options>
+        <Common:OptionsPanel>
+            <CheckBox Content="Enable Splitter" IsChecked="{Binding EnableSplitter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Common:OptionItem Header="Splitter Mode:" HeaderOrientation="Vertical">
+                <Common:MasterDetailPageContentSplitterModeComboBox SelectedItem="{Binding SplitterMode, Mode=TwoWay}" />
+            </Common:OptionItem>
+        </Common:OptionsPanel>
+    </Common:DemoModuleView.Options>
+</Common:DemoModuleView>

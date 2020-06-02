@@ -1,0 +1,94 @@
+﻿<Page
+    x:Class="HamburgerMenuDemo.HamburgerMenuDemoModule_Menu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Ribbon="using:DevExpress.UI.Xaml.Ribbon"
+    xmlns:Core="using:DevExpress.Core"
+    xmlns:local="using:HamburgerMenuDemo"
+    xmlns:viewModel="using:FeatureDemo.ViewModel"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dxmvvmui="using:DevExpress.Mvvm.UI"
+    xmlns:dxmvvmi="using:DevExpress.Mvvm.UI.Interactivity"    
+    mc:Ignorable="d">
+    <dxmvvmi:Interaction.Behaviors>
+        <dxmvvmui:MessageBoxService />
+    </dxmvvmi:Interaction.Behaviors>
+
+    <Page.Resources>
+        <DataTemplate x:Key="ContextMenuItemTemplate" x:DataType="local:ContextMenuItem">
+            <Ribbon:ContextToolbarButton Content="{x:Bind Content, Mode=OneWay}"
+                                         Command="{x:Bind Command}"
+                                         FlyoutFlowBreakWithSeparator="{x:Bind ShowSeparator}"
+                                         Visibility="{x:Bind Visibility}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="HamburgerSubItemTemplate" x:DataType="local:HamburgerSubItemViewModel">
+            <Layout:HamburgerSubMenuNavigationButton Content="{x:Bind Content}" RightContent="{x:Bind RightContent, Mode=OneWay}"
+                                                     PreviewContent="{x:Bind PreviewContent}" ShowInPreview="{x:Bind ShowInPreview, Mode=OneWay}"
+                                                     NavigationTargetType="{x:Bind NavigationTargetType}">
+                <Layout:HamburgerSubMenuNavigationButton.ContextMenu>
+                    <Ribbon:ContextToolbarControl Orientation="Vertical">
+                        <Ribbon:ContextToolbarGroup ItemsSource="{Binding TargetDataContext.ContextMenu}"
+                                                    ItemTemplate="{StaticResource ContextMenuItemTemplate}"/>
+                    </Ribbon:ContextToolbarControl>
+                </Layout:HamburgerSubMenuNavigationButton.ContextMenu>
+                <Layout:HamburgerSubMenuNavigationButton.PreviewContextMenu>
+                    <Ribbon:ContextToolbarControl Orientation="Vertical">
+                        <Ribbon:ContextToolbarGroup ItemsSource="{Binding TargetDataContext.PreviewContextMenu}"
+                                                    ItemTemplate="{StaticResource ContextMenuItemTemplate}"/>
+                    </Ribbon:ContextToolbarControl>
+                </Layout:HamburgerSubMenuNavigationButton.PreviewContextMenu>
+            </Layout:HamburgerSubMenuNavigationButton>
+        </DataTemplate>
+
+        <Core:TypeTemplateSelector x:Key="HamburgerMenuItemTemplateSelector" FindDescendants="True">
+            <DataTemplate x:Name="HamburgerNavigationItemViewModel" x:DataType="local:HamburgerNavigationItemViewModel">
+                <Layout:HamburgerMenuNavigationButton Content="{x:Bind Content}" IconSource="{x:Bind Icon}" 
+                                                      Placement="{x:Bind Placement}" HideMenuWhenSelected="{x:Bind HideMenuWhenSelected}"
+                                                      SelectOnClick="{x:Bind SelectOnClick}" Command="{x:Bind Command}"
+                                                      NavigationTargetType="{x:Bind NavigationTargetType}"/>
+            </DataTemplate>
+            <DataTemplate x:Name="HamburgerLinkItemViewModel" x:DataType="local:HamburgerLinkItemViewModel">
+                <Layout:HamburgerMenuHyperlinkButton Content="{x:Bind Content}" Placement="{x:Bind Placement}" NavigateUri="{x:Bind NavigationUri}"/>
+            </DataTemplate>
+            <DataTemplate x:Name="HamburgerThemeSwitcherItemViewModel" x:DataType="local:HamburgerThemeSwitcherItemViewModel">
+                <Common:HamburgerMenuThemeSwitcher Content="{x:Bind Content}" IconSource="{x:Bind Icon}" Placement="{x:Bind Placement}"
+                                                   IsStandaloneSelectionItemMode="{x:Bind IsStandaloneSelectionItemMode}"
+                                                   MoreButtonVisibilityMode="{x:Bind MoreButtonVisibilityMode}">
+                    <Layout:HamburgerSubMenu.ItemTemplate>
+                        <DataTemplate x:DataType="viewModel:ColorSchemeInfo">
+                            <Layout:HamburgerSubMenuNavigationButton Content="{x:Bind PublicName}"/>
+                        </DataTemplate>
+                    </Layout:HamburgerSubMenu.ItemTemplate>
+                </Common:HamburgerMenuThemeSwitcher>
+            </DataTemplate>
+            <DataTemplate x:Name="HamburgerSubMenuItemViewModel" x:DataType="local:HamburgerSubMenuItemViewModel">
+                <Layout:HamburgerSubMenu Content="{x:Bind Content}" IconSource="{x:Bind Icon}" Placement="{x:Bind Placement}" ItemsSource="{x:Bind Items}"
+                                         IsStandaloneSelectionItemMode="{x:Bind IsStandaloneSelectionItemMode}"
+                                         MoreButtonVisibilityMode="{x:Bind MoreButtonVisibilityMode}"
+                                         ItemTemplate="{StaticResource HamburgerSubItemTemplate}"/>
+            </DataTemplate>
+        </Core:TypeTemplateSelector>
+    </Page.Resources>
+
+
+    <Layout:HamburgerMenu
+        WindowTitle="{Binding Title}"
+        AllowCustomizingWindowTitle="{Binding AllowCustomizingWindowTitle}"
+        Header="{Binding Header}"
+        ShowMenuOnEmptySpaceBarClick="{Binding ShowMenuOnEmptySpaceBarClick}"
+        AvailableViewStates="{Binding AvailableViewStates}"
+        ItemTemplateSelector="{StaticResource HamburgerMenuItemTemplateSelector}"
+        ItemsSource="{Binding Items}"
+        Width="250">
+        <Layout:HamburgerMenu.BottomBarItems>
+            <Layout:HamburgerMenuBottomBarRadioButton IconSource="&#xE787;" GroupName="AppGroup" IsChecked="{Binding IsCalendarRadioButtonChecked, Mode=TwoWay}"/>
+            <Layout:HamburgerMenuBottomBarRadioButton IconSource="&#xE715;" GroupName="AppGroup" IsChecked="{Binding IsMailRadioButtonChecked, Mode=TwoWay}"/>
+            <Layout:HamburgerMenuBottomBarCheckBox IconSource="&#xE008;" Placement="Right" IsChecked="{Binding IsCheckBoxChecked, Mode=TwoWay}"/>
+        </Layout:HamburgerMenu.BottomBarItems>
+        
+    </Layout:HamburgerMenu>
+
+</Page>

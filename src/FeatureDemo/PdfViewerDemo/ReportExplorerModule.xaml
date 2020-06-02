@@ -1,0 +1,112 @@
+﻿<Common:DemoModuleView
+    x:Class="PdfViewerDemo.ReportExplorerModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:PdfViewerDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    xmlns:Controls="using:DevExpress.UI.Xaml.Controls"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Core="using:DevExpress.Core"
+    BorderBrush="Transparent"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <Common:DemoModuleView.Resources>
+        <DataTemplate x:Key="multicolumnParametersTemplate">
+            <CheckBox Content="First across, then down" IsChecked="{Binding IsHorizontal, Mode=TwoWay}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="emptyParametersTemplate">
+            <TextBlock Text="The report has no parameters"/>
+        </DataTemplate>
+        <DataTemplate x:Key="tableParametersTemplate">
+            <Layout:LayoutControl Orientation="Vertical">
+                <Layout:LayoutItem Header="Order Id:" HeaderPosition="Top">
+                    <Editors:SpinEdit EditValue="{Binding OrderId, Mode=TwoWay}" Width="250">
+                        <Editors:SpinEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="d" MaskType="Numeric"/>
+                        </Editors:SpinEdit.TextInputSettings>
+                    </Editors:SpinEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="Max Rows per Page:" HeaderPosition="Top">
+                    <Editors:SpinEdit EditValue="{Binding MaxRowsPerPage, Mode=TwoWay}">
+                        <Editors:SpinEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="d" MaskType="Numeric"/>
+                        </Editors:SpinEdit.TextInputSettings>
+                    </Editors:SpinEdit>
+                </Layout:LayoutItem>
+            </Layout:LayoutControl>
+        </DataTemplate>
+        <DataTemplate x:Key="subreportParametersTemplate">
+            <Layout:LayoutControl Orientation="Vertical">
+                <Layout:LayoutItem Header="From Date:" HeaderPosition="Top">
+                    <Editors:DateEdit EditValue="{Binding From, Mode=TwoWay}" Width="250">
+                        <Editors:DateEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="MM/dd/yyyy" MaskType="DateTime"/>
+                        </Editors:DateEdit.TextInputSettings>
+                    </Editors:DateEdit>
+                </Layout:LayoutItem>
+                <Layout:LayoutItem Header="To Date:" HeaderPosition="Top">
+                    <Editors:DateEdit EditValue="{Binding To, Mode=TwoWay}" Width="250">
+                        <Editors:DateEdit.TextInputSettings>
+                            <Editors:TextInputMaskSettings Mask="MM/dd/yyyy" MaskType="DateTime"/>
+                        </Editors:DateEdit.TextInputSettings>
+                    </Editors:DateEdit>
+                </Layout:LayoutItem>
+            </Layout:LayoutControl>
+        </DataTemplate>
+        <Core:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+        <local:ReportParametersSelector x:Key="reportParametersSelector" 
+                                        MultiColumnTemplate="{StaticResource multicolumnParametersTemplate}"
+                                        EmptyTemplate="{StaticResource emptyParametersTemplate}"
+                                        TableTemplate="{StaticResource tableParametersTemplate}"
+                                        SubreportTemplate="{StaticResource subreportParametersTemplate}" />
+    </Common:DemoModuleView.Resources>
+    <Common:DemoModuleView.DataContext>
+        <local:ReportExplorerViewModel />        
+    </Common:DemoModuleView.DataContext>
+    <Layout:LayoutControl VerticalContentAlignment="Stretch" 
+                          VerticalAlignment="Stretch" 
+                          HorizontalItemSpacing="50"
+                          PortraitOrientation="Vertical"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        <Layout:LayoutGroup HorizontalHeaderAlignment="Center"
+                            VerticalAlignment="Stretch" 
+                            VerticalContentAlignment="Stretch" 
+                            BorderThickness="1"
+                            BorderBrush="Black"
+                            Orientation="Vertical"
+                            SizeMode="Stretch">            
+            <Grid>
+                <Controls:PdfViewerControl DocumentSource="{Binding Document}" IsDataLoading="{Binding IsLoading, Mode=TwoWay}"/>
+            </Grid>
+        </Layout:LayoutGroup>
+        <Layout:LayoutGroup Orientation="Vertical"
+                            SizeMode="AutoSize"  
+                            Header="Options" 
+                            PortraitOrientation="Horizontal"
+                            MinWidth="330">
+            <Layout:LayoutControl Orientation="Vertical" PortraitOrientation="Horizontal">
+                <Layout:LayoutItem Header="Available reports" HeaderPosition="Top">
+                    <ListBox BorderThickness="0" ItemsSource="{Binding AvailableReports}" SelectedItem="{Binding SelectedReport, Mode=TwoWay}" SelectionMode="Single">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DisplayName}" Margin="5" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Layout:LayoutItem>
+                <Layout:LayoutGroup Orientation="Vertical">
+                    <Layout:LayoutItem Header="Report parameters" HeaderPosition="Top">
+                        <ContentControl Content="{Binding SelectedReport.Parameters}" ContentTemplateSelector="{StaticResource reportParametersSelector}"/>
+                    </Layout:LayoutItem>
+                    <Layout:LayoutItem>
+                        <Button Content="Apply" Command="{Binding LoadDocumentCommand}" IsEnabled="{Binding CanStartLoading}" VerticalAlignment="Top" Width="150"/>
+                    </Layout:LayoutItem>
+                </Layout:LayoutGroup>                
+            </Layout:LayoutControl>
+        </Layout:LayoutGroup>
+    </Layout:LayoutControl>
+</Common:DemoModuleView>

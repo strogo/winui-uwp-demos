@@ -1,0 +1,114 @@
+﻿<UserControl
+    x:Class="EditorsDemo.ButtonEditModule"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Common="using:FeatureDemo.Common"
+    xmlns:Layout="using:DevExpress.UI.Xaml.Layout"
+    xmlns:Editors="using:DevExpress.UI.Xaml.Editors"
+    xmlns:Xaml="using:DevExpress.UI.Xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="400"
+    d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="ms-appx:///EditorsDemo/LayoutItemInvertedColors.xaml" />
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="0.85*" />
+        </Grid.RowDefinitions>
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="DeviceFamilyStates">
+                <VisualState x:Name="IoT">
+                    <VisualState.StateTriggers>
+                        <Xaml:DeviceFamilyTrigger DeviceFamilyName="Windows.IoT" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="linkItem.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Layout:LayoutControl Grid.Row="1" HorizontalAlignment="Center" Orientation="Vertical"  MinWidth="600">
+            <Layout:LayoutItem Header="Simple Button:">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.Buttons>
+                        <Editors:ButtonInfo Content="Button" ButtonKind="Simple"/>
+                    </Editors:TextEdit.Buttons>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+            <Layout:LayoutItem Header="Toggle Button:">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.Buttons>
+                        <Editors:ButtonInfo Content="Button" ClickMode="Release" ButtonKind="Toggle" Click="ButtonInfo_Click"/>
+                    </Editors:TextEdit.Buttons>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+            <Layout:LayoutItem Header="Repeat Button:">
+                <Editors:TextEdit x:Name="RepeatTextEdit" IsReadOnly="True" Text="0">
+                    <Editors:TextEdit.Buttons>
+                        <Editors:ButtonInfo Content="Increase" ButtonKind="Repeat" Click="Increase"/>
+                        <Editors:ButtonInfo Content="Decrease" ButtonKind="Repeat" Click="Decrease"/>
+                    </Editors:TextEdit.Buttons>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+            
+            <Layout:LayoutItem Header="Button Right:">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.Buttons>
+                        <Editors:ButtonInfo IsLeft="false" Content="Button"/>
+                    </Editors:TextEdit.Buttons>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+            <Layout:LayoutItem Header="Button Left:">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.Buttons>
+                        <Editors:ButtonInfo IsLeft="True" Content="Button"/>
+                    </Editors:TextEdit.Buttons>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+            
+            <Layout:LayoutItem Header="Image Button:">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.Buttons>
+                        <Editors:ButtonInfo ImageSource="ms-appx:///Images/Module1.Icon.png" Padding="2,0"/>
+                    </Editors:TextEdit.Buttons>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+
+            <Layout:LayoutItem Header="Custom Content Button:">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.Buttons>
+                        <Editors:ButtonInfo GlyphKind="None" Padding="2,0">
+                            <Editors:ButtonInfo.ContentTemplate>
+                                <DataTemplate>
+                                    <Rectangle Height="20" Width="20" Fill="#FF8595DA"/>
+                                </DataTemplate>
+                            </Editors:ButtonInfo.ContentTemplate>
+                        </Editors:ButtonInfo>
+                    </Editors:TextEdit.Buttons>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+
+            <Layout:LayoutItem Header="Custom Button:" Name="linkItem">
+                <Editors:TextEdit>
+                    <Editors:TextEdit.Buttons>
+                        <Editors:ButtonInfo ButtonKind="Simple">
+                            <Editors:ButtonInfo.TemplateSimple>
+                                <DataTemplate>
+                                    <HyperlinkButton NavigateUri="http://www.devexpress.com" HorizontalAlignment="Stretch" Padding="12,1,12,1">www.devexpress.com</HyperlinkButton>
+                                </DataTemplate>
+                            </Editors:ButtonInfo.TemplateSimple>
+                        </Editors:ButtonInfo>
+                    </Editors:TextEdit.Buttons>
+                </Editors:TextEdit>
+            </Layout:LayoutItem>
+        </Layout:LayoutControl>
+    </Grid>
+</UserControl>
