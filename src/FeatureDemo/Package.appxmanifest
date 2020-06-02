@@ -3,7 +3,7 @@
   <Identity Name="DevExpress.Demos.FeatureDemo.Universal.v20.2" Publisher="CN=DevExpress" Version="20.2.0.0" />
   <mp:PhoneIdentity PhoneProductId="5ef2226a-f9a4-44af-b92d-d0979851332b" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>DevExpress Windows 10 UWP Controls Demo</DisplayName>
+    <DisplayName>DevExpress WinUI UWP Controls Demo</DisplayName>
     <PublisherDisplayName>DevExpress</PublisherDisplayName>
     <Logo>Assets\StoreLogo50x50.png</Logo>
   </Properties>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="FeatureDemo.App">
-      <uap:VisualElements DisplayName="DevExpress Windows 10 UWP Controls Demo" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="FeatureDemo" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="DevExpress WinUI UWP Controls Demo" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="FeatureDemo" BackgroundColor="transparent">
         <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#106EBE" />
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="DX Controls Demo" Square71x71Logo="Assets\Square71x71Logo.png">
           <uap:ShowNameOnTiles>
