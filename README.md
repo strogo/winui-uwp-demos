@@ -16,7 +16,9 @@ This repository contains the DevExpress UWP demo application for [WinUI 3 Previe
 3. Install the required NuGet packages.
 
 3.1. [Obtain your NuGet feed URL](https://docs.devexpress.com/GeneralInformation/116042/installation/install-devexpress-controls-using-nuget-packages/obtain-your-nuget-feed-url).
+
 3.2. In Visual Studio, go to **Tools | NuGet Package Manager | Manage NuGet Packages for Solution**
+
 3.3. Open "Settings"...
 
     ... and add a new NuGet feed with the following credentials:
