@@ -41,7 +41,7 @@ namespace FeatureDemo.ViewModel {
             get { return prevNextEnabled; }
             set { SetProperty(ref prevNextEnabled, value); }
         }
-        public string WindowTitle { get { return "DevExpress Windows 10 UWP Controls Demo " + AssemblyInfo.VersionShort; } }
+        public string WindowTitle { get { return "DevExpress WinUI UWP Controls Demo " + AssemblyInfo.VersionShort; } }
         public List<object> HamburgerMenuItems { get; }
         public object SelectedHamburgerMenuItem {
             get { return selectedHamburgerMenuItem; }
