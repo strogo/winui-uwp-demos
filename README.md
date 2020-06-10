@@ -13,14 +13,14 @@ You can find detailed instructions in the following help topic: [Try WinUI 3.0 P
 
 Open and build the demo project. All required NuGet packages will be automatically retrieved by Visual Studio.
 <div align="center">
-    <img alt="VS-new-project" src="./images/VS-new-project.png">
+    <img alt="WinUI-demos" src="./images/WinUI-demos.png">
 </div>
 
 ## Adding DevExpress to a New UWP Project
 
 Open Visual Studio and locate the **Blank App (WinUI in UWP)** template.
 <div align="center">
-    <img alt="WinUI-demos" src="./images/WinUI-demos.png">
+    <img alt="VS-new-project" src="./images/VS-new-project.png">
 </div>
 
 In the NuGet Package Manager, [register](https://docs.devexpress.com/GeneralInformation/116698/installation/install-devexpress-controls-using-nuget-packages/setup-visual-studios-nuget-package-manager) the DevExpress Early Access NuGet feed.
