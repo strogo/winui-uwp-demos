@@ -19,7 +19,7 @@ Open and build the demo project. All required NuGet packages will be automatical
 ## Adding DevExpress to a New UWP Project
 
 Open Visual Studio and locate the **Blank App (WinUI in UWP)** template.
-<div align="center">
+<div align="center" style="border: 1px solid #dddddd;">
     <img alt="VS-new-project" src="./images/VS-new-project.png">
 </div>
 
