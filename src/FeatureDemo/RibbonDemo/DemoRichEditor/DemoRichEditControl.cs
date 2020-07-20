@@ -15,6 +15,13 @@ using DevExpress.UI.Xaml.Ribbon.Internal;
 using DevExpress.Utils;
 using DevExpress.UI.Xaml.Ribbon;
 using Color = Windows.UI.Color;
+using TextGetOptions = Microsoft.UI.Text.TextGetOptions;
+using TextSetOptions = Microsoft.UI.Text.TextSetOptions;
+using ITextSelection = Microsoft.UI.Text.ITextSelection;
+using FormatEffect = Microsoft.UI.Text.FormatEffect;
+using UnderlineType = Microsoft.UI.Text.UnderlineType;
+using ParagraphAlignment = Microsoft.UI.Text.ParagraphAlignment;
+using MarkerType = Microsoft.UI.Text.MarkerType;
 
 namespace RibbonDemo {
     public class DemoScrollArea : ContentControl {
@@ -89,7 +96,7 @@ namespace RibbonDemo {
             get { return (string)GetValue(RTFTextProperty); }
             set { SetValue(RTFTextProperty, value); }
         }
-		public string FileName {
+                public string FileName {
             get { return (string)GetValue(FileNameProperty); }
             set { SetValue(FileNameProperty, value); }
         }
@@ -126,6 +133,8 @@ namespace RibbonDemo {
            if (!textLocked && RTFText != null) {
                 selectionLocked = true;
                 Document.SetText(TextSetOptions.FormatRtf, RTFText);
+                //string currentText;
+                //Document.GetText(TextGetOptions.FormatRtf, out currentText);
                 InitialText = RTFText;
                 Document.UndoLimit = 0;
                 Task.Delay(10);
@@ -194,7 +203,7 @@ namespace RibbonDemo {
             get { return (Color)GetValue(CurrentForegroundProperty); }
             set { SetValue(CurrentForegroundProperty, value); }
         }
-		public bool IsImageSelected {
+                public bool IsImageSelected {
             get { return (bool)GetValue(IsImageSelectedProperty); }
             set { SetValue(IsImageSelectedProperty, value); }
         }
@@ -244,9 +253,11 @@ namespace RibbonDemo {
             FileName = "Document";
             documentColorsMap = new Dictionary<Color, SolidColorBrush>();
             RTFContentIsUpdated = true;
+            //imageParamsUpdating = false;
         }
 
         ITextSelection currentSelection;
+        //bool imageParamsUpdating;
         bool isShiftPressed;
         Dictionary<Color, SolidColorBrush> documentColorsMap;
         
@@ -618,3 +629,4 @@ namespace RibbonDemo {
         }
     }
 }
+

@@ -26,6 +26,10 @@ namespace RibbonDemo {
         void OnUnloaded(object sender, RoutedEventArgs e) {
             var popups = VisualTreeHelper.GetOpenPopups(Window.Current);
             foreach(var popup in popups) {
+#if DEBUGTEST
+                if(popup.Child is DevExpress.TestFramework.PopupWindow)
+                    return;
+#endif
                 popup.IsOpen = false;
             }
             InputPane.GetForCurrentView().TryHide();

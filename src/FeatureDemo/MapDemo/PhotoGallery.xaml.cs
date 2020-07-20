@@ -24,6 +24,10 @@ namespace MapDemo {
             CitiesViewModel viewModel = new CitiesViewModel(map, Resources["citySmallIconTemplate"] as DataTemplate);
             DataContext = viewModel;
             map.Layers[0].ViewportChanged += TileLayer_ViewportChanged;
+            //MapCustomElement placePointerLayer = (MapCustomElement)((VectorItemsLayer)map.Layers[2]).Items[0];
+            //placePointerLayer.Content = ViewModel;
+            //BindingOperations.SetBinding(placePointerLayer, MapCustomElement.LocationProperty, 
+            //    new Binding() { Path = new PropertyPath("Content.SelectedPlace.Location"), Source = placePointerLayer });
         }
         void TileLayer_ViewportChanged(object sender, ViewportChangedEventArgs e) {
             navWindow.LeftTop = e.TopLeft;

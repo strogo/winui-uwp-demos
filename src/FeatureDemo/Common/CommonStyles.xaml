@@ -165,6 +165,7 @@
         </Setter>
     </Style>
 
+    <!-- For Dialog Module -->
     <Style x:Key="DialogButton" TargetType="Button" BasedOn="{StaticResource SystemButtonStyle}">
         <Setter Property="MaxWidth" Value="150"/>
         <Setter Property="Height" Value="45"/>
@@ -177,6 +178,8 @@
         <Setter Property="MinWidth" Value="150"/>
         <Setter Property="MaxWidth" Value="480"/>
     </Style>
+    <!-- End -->
+    <!-- For controls stretching  -->
     <Style TargetType="common:GroupTypeComboBox" BasedOn="{StaticResource SystemComboBoxStyle}">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
     </Style>

@@ -18,6 +18,7 @@ namespace RibbonDemo {
         }
         
         private void PdfViewer_Loaded(object sender, RoutedEventArgs e) {
+            //DXVisualizer.DXVisualTreeVisualizer.Show(this);
         }
     }
 }

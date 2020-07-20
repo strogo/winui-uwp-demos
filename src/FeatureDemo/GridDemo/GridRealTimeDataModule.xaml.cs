@@ -42,6 +42,8 @@ namespace GridDemo {
             this.InitializeComponent();
             Loaded += OnLoaded;
             Unloaded += OnUnloaded;
+            //LayoutUpdated += GridRealTimeDataModule_LayoutUpdated;
+            //Application.Current.F
         }
         void OnLoaded(object sender, RoutedEventArgs e) {
             Model = new StockDataViewModel(grid);            
@@ -55,12 +57,20 @@ namespace GridDemo {
             Model = null;
         }
 
+        //void GridRealTimeDataModule_LayoutUpdated(object sender, object e) {
+        //}
+        //protected override Size MeasureOverride(Size availableSize) {
+        //    return base.MeasureOverride(availableSize);
+        //}
+
         protected internal override GridControl Grid { get { return grid; } }
         public override void OnNavigatingFrom() {
+            //model.Pause();
             base.OnNavigatingFrom();
         }
         public override void OnNavigatedTo() {
             base.OnNavigatedTo();
+            //model.Resume();
         }
 
         void grid_CustomSummary(object sender, CustomSummaryEventArgs e) {

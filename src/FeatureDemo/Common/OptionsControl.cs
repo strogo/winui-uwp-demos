@@ -231,6 +231,7 @@ namespace FeatureDemo.Common {
             }
 
             private async Task<IInputStream> GetContent() {
+                //
                 try {
                     InMemoryRandomAccessStream res = new InMemoryRandomAccessStream();
                     using(DataWriter dataWriter = new DataWriter(res)) {

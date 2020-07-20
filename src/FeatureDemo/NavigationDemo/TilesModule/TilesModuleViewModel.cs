@@ -24,6 +24,7 @@ namespace NavigationDemo {
         public int LotSize { get; set; }
         public DateTime ListDate { get; set; }
         public string MLS { get; set; }
+        //
         public string Kitchen { get; set; }
         public string DiningRoom { get; set; }
         public string Bedroom { get; set; }
@@ -32,12 +33,14 @@ namespace NavigationDemo {
         public string FloorCoverings { get; set; }
         public bool Laundry { get; set; }
         public string Fireplace { get; set; }
+        //
         public int Stories { get; set; }
         public string RoofType { get; set; }
         public string Parking { get; set; }
         public string Yard { get; set; }
         public string PoolType { get; set; }
         public string Spa { get; set; }
+        //
         public string Amenities { get; set; }
         public int HOAFee { get; set; }
         public string HOAFeeIncludes { get; set; }

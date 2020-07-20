@@ -60,6 +60,7 @@
                                         <Map:BingMapDataProvider Kind="Area" BingKey="{Binding DevexpressBingKey, Source={StaticResource DemoValuesProvider}}"/>
                                     </Map:ImageTilesLayer.DataProvider>
                                 </Map:ImageTilesLayer>
+                                <!--<Map:VectorItemsLayer ItemsSource="{Binding CitySmallIcons}"/>-->
                             </Map:MapControl>
                             <Canvas x:Name="PART_Canvas">
                                 <Grid x:Name="PART_LocationRect">

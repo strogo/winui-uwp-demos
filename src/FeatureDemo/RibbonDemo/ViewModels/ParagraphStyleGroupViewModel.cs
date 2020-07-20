@@ -2,6 +2,7 @@
 using DevExpress.Mvvm;
 using Windows.UI.Text;
 using ICommand = Microsoft.UI.Xaml.Input.ICommand;
+using MarkerType = Microsoft.UI.Text.MarkerType;
 
 namespace RibbonDemo {
     public class ParagraphStyleGroupViewModel : ViewModelBase {

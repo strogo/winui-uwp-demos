@@ -6,6 +6,7 @@ using Windows.Storage;
 namespace MapDemo {
     public class DemoValuesProvider {
         const string updatedKey = "UtQsCivjZeuC7gjahROM~OH43ARXPug81UzThcSHI7g~ArG9ZFpBe1iZTXbdE3kyq6IZNyHEyFOG7otcBlMNxAInlhopSGvgy_nI1-2SPZX4";
+        //const string key = "AgJSVMywKRoKjmJvoBYfjdlmBq4-Ub2TdPOL7Di_WWjpwXLOwo28aG21Kb6d9zox";
         public string DevexpressBingKey { get { return updatedKey; } }
     }
     public static class DataLoader {

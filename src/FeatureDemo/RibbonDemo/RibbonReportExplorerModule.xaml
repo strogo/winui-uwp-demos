@@ -102,6 +102,7 @@
                                               IconHeight="24"
                                               IsChecked="{Binding PdfViewMode, ElementName=pdfViewer, Converter={StaticResource PdfViewModeToBoolConverter}, ConverterParameter=SinglePage, Mode=TwoWay}">
                     </Ribbon:RibbonRadioButton>
+                    <!--<Ribbon:RibbonButton Content ="Open" Command="{Binding OpenFileCommand, ElementName=pdfViewer}"/>-->
                     <Ribbon:RibbonRadioButton Icon="{StaticResource ContinuousePath}" 
                                               IconWidth="24"
                                               IconHeight="24"
@@ -109,6 +110,17 @@
                     <local:RibbonTextSearchBox Owner="{Binding ElementName=pdfViewer}"/>
                 </Ribbon:RibbonGroup>
                 <Ribbon:RibbonGroup Caption="Search" Visibility="{Binding IsTextSearchEnabled, ElementName=pdfViewer, Converter={StaticResource booleanToVisibilityConverter}}">
+                    <!--<Ribbon:RibbonButton Style="{StaticResource buttonStyle}"
+                                         Command="{Binding FindPreviousTextCommand, ElementName=pdfViewer}"
+                                         Icon="F1 M 24.0033,20.0028L 33.0046,20.0028L 33.0046,28.0039L 24.0033,28.0039L 24.0033,35.0049L 13.0018,24.0033L 24.0033,13.0018L 24.0033,20.0028 Z
+                                               M 24.0033,0C 37.26,0 48.0067,10.7467 48.0067,24.0033C 48.0067,37.26 37.26,48.0067 24.0033,48.0067C 10.7467,48.0067 0,37.26 0,24.0033C 0,10.7467 10.7467,0 24.0033,0 Z
+                                               M 24.0033,3.00042C 12.4037,3.00042 3.00042,12.4037 3.00042,24.0033C 3.00042,35.6029 12.4037,45.0063 24.0033,45.0063C 35.6029,45.0063 45.0063,35.6029 45.0063,24.0033C 45.0063,12.4037 35.6029,3.00042 24.0033,3.00042 Z"/>
+                    <local:RibbonTextSearchBox FindTextCommand="{Binding FindTextCommand, ElementName=pdfViewer}"/>
+                    <Ribbon:RibbonButton Style="{StaticResource buttonStyle}"
+                                         Command="{Binding FindNextTextCommand, ElementName=pdfViewer}"
+                                         Icon="F1 M 23.0032,20.0028L 23.0032,13.0018L 34.0047,24.0034L 23.0032,35.0049L 23.0032,28.0039L 14.002,28.0039L 14.002,20.0028L 23.0032,20.0028 Z 
+                                               M 24.0033,-1.14441e-005C 37.26,-1.14441e-005 48,10.7467 48,24.0033C 48,37.26 37.26,48 24.0033,48C 10.7467,48 -7.94729e-008,37.26 -7.94729e-008,24.0033C -7.94729e-008,10.7467 10.7467,-1.14441e-005 24.0033,-1.14441e-005 Z 
+                                               M 24.0033,3.00041C 12.4037,3.00041 3.00042,12.4037 3.00042,24.0033C 3.00042,35.6029 12.4037,45.0063 24.0033,45.0063C 35.6029,45.0063 45.0063,35.6029 45.0063,24.0033C 45.0063,12.4037 35.6029,3.00041 24.0033,3.00041 Z"/>-->
                 </Ribbon:RibbonGroup>
                 <Ribbon:RibbonGroup Caption="View Settings">
                     <Ribbon:RibbonButton IconTemplate="{StaticResource FitIntoPageLevelIconTemplate}"

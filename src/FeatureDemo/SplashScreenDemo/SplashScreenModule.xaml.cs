@@ -19,7 +19,9 @@ namespace SpashScreenDemo {
     public sealed partial class SplashScreenModule : DemoModuleView {
         public SplashScreenModule() {
             this.InitializeComponent();
+            //TODO: WinUI
             this.ProgressSplashScreen.SplashScreenType = typeof(ProgressBarSplashScreenView);
         }
     }
 }
+

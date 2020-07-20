@@ -58,6 +58,9 @@
 
         <Layout:LayoutGroup Header="Header highlighting" ItemHeadersAlignment="Local"
                     Orientation="Vertical">
+            <!--<Layout:LayoutItem Header="Item:">
+                <Editors:TextEdit Text="Focus this editor and see its header being highlighted" MinWidth="450"/>
+            </Layout:LayoutItem>-->
             <Layout:LayoutItem Header="Disabled Item:">
                 <Editors:TextEdit Text="IsEnabled=false" IsEnabled="False"/>
             </Layout:LayoutItem>

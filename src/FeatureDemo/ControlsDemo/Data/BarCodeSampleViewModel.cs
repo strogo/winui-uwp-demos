@@ -42,6 +42,8 @@ namespace FeatureDemo.ControlsDemo {
         IEnumerable<BarCodeSymbology> GetBarCodeTypes() {
             DeviceFamily deviceFamily = DeviceFamilyHelper.DeviceFamily;
             var symbologies = Enum.GetValues(typeof(BarCodeSymbology)).Cast<BarCodeSymbology>();
+            //if(deviceFamily == DeviceFamily.Mobile)
+            //    return symbologies.OrderBy(x => x, new SymbologyComparer()).ToArray();
             return symbologies.TakeWhile(x => !IsSymbology2D(x)).ToArray();
         }
         public IEnumerable<BarCodeSymbology> BarCodeTypes { get; private set; }

@@ -63,6 +63,13 @@ namespace FeatureDemo {
             Window.Current.Activate();
             Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().SetPreferredMinSize(new Windows.Foundation.Size { Width = 500, Height = 500 });
 
+            #region DEMO_REMOVE
+#if DEBUGTEST
+            DevExpress.TestFramework.TestApp.Start(args.Arguments + " -FullScreen:False");
+            this.UnhandledException -= App_UnhandledException;
+#endif
+            #endregion
+
         }
         async private void OnSuspending(object sender, SuspendingEventArgs e) {
             var deferral = e.SuspendingOperation.GetDeferral();

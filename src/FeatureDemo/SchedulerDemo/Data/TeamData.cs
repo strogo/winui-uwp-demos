@@ -4,9 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 using DevExpress.DemoData.Models;
+//using DevExpress.DemoData.Models;
 using DevExpress.Mvvm;
 using DevExpress.UI.Xaml.Scheduler;
 using Windows.Storage;
+//using FeatureDemo.Data;
+//using DevExpress.XtraScheduler;
 
 namespace SchedulerDemo {
     public class TeamCalendar {
@@ -65,6 +68,7 @@ namespace SchedulerDemo {
                 return;
             }
 
+            //Employees = NWindContext.Create().Employees.ToList();
             Employees[0].BirthDate = Start.AddDays(4).AddYears(-30);
 
             Calendars = CreateCalendars().ToList();

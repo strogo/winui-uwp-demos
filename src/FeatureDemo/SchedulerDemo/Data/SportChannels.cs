@@ -54,6 +54,10 @@ namespace SchedulerDemo {
         };
 
         static ImageSource CreateSportGroupImageSource(string caption) {
+            //string imageName = String.Format("Images/SportGroups/{0}.png", caption);
+            //ImageSource sportImage = new BitmapImage(new Uri(string.Format("pack://application:,,,/SchedulerDemo;component/{0}", imageName)));
+            ////sportImage.Freeze();
+            //return sportImage;
             return null;
         }
         static ObservableCollection<SportEvent> GenerateEvents(int dayCount) {
@@ -96,6 +100,7 @@ namespace SchedulerDemo {
             return result;
         }
         static string recurrenceInfoFormat = @"<RecurrenceInfo Start=""{0}"" End=""{1}"" WeekDays=""{2}"" OccurrenceCount=""{3}"" Range=""{4}"" Type=""{5}"" Id=""{6}""/>";
+        //static string reminderInfoFormat = @"<Reminders><Reminder AlertTime=""{0}"" TimeBeforeStart=""00:00:00"" /></Reminders>";
         static SportEvent GetRandomRecurrenceSportEvent(int id, DateTime startDate, SportChannel channel, int dayCount) {
             SportEvent pattern = new SportEvent();
             pattern.Id = id;
@@ -116,6 +121,7 @@ namespace SchedulerDemo {
             recInfo.Type = RecurrenceType.Daily;
             pattern.RecurrenceInfo = String.Format(CultureInfo.InvariantCulture, recurrenceInfoFormat,
                 recInfo.Start, recInfo.End, (int)recInfo.WeekDays, recInfo.OccurrenceCount, (int)recInfo.Range, (int)recInfo.Type, recInfo.Id.ToString());
+            //pattern.ReminderInfo = String.Format(CultureInfo.InvariantCulture, reminderInfoFormat, pattern.StartTime);
             return pattern;
         }
         static SportEvent GetRandomSportEvent(int id, DateTime start, DateTime end, int channelId) {

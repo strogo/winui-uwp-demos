@@ -47,6 +47,7 @@ namespace ControlsDemo {
         void Cut(TextBox tb) {
             DataPackage dp = new DataPackage();
             dp.SetText(tb.SelectedText);
+            //Clipboard.SetContent(dp);
             tb.SelectedText = string.Empty;
         }
         bool CanCut(TextBox tb) {
@@ -57,12 +58,21 @@ namespace ControlsDemo {
                 return;
             DataPackage dp = new DataPackage();
             dp.SetText(tb.Text);
+            //Clipboard.SetContent(dp);
         }
         bool CanCopy(TextBox tb) {
             return true;
         }
         void Paste(TextBox tb) {
-            //
+            try {
+                //var pack = Clipboard.GetContent();
+                //string text = await pack.GetTextAsync();
+                //if (string.IsNullOrEmpty(text))
+                //    return;
+                //tb.SelectedText = text;
+            }
+            catch (Exception) {
+            }
         }
         bool CanPaste(TextBox tb) {
             return true;

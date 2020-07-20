@@ -77,6 +77,7 @@
         </Core:EnumToObjectConverter.Values>
     </Core:EnumToObjectConverter>
     <Style x:Key="NameColumnStyle" TargetType="Grid:EditableCellControlBase">
+        <!--<Setter Property="FocusedBackground" Value="#FFE0E6F0"/>-->
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Grid:EditableCellControlBase">

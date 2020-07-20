@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 using DevExpress.DemoData.Models;
 using DevExpress.Mvvm;
 using DevExpress.UI.Xaml.Scheduler;
+//using Microsoft.EntityFrameworkCore;
 using Windows.Storage;
 
 namespace SchedulerDemo {
@@ -118,6 +119,7 @@ namespace SchedulerDemo {
         public static DateTime Start { get; private set; }
         public static ObservableCollection<Employee> Employees { get; private set; }
         public static ObservableCollection<Customer> Customers { get; private set; }
+        //public static ObservableCollection<CustomerEmployee> CustomerEmployees { get; private set; }
         public static ObservableCollection<Employee> Employees_Support { get; private set; }
         public static ObservableCollection<Employee> Employees_Development { get; private set; }
         public static ObservableCollection<WorkAppointment> Appointments { get; private set; }
@@ -140,6 +142,7 @@ namespace SchedulerDemo {
         static int StatusFree = 0;
         static int StatusTentative = 1;
         static int StatusBusy = 2;
+        //static int StatusOutOfOffice = 3;
         static int StatusWorkingElsewhere = 4;
 
         static WorkLabel LabelNone = new WorkLabel() { Id = 0, Caption = "None" };
@@ -174,6 +177,13 @@ namespace SchedulerDemo {
             InitLabels();
             InitAppts();
         }
+        //public static void SaveToXml() {
+        //    XmlSerializer EmployeeSerializer = new XmlSerializer(typeof(CustomerEmployee[]));
+        //    StringWriter writer = new StringWriter();
+        //    EmployeeSerializer.Serialize(writer, CustomerEmployees.ToArray());
+        //    string result = writer.ToString();
+        //    writer.Flush();
+        //}
         public static XDocument LoadFromXmlResource(string path) {
             path = path.Replace('\\', '/');
             path = path.TrimStart('/');

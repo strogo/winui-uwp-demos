@@ -228,6 +228,7 @@ namespace FeatureDemo.ViewModel {
         public bool CanGoBack {
             get {
                 return false;
+                //return navigationHistory != null && navigationHistory.Count > 1 || NavigationLevel == NavigationLevel.DemoModule;
             }
         }
 
@@ -305,3 +306,4 @@ namespace FeatureDemo.ViewModel {
     }
     public enum NavigationLevel { Main, DemoModule }
 }
+

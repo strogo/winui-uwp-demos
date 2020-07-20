@@ -36,6 +36,15 @@ namespace FeatureDemo {
             get { return GetProperty(() => SelectionMode); }
             set {
                 SetProperty(() => SelectionMode, value, () => {
+                    //if (SelectionMode == ListViewSelectionMode.None) {
+                    //    SelectedItem = null;
+                    //    SelectedItems.Clear();
+                    //} else if (SelectionMode == ListViewSelectionMode.Single) {
+                    //    SelectedItems.Clear();
+                    //    SelectedItem = Items[0];
+                    //} else {
+                    //    SelectedItems.Clear();
+                    //}
                     UpdateAllowClearSelection();
                 });
             }

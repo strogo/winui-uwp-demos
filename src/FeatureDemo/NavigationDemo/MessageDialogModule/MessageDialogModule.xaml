@@ -23,6 +23,7 @@
             <Style TargetType="Button" BasedOn="{StaticResource SystemButtonStyle}">
                 <Setter Property="MinWidth" Value="150"/>
                 <Setter Property="MinHeight" Value="50"/>
+                <!--<Setter Property="FontWeight" Value="SemiBold"/>-->
                 <Setter Property="Margin" Value="12,12,0,0"/>
             </Style>
         </ResourceDictionary>

@@ -52,6 +52,7 @@ namespace SvgDemo {
                 var inverseColor = Inverse(colors[i]);
                 var luGrayscale = Grayscale(colors[i]);
                 var invertGrayscale = Inverse(luGrayscale);
+                //ColorParser.TryGetKnownColor
                 inversePalette[colorNames[i]] = new SvgColorSet() { Default = inverseColor, Light = inverseColor };
                 grayScale[colorNames[i]] = new SvgColorSet() { Default = invertGrayscale, Light = luGrayscale };
             }

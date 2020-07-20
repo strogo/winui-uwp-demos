@@ -1412,13 +1412,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DevExpress.WinUI.Uwp">
-      <Version>20.2.1-ctp1</Version>
+      <Version>20.2.1-ctp2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.WinUI">
-      <Version>3.0.0-preview1.200515.3</Version>
+      <Version>3.0.0-preview2.200713.0</Version>
     </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '$(MinimumVisualStudioVersion)' ">

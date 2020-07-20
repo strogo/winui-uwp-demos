@@ -61,6 +61,7 @@ namespace LayoutDemo.LayoutControl {
             get { return loanAmount2; }
             set { SetProperty(ref loanAmount2, value, (v1, v2) => UpdateCashToFromBorrower()); }
         }
+        //
         void UpdateTotalCosts() {
             TotalCosts = PurchasePrice + PrepaidItems + ClosingCosts + Fees + Discount;
         }

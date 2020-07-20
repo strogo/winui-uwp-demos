@@ -80,6 +80,13 @@ namespace GridDemo {
                 return;
             }
             string id = e.Value.ToString();
+            //if (id.Length != 5) {
+            //    e.ErrorContent = "Customer ID must be 5-characters long";
+            //    e.ErrorType = DevExpress.UI.Xaml.Editors.Native.ErrorType.Information;
+            //    e.Handled = true;
+            //    e.IsValid = false;
+            //    return;
+            //}
             if (id.ToUpper() != id) {
                 e.ErrorContent = "Customer ID must contain only upper case letters";
                 e.ErrorType = DevExpress.UI.Xaml.Editors.Native.ErrorType.Information;

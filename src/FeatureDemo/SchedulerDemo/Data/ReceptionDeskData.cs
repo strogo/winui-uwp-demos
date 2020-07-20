@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Media;
+//using System.Windows.Media.Imaging;
+//using DevExpress.XtraScheduler.Native;
+//using DevExpress.Mvvm.POCO;
 using DevExpress.Mvvm.UI.Native;
 using Microsoft.UI;
 using Microsoft.UI.Xaml.Media;
@@ -170,6 +173,9 @@ namespace SchedulerDemo {
                     doctor.DepartmentId = hospitalDepartment.Id;
                     doctor.DepartmentName = hospitalDepartment.Name;
                     doctor.IsVisible = hospitalDepartment.Id == 1;
+                    //string imageName = String.Format("Images/Medics/{0}.png", doctor.Name.Replace(" ", ""));
+                    //doctor.Photo = new BitmapImage(new Uri(string.Format("pack://application:,,,/SchedulerDemo;component/{0}", imageName)));
+                    //doctor.Photo.Freeze();
                     doctors.Add(doctor);
                     allDoctors.Add(doctor);
                 }
@@ -180,7 +186,7 @@ namespace SchedulerDemo {
         void CreateMedicalAppointments(int apptDensity) {
             int appointmentId = 1;
             int patientIndex = 0;
-            DateTime date = BaseDate;
+            DateTime date = BaseDate;//DateTimeHelper.GetStartOfWeek(BaseDate);
             ObservableCollection<MedicalAppointment> result = new ObservableCollection<MedicalAppointment>();
             foreach (Doctor doctor in Doctors) {
                 TimeSpan duration = CalculateAppointmentDuration(doctor, apptDensity);

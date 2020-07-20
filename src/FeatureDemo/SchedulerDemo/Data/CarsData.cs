@@ -85,6 +85,10 @@ namespace SchedulerDemo {
                 Wash = GetImage("Wash");
             }
             static ImageSource GetImage(string imageName) {
+                //Uri uri = new Uri(string.Format("pack://application:,,,/SchedulerDemo;component/Images/Cars/{0}.png", imageName));
+                //BitmapImage image = new BitmapImage(uri);
+                ////image.Freeze();
+                //return image;
                 return null;
             }
         }

@@ -1,6 +1,7 @@
 ﻿using Windows.Storage.Streams;
 using Windows.UI.Text;
 using Microsoft.UI.Xaml.Media;
+using MarkerType = Microsoft.UI.Text.MarkerType;
 
 namespace RibbonDemo {
     public interface IRichEditorContentService {

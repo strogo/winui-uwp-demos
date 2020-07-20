@@ -5,6 +5,11 @@ using DevExpress.Mvvm.Native;
 using DevExpress.Mvvm.UI;
 using System;
 using System.Text.RegularExpressions;
+using TextGetOptions = Microsoft.UI.Text.TextGetOptions;
+using TextSetOptions = Microsoft.UI.Text.TextSetOptions;
+using VerticalCharacterAlignment = Microsoft.UI.Text.VerticalCharacterAlignment;
+using ParagraphAlignment = Microsoft.UI.Text.ParagraphAlignment;
+using MarkerType = Microsoft.UI.Text.MarkerType;
 
 namespace RibbonDemo {
     public class DemoRichEditorBehavior : ServiceBase, IRichEditorContentService, IRichEditorFontService, IRichEditorCommonActionsService, IRichEditorInsertService, IRichEditorParagraphService {

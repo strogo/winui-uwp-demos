@@ -34,6 +34,7 @@
             <SolidColorBrush x:Key="TileHoverBrush" Color="#FFBFBFBF" />
             <SolidColorBrush x:Key="TileBrushPressed" Color="#FFBFBFBF" />
 
+            <!--moved from another dictionaries-->
             <SolidColorBrush x:Key="ModuleHeaderBrush" Color="#FFFFFCDB" />
             <SolidColorBrush x:Key="DemoModuleForegroundBrush" Color="#FFD4D4D4" />
             <SolidColorBrush x:Key="DemoModuleSeparatorBrush" Color="#FF404040" />
@@ -84,6 +85,7 @@
             <SolidColorBrush x:Key="TileHoverBrush" Color="#FFBFBFBF" />
             <SolidColorBrush x:Key="TileBrushPressed" Color="#FFBFBFBF" />
 
+            <!--moved from another dictionaries-->
             <SolidColorBrush x:Key="ModuleHeaderBrush" Color="#FFFFFCDB" />
             <SolidColorBrush x:Key="DemoModuleForegroundBrush" Color="#FF505050" />
             <SolidColorBrush x:Key="DemoModuleSeparatorBrush" Color="#FFDEDEDE" />
